@@ -48,6 +48,11 @@ const routes = [
     path: '/resetpass-perekrut',
     name: 'ResetPassPerekrut',
     component: () => import('../views/ResetPassPerekrut.vue')
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: () => import('../views/Home.vue')
   }
 ]
 

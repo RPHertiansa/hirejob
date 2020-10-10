@@ -2,15 +2,20 @@
   <div>
       <nav class="cont-nav">
           <img src="../assets/img/Group 980 1.png">
-          <div class="btn-head d-inline float-right">
+          <div v-if="$route.path === '/'" class="btn-head d-inline float-right">
             <b-dropdown id="dropdown-1" text="Masuk" class="btn-login m-md-2">
-                <b-dropdown-item><router-link to="/login-perekrut"> Perekrut </router-link></b-dropdown-item>
-                <b-dropdown-item><router-link to="/login-pekerja">Pekerja </router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut"> Perekrut </router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja </router-link></b-dropdown-item>
             </b-dropdown>
               <b-dropdown id="dropdown-1" text="Daftar" variant="primary" class="btn-register m-md-2">
-                <b-dropdown-item><router-link to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
-                <b-dropdown-item><router-link to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
             </b-dropdown>
+          </div>
+          <div v-else class="btn-head d-inline float-right">
+              <img src="../assets/img/bell (1) 1.png">
+              <img class="ml-5" src="../assets/img/mail (3) 1.png">
+              <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" src="../assets/img/Ellipse 325.png">
           </div>
       </nav>
   </div>
