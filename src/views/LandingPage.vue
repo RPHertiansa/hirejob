@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Navbar/>
+    <div class="d-sm-block d-none">
+        <Navbar/>
     <div class="cont-landpage">
       <div class="row no-gutters">
         <div class="col-6 r-1">
@@ -11,8 +12,8 @@
              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
           </div>
           <b-dropdown id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2">
-                <b-dropdown-item>Perekrut</b-dropdown-item>
-                <b-dropdown-item>Pekerja</b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja</router-link></b-dropdown-item>
           </b-dropdown>
         </div>
         <div class="col-6">
@@ -114,8 +115,8 @@
               </div>
               <div class="float-right btn-start-bottom">
               <b-dropdown id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2">
-                <b-dropdown-item>Perekrut</b-dropdown-item>
-                <b-dropdown-item>Pekerja</b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja</router-link></b-dropdown-item>
               </b-dropdown>
               </div>
           </div>
@@ -124,6 +125,26 @@
       </div>
     </div>
     <Footer/>
+    </div>
+    <div class="d-sm-none d-block">
+       <div class="cont-landing-hp">
+         <div class="bg-landing-hp">
+            <p class="text-main"><img class="mr-2" src="../assets/img/layers 1.png">Peworld</p>
+            <p class="text-body-hp">Temukan developer berbakat & terbaik di berbagai bidang keahlian</p>
+            <button type="button" class="btn btn-pekerja btn-block btn-lg">
+              <router-link style="color: #5E50A1;" to="/login-pekerja">Masuk sebagai pekerja</router-link>
+            </button>
+            <div class="row no-gutters mt-2">
+              <div class="col-5"><hr class="line-landing"></div>
+              <div class="col-2"><p class="text-main text-center mt-2">atau</p></div>
+              <div class="col-5"><hr class="line-landing"></div>
+            </div>
+            <button type="button" class="btn btn-perekrut btn-block btn-lg">
+              <router-link class="text-white" to="/login-perekrut">Masuk sebagai perekrut</router-link>
+            </button>
+         </div>
+       </div>
+    </div>
   </div>
 </template>
 
@@ -161,6 +182,53 @@ export default {
   padding-left: 100px;
   padding-top: 50px;
   padding-bottom: 100px;
+}
+.btn-pekerja {
+  background: #FFFFFF;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #5E50A1;
+  margin-top: 25vh;
+}
+.btn-perekrut {
+  border: 1px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+.line-landing {
+  border: 1px solid #FFFFFF;
+}
+.text-main {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #FFFFFF;
+}
+.text-body-hp {
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 54px;
+  color: #FFFFFF;
+  margin-top: 15vh;
+}
+.d-sm-none .cont-landing-hp {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/img/Mask Group (1).png');
+  background-repeat: no-repeat;
+}
+.d-sm-none .cont-landing-hp .bg-landing-hp{
+  width: 100vw;
+  height: 100vh;
+  background-color: #5E50A1;
+  opacity: 0.8;
+  background-repeat: no-repeat;
+  padding: 40px 20px;
 }
 .text-landing-1 {
   width: 490px;
