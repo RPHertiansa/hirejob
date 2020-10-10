@@ -10,7 +10,7 @@ const getters = {
 }
 
 const actions = {
-  onRegister (context, payload) {
+  onRegisterPekerja (context, payload) {
     return new Promise((resolve, reject) => {
       axios
         .post(`${url}/pekerja/register`, payload)
@@ -21,6 +21,19 @@ const actions = {
           reject(err.message)
         })
     })
+  },
+  onRegisterPerekrut (context, payload) {
+    console.log(payload)
+    // return new Promise((resolve, reject) => {
+    //   axios
+    //     .post(`${url}/perekrut/register`, payload)
+    //     .then(result => {
+    //       resolve(result.data.message)
+    //     })
+    //     .catch(err => {
+    //       reject(err.message)
+    //     })
+    // })
   }
 }
 

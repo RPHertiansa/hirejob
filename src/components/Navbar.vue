@@ -4,12 +4,12 @@
           <img src="../assets/img/Group 980 1.png">
           <div class="btn-head d-inline float-right">
             <b-dropdown id="dropdown-1" text="Masuk" class="btn-login m-md-2">
-                <b-dropdown-item>Perekrut</b-dropdown-item>
-                <b-dropdown-item>Pekerja</b-dropdown-item>
+                <b-dropdown-item><router-link to="/login-perekrut"> Perekrut </router-link></b-dropdown-item>
+                <b-dropdown-item><router-link to="/login-pekerja">Pekerja </router-link></b-dropdown-item>
             </b-dropdown>
               <b-dropdown id="dropdown-1" text="Daftar" variant="primary" class="btn-register m-md-2">
-                <b-dropdown-item>Perekrut</b-dropdown-item>
-                <b-dropdown-item>Pekerja</b-dropdown-item>
+                <b-dropdown-item><router-link to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
             </b-dropdown>
           </div>
       </nav>

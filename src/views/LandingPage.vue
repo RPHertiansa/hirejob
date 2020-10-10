@@ -11,8 +11,8 @@
              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
           </div>
           <b-dropdown id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2">
-                <b-dropdown-item>Perekrut</b-dropdown-item>
-                <b-dropdown-item>Pekerja</b-dropdown-item>
+                <b-dropdown-item><router-link to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
           </b-dropdown>
         </div>
         <div class="col-6">
@@ -114,8 +114,8 @@
               </div>
               <div class="float-right btn-start-bottom">
               <b-dropdown id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2">
-                <b-dropdown-item>Perekrut</b-dropdown-item>
-                <b-dropdown-item>Pekerja</b-dropdown-item>
+                <b-dropdown-item><router-link to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
               </b-dropdown>
               </div>
           </div>

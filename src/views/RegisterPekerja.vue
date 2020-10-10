@@ -107,7 +107,7 @@ export default {
       }
     },
     ...mapActions({
-      onRegister: 'auth/onRegister'
+      onRegister: 'auth/onRegisterPekerja'
     }),
     register () {
       const data = {
