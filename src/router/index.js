@@ -10,14 +10,24 @@ const routes = [
     component: () => import('../views/LandingPage.vue')
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
+    path: '/login-pekerja',
+    name: 'LoginPekerja',
+    component: () => import('../views/LoginPekerja.vue')
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/Register.vue')
+    path: '/login-perekrut',
+    name: 'LoginPerekrut',
+    component: () => import('../views/LoginPerekrut.vue')
+  },
+  {
+    path: '/register-pekerja',
+    name: 'RegisterPekerja',
+    component: () => import('../views/RegisterPekerja.vue')
+  },
+  {
+    path: '/register-perekrut',
+    name: 'RegisterPerekrut',
+    component: () => import('../views/RegisterPerekrut.vue')
   },
   {
     path: '/forgotpass',

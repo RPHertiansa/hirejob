@@ -25,7 +25,7 @@
                 <router-link style="font-size: 16px;line-height: 22px;color: #1F2A36;" to="/forgotpass" class="mb-3 float-right">Lupa kata sandi?</router-link>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
               </form>
-              <p class="mt-4 text-center">Anda belum punya akun?<router-link to="/register" class="ml-1" style="color:#FBB017;">Daftar disini</router-link></p>
+              <p class="mt-4 text-center">Anda belum punya akun?<router-link to="/register-pekerja" class="ml-1" style="color:#FBB017;">Daftar disini</router-link></p>
           </div>
       </div>
   </div>
@@ -46,7 +46,7 @@
         <router-link style="font-size: 16px;line-height: 22px;color: #1F2A36;" to="/forgotpass" class="mb-3 float-right">Lupa kata sandi?</router-link>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
         </form>
-        <p class="mt-4 text-center">Anda belum punya akun?<router-link to="/register" class="ml-1" style="color:#FBB017;">Daftar disini</router-link></p>
+        <p class="mt-4 text-center">Anda belum punya akun?<router-link to="/register-pekerja" class="ml-1" style="color:#FBB017;">Daftar disini</router-link></p>
   </div>
   </div>
 </template>
