@@ -34,7 +34,6 @@
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="ConfirmPassword">Konfirmasi Kata Sandi</label>
                     <input type="password" class="form-control" id="ConfirmPassword" placeholder="Masukan konfirmasi kata sandi">
                 </div>
-                <router-link style="font-size: 16px;line-height: 22px;color: #1F2A36;" to="/forgotpass" class="mb-3 float-right">Lupa kata sandi?</router-link>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Daftar</button>
               </form>
               <p class="mt-4 text-center">Anda sudah punya akun?<router-link to="/login-pekerja" class="ml-1" style="color:#FBB017;">Masuk disini</router-link></p>
@@ -44,7 +43,7 @@
   <!-- Responsive -->
   <div class="cont-register-hp d-sm-none d-block">
       <img class="mb-5" src="../assets/img/iconhead.png">
-         <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Login</p>
+         <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Register</p>
         <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
         <form>
         <div class="form-group mb-4">

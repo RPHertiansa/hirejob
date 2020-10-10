@@ -52,7 +52,7 @@
   <!-- Responsive -->
   <div class="cont-register-hp d-sm-none d-block">
       <img class="mb-5" src="../assets/img/iconhead.png">
-         <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Login</p>
+         <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Register</p>
         <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
         <form>
         <div class="form-group mb-4">

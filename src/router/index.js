@@ -30,9 +30,24 @@ const routes = [
     component: () => import('../views/RegisterPerekrut.vue')
   },
   {
-    path: '/forgotpass',
-    name: 'ForgotPass',
-    component: () => import('../views/ForgotPass.vue')
+    path: '/forgotpass-pekerja',
+    name: 'ForgotPassPekerja',
+    component: () => import('../views/ForgotPassPekerja.vue')
+  },
+  {
+    path: '/forgotpass-perekrut',
+    name: 'ForgotPassPerekrut',
+    component: () => import('../views/ForgotPassPerekrut.vue')
+  },
+  {
+    path: '/resetpass-pekerja',
+    name: 'ResetPassPekerja',
+    component: () => import('../views/ResetPassPekerja.vue')
+  },
+  {
+    path: '/resetpass-perekrut',
+    name: 'ResetPassPerekrut',
+    component: () => import('../views/ResetPassPerekrut.vue')
   }
 ]
 
