@@ -11,13 +11,13 @@
           </div>
           <div class="main-content">
             <div class="portofolio" v-if="switchContent === 0">
-              <div class="portofolio-pict"><span>Cek</span></div>
+              <div class="portofolio-pict"><span></span></div>
               <div class="portofolio-pict"><span></span></div>
               <div class="portofolio-pict"><span></span></div>
             </div>
             <div class="exprerience" v-else>
               <div class="exprerience-pict"><span></span></div>
-              <div class="exprerience-pict"><span>Ntap</span></div>
+              <div class="exprerience-pict"><span></span></div>
               <div class="exprerience-pict"><span></span></div>
             </div>
           </div>

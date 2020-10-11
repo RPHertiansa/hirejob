@@ -14,41 +14,44 @@ axios.defaults.headers = {
 }
 
 // handle token expired
-axios.interceptors.response.use((response) => {
-  if (response.data.message === 'Token Expired! Please log in again') {
-    return new Promise((resolve, reject) => {
-      axios.post(`${url}/pekerja/refreshToken`, {
-        refreshToken: localStorage.getItem('refreshToken')
-      })
-        .then(res => {
-          resolve()
-          localStorage.setItem('token', res.data.data.token)
-          window.location = '/home'
+if (localStorage.getItem('status') === 'pekerja') {
+  axios.interceptors.response.use((response) => {
+    if (response.data.message === 'Token Expired! Please log in again') {
+      return new Promise((resolve, reject) => {
+        axios.post(`${url}/pekerja/refreshToken`, {
+          refreshToken: localStorage.getItem('refreshToken')
         })
-        .catch(err => reject(err.message))
-    })
-  } else {
-    return response
-  }
-})
-
-axios.interceptors.response.use((response) => {
-  if (response.data.message === 'Token Expired! Please log in again') {
-    return new Promise((resolve, reject) => {
-      axios.post(`${url}/perekrut/refreshToken`, {
-        refreshToken: localStorage.getItem('refreshToken')
+          .then(res => {
+            resolve()
+            localStorage.setItem('token', res.data.data.token)
+            window.location = '/home'
+          })
+          .catch(err => reject(err.message))
       })
-        .then(res => {
-          resolve()
-          localStorage.setItem('token', res.data.data.token)
-          window.location = '/home'
+    } else {
+      return response
+    }
+  })
+} else {
+  axios.interceptors.response.use((response) => {
+    if (response.data.message === 'Token Expired! Please log in again') {
+      return new Promise((resolve, reject) => {
+        axios.post(`${url}/perekrut/refreshToken`, {
+          refreshToken: localStorage.getItem('refreshToken')
         })
-        .catch(err => reject(err.message))
-    })
-  } else {
-    return response
-  }
-})
+          .then(res => {
+            resolve()
+            console.log(res.data.data.token)
+            localStorage.setItem('token', res.data.data.token)
+            window.location = '/home'
+          })
+          .catch(err => reject(err.message))
+      })
+    } else {
+      return response
+    }
+  })
+}
 
 Vue.use(VueCarousel)
 Vue.use(BootstrapVue)

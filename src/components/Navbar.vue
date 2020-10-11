@@ -57,7 +57,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      status: localStorage.getItem('status'),
+      status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
       getid: localStorage.getItem('idpekerja'),
       getidperekrut: localStorage.getItem('idperekrut')
     }
