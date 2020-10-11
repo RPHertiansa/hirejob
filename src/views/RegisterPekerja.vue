@@ -118,6 +118,7 @@ export default {
       }
       this.onRegister(data).then(result => {
         this.alertActive()
+        window.location = '/login-pekerja'
       }).catch(err => this.alertError(err))
     },
     alertActive () {

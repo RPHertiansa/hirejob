@@ -13,7 +13,7 @@
           <div class="col-6 register-right">
               <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Halo, Pewpeople</p>
               <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-               <form @submit="register">
+               <form @submit.prevent="register">
                 <div class="form-group mb-4">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="Name">Nama</label>
                     <input type="text" class="form-control" id="name" autofocus required v-model="registerName" placeholder="Masukan Nama Panjang">
@@ -36,11 +36,11 @@
                 </div>
                 <div class="form-group mb-3">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="password">Kata Sandi</label>
-                    <input type="password" class="form-control" id="password" autofocus required v-model="registerPassword" placeholder="Masukan kata sandi">
+                    <input type="password" class="form-control" id="Password" autofocus required v-model="registerPassword" placeholder="Masukan kata sandi">
                 </div>
                 <div class="form-group mb-3">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="ConfirmPassword">Konfirmasi Kata Sandi</label>
-                    <input type="password" class="form-control" id="ConfirmPassword" placeholder="Masukan konfirmasi kata sandi">
+                    <input type="password" class="form-control" id="ConfirmPassword" placeholder="Masukan konfirmasi kata sandi"  @keyup="validate">
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Daftar</button>
               </form>
@@ -53,7 +53,7 @@
       <img class="mb-5" src="../assets/img/iconhead.png">
          <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Register</p>
         <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-        <form @submit="register">
+        <form @submit.prevent="register">
         <div class="form-group mb-4">
             <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="Name">Nama</label>
             <input type="text" class="form-control" id="name1" autofocus required v-model="registerName" placeholder="Masukan Nama Panjang">
@@ -76,11 +76,11 @@
         </div>
         <div class="form-group mb-3">
             <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="password">Kata Sandi</label>
-            <input type="password" class="form-control" id="password1" autofocus required v-model="registerPassword" placeholder="Masukan kata sandi">
+            <input type="password" class="form-control" id="Password1" autofocus required v-model="registerPassword" placeholder="Masukan kata sandi">
         </div>
         <div class="form-group mb-3">
             <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="ConfirmPassword">Konfirmasi Kata Sandi</label>
-            <input type="password" class="form-control" id="ConfirmPassword1" placeholder="Masukan konfirmasi kata sandi">
+            <input type="password" class="form-control" id="ConfirmPassword1" placeholder="Masukan konfirmasi kata sandi"  @keyup="validate1">
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Daftar</button>
         </form>
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     validate () {
-      const password = document.getElementById('password')
+      const password = document.getElementById('Password')
       const confirm = document.getElementById('ConfirmPassword')
       if (password.value !== confirm.value) {
         console.log('Password Doesnt Match')
@@ -116,7 +116,7 @@ export default {
       }
     },
     validate1 () {
-      const password1 = document.getElementById('password1')
+      const password1 = document.getElementById('Password1')
       const confirm1 = document.getElementById('ConfirmPassword1')
       if (password1.value !== confirm1.value) {
         console.log('Password Doesnt Match')
@@ -137,7 +137,8 @@ export default {
         passwordperekrut: this.registerPassword
       }
       this.onRegister(data).then(result => {
-        // this.alertActive()
+        this.alertActive()
+        window.location = '/login-perekrut'
         console.log(data)
       }).catch(err => this.alertError(err))
     },

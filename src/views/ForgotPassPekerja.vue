@@ -13,10 +13,10 @@
           <div class="col-6 forgotpass-right">
               <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Reset Password</p>
               <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Enter your user account's verified email address and we will send you a password reset link</p>
-               <form>
+               <form @submit.prevent="forgotpass">
                 <div class="form-group mb-4">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Masukan alamat email">
+                    <input type="email" class="form-control" id="email" autofocus required v-model="sendMail" placeholder="Masukan alamat email">
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Send password reset email</button>
               </form>
@@ -28,10 +28,10 @@
       <img class="mb-5" src="../assets/img/iconhead.png">
          <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Reset Password</p>
         <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Enter your user account's verified email address and we will send you a password reset link</p>
-        <form>
+        <form @submit.prevent="forgotpass">
         <div class="form-group mb-4">
             <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Masukan alamat email">
+            <input type="email" class="form-control" id="email" autofocus required v-model="sendMail" placeholder="Masukan alamat email">
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Send password reset email</button>
         </form>
@@ -40,7 +40,43 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
 export default {
+  name: 'forgotpass-pekerja',
+  data () {
+    return {
+      sendMail: null
+    }
+  },
+  methods: {
+    ...mapActions({
+      onForgotPassword: 'auth/onForgotPasswordPekerja'
+    }),
+    forgotpass () {
+      const data = {
+        emailpekerja: this.sendMail
+      }
+      this.onForgotPassword(data).then(result => {
+        this.alertActivate(result)
+        window.location = '/login-pekerja'
+      }).catch(err => this.alertError(err.message))
+    },
+    alertActivate () {
+      Swal.fire(
+        'Check your email',
+        'Please Check Your Email to reset password',
+        'success'
+      )
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Send Email Failed!'
+      })
+    }
+  }
 
 }
 </script>

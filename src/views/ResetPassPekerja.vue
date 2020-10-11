@@ -13,14 +13,14 @@
           <div class="col-6 resetpass-right">
               <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Reset Password</p>
               <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">You need to change your password to active your account</p>
-               <form>
+               <form @submit.prevent="resetPassword">
                 <div class="form-group mb-3">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="password">Kata Sandi</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukan kata sandi">
+                    <input type="password" class="form-control" id="password" autofocus required v-model="password" placeholder="Masukan kata sandi">
                 </div>
                 <div class="form-group mb-3">
-                    <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="ConfirmPassword">Konfirmasi Kata Sandi</label>
-                    <input type="password" class="form-control" id="ConfirmPassword" placeholder="Masukan konfirmasi kata sandi">
+                    <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="ConfirmPassword" >Konfirmasi Kata Sandi</label>
+                    <input type="password" class="form-control" id="ConfirmPassword" autofocus required  @keyup="validate" placeholder="Masukan konfirmasi kata sandi">
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Reset password</button>
               </form>
@@ -32,14 +32,14 @@
       <img class="mb-5" src="../assets/img/iconhead.png">
          <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Reset Password</p>
         <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">You need to change your password to active your account</p>
-        <form>
+        <form @submit.prevent="resetPassword">
             <div class="form-group mb-3">
                 <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="password">Kata Sandi</label>
-                <input type="password" class="form-control" id="password" placeholder="Masukan kata sandi">
+                <input type="password" class="form-control" id="password1" required v-model="password" placeholder="Masukan kata sandi">
             </div>
             <div class="form-group mb-3">
                 <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="ConfirmPassword">Konfirmasi Kata Sandi</label>
-                <input type="password" class="form-control" id="ConfirmPassword" placeholder="Masukan konfirmasi kata sandi">
+                <input type="password" class="form-control" id="ConfirmPassword1" placeholder="Masukan konfirmasi kata sandi" @keyup="validate1">
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block">Reset password</button>
         </form>
@@ -48,7 +48,55 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
 export default {
+  name: 'resetpass-pekerja',
+  data () {
+    return {
+      password: null,
+      userkey: null
+    }
+  },
+  methods: {
+    validate () {
+      const password = document.getElementById('password')
+      const confirm = document.getElementById('ConfirmPassword')
+      if (password.value !== confirm.value) {
+        console.log('Password Doesnt Match')
+      } else {
+        console.log('Password Match')
+      }
+    },
+    validate1 () {
+      const password1 = document.getElementById('password1')
+      const confirm1 = document.getElementById('ConfirmPassword1')
+      if (password1.value !== confirm1.value) {
+        console.log('Password Doesnt Match')
+      } else {
+        console.log('Password Match')
+      }
+    },
+    ...mapActions({
+      onResetPassword: 'auth/onResetPasswordPekerja'
+    }),
+    resetPassword () {
+      const ukey = {
+        passwordpekerja: this.password,
+        userkey: this.$route.query.userkey
+      }
+      this.onResetPassword(ukey).then(result => {
+        window.location = '/login-pekerja'
+      }).catch(err => this.alertError(err))
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Reset password Failed, Something went wrong!'
+      })
+    }
+  }
 
 }
 </script>

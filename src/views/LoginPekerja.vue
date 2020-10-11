@@ -13,14 +13,14 @@
           <div class="col-6 login-right">
               <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Halo, Pewpeople</p>
               <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-               <form>
+               <form @submit.prevent="login">
                 <div class="form-group mb-5">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Masukan alamat email">
+                    <input type="email" class="form-control" id="email" autofocus required v-model="loginEmail" placeholder="Masukan alamat email">
                 </div>
                 <div class="form-group mb-3">
                     <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="password">Kata Sandi</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukan kata sandi">
+                    <input type="password" class="form-control" id="password" autofocus required v-model="loginPassword" placeholder="Masukan kata sandi">
                 </div>
                 <router-link style="font-size: 16px;line-height: 22px;color: #1F2A36;" to="/forgotpass-pekerja" class="mb-3 float-right">Lupa kata sandi?</router-link>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
@@ -34,14 +34,14 @@
       <img class="mb-5" src="../assets/img/iconhead.png">
          <p style="font-weight: 600;font-size: 32px;line-height: 44px;color: #1F2A36;">Login</p>
         <p class="mb-5" style="font-size: 18px; line-height: 25px;color: #46505C;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-        <form>
+        <form @submit.prevent="login">
         <div class="form-group mb-4">
             <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Masukan alamat email">
+            <input type="email" class="form-control" id="email1" autofocus required v-model="loginEmail" placeholder="Masukan alamat email">
         </div>
         <div class="form-group mb-3">
             <label style="font-size: 12px;line-height: 16px;color: #9EA0A5;" for="password">Kata Sandi</label>
-            <input type="password" class="form-control" id="password" placeholder="Masukan kata sandi">
+            <input type="password" class="form-control" id="password1" autofocus required v-model="loginPassword" placeholder="Masukan kata sandi">
         </div>
         <router-link style="font-size: 16px;line-height: 22px;color: #1F2A36;" to="/forgotpass-pekerja" class="mb-3 float-right">Lupa kata sandi?</router-link>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
@@ -52,8 +52,81 @@
 </template>
 
 <script>
-export default {
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
 
+export default {
+  name: 'login-pekerja',
+  data () {
+    return {
+      loginEmail: '',
+      loginPassword: ''
+    }
+  },
+  methods: {
+    ...mapActions({
+      onLogin: 'auth/onLoginPekerja'
+    }),
+    login () {
+      const data = {
+        emailpekerja: this.loginEmail,
+        passwordpekerja: this.loginPassword
+      }
+      this.onLogin(data).then(result => {
+        if (result === "Cannot read property 'passwordpekerja' of undefined") {
+          this.alertExist()
+          localStorage.removeItem('emailpekerja')
+          localStorage.removeItem('idpekerja')
+          localStorage.removeItem('refreshToken')
+          localStorage.removeItem('status')
+          localStorage.removeItem('token')
+        } else if (result === 'Need Activation') {
+          this.alertActivate()
+          localStorage.removeItem('emailpekerja')
+          localStorage.removeItem('idpekerja')
+          localStorage.removeItem('refreshToken')
+          localStorage.removeItem('status')
+          localStorage.removeItem('token')
+        } else if (result === 'Incorrect password! Please try again') {
+          this.alertMatch()
+          localStorage.removeItem('emailpekerja')
+          localStorage.removeItem('idpekerja')
+          localStorage.removeItem('refreshToken')
+          localStorage.removeItem('status')
+          localStorage.removeItem('token')
+        } else {
+          window.location = '/home'
+        }
+      }).catch(err => this.alertError(err.message))
+    },
+    alertExist () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Username Doesnt Exist!',
+        text: 'Please check your personal info or create a new one'
+      })
+    },
+    alertActivate () {
+      Swal.fire({
+        icon: 'warning',
+        title: 'This Account need to verified!',
+        text: 'Please check your email account to activate'
+      })
+    },
+    alertMatch () {
+      Swal.fire({
+        icon: 'question',
+        title: 'Username and Password Doesnt Match!'
+      })
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      })
+    }
+  }
 }
 </script>
 
