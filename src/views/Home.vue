@@ -35,10 +35,10 @@
                 </div>
             </div>
             <div class="list-pekerja">
-                <div class="card cont-card">
+                <div class="cont-card">
                     <div class="card-body">
                         <div class="row pa-seeker">
-                            <div class="col-2">
+                            <div class="col-2 d-flex h-100 align-items-center justify-content-center">
                                 <img style="border-radius:100%;" src="../assets/img/Ellipse 325.png">
                             </div>
                             <div class="col-8">
@@ -353,6 +353,9 @@ export default {
     padding: 5px 20px;
     margin-right: 10px;
 }
+.b:hover {
+    color: white;
+}
 .cont-pagination {
     margin-top: 10vh;
     display: flex;
@@ -473,5 +476,12 @@ export default {
     color: white;
     padding: 1px 3px;
     margin-right: 3px;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+.btn-skill-home:hover {
+    color: white;
 }
 </style>
