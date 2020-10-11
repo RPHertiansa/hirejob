@@ -1,46 +1,89 @@
 <template>
   <div>
-      <nav class="d-sm-block d-none cont-nav">
-          <img src="../assets/img/Group 980 1.png">
-          <div v-if="$route.path === '/'" class="btn-head d-inline float-right">
-            <b-dropdown id="dropdown-1" text="Masuk" class="btn-login m-md-2">
-                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut"> Perekrut </router-link></b-dropdown-item>
-                <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja </router-link></b-dropdown-item>
-            </b-dropdown>
-              <b-dropdown id="dropdown-1" text="Daftar" variant="primary" class="btn-register m-md-2">
-                <b-dropdown-item><router-link style="color: #5E50A1;" to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
-                <b-dropdown-item><router-link style="color: #5E50A1;" to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
-            </b-dropdown>
-          </div>
-          <div v-else class="btn-head d-inline float-right">
-              <img src="../assets/img/bell (1) 1.png">
-              <img class="ml-5" src="../assets/img/mail (3) 1.png">
-              <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" src="../assets/img/Ellipse 325.png">
-          </div>
-      </nav>
-      <!-- responsive -->
-      <nav class="d-sm-none d-block cont-nav-hp fixed-bottom">
-          <div class="row no-gutters h-100 align-items-center">
-              <div class="col-3 d-flex justify-content-center">
-                  <img src="../assets/img/grid 1.png" width="24px" height="24px">
-              </div>
-              <div class="col-3 d-flex justify-content-center">
-                  <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
-              </div>
-              <div class="col-3 d-flex justify-content-center">
-                  <img src="../assets/img/Vector.png" width="24px" height="24px">
-              </div>
-              <div class="col-3 d-flex justify-content-center">
-                  <img style="border-radius:100%;" src="../assets/img/derick-mckinney-kfN-BBbWTWo-unsplash 1.png" width="24px" height="24px">
-              </div>
-          </div>
-      </nav>
+        <nav class="d-sm-block d-none cont-nav">
+            <img src="../assets/img/Group 980 1.png">
+            <div v-if="$route.path === '/'" class="btn-head d-inline float-right">
+                <b-dropdown id="dropdown-1" text="Masuk" class="btn-login m-md-2">
+                    <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut"> Perekrut </router-link></b-dropdown-item>
+                    <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja </router-link></b-dropdown-item>
+                </b-dropdown>
+                <b-dropdown id="dropdown-1" text="Daftar" variant="primary" class="btn-register m-md-2">
+                    <b-dropdown-item><router-link style="color: #5E50A1;" to="/register-perekrut">Perekrut</router-link></b-dropdown-item>
+                    <b-dropdown-item><router-link style="color: #5E50A1;" to="/register-pekerja">Pekerja</router-link></b-dropdown-item>
+                </b-dropdown>
+            </div>
+            <div v-else class="btn-head d-inline float-right">
+                <div v-if="status === 'pekerja'">
+                    <img src="../assets/img/bell (1) 1.png">
+                    <img class="ml-5" src="../assets/img/mail (3) 1.png">
+                    <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`">
+                </div>
+                <div v-else>
+                    <img src="../assets/img/bell (1) 1.png">
+                    <img class="ml-5" src="../assets/img/mail (3) 1.png">
+                    <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`">
+                </div>
+            </div>
+        </nav>
+        <!-- responsive -->
+        <nav class="d-sm-none d-block cont-nav-hp fixed-bottom">
+            <div class="row no-gutters h-100 align-items-center">
+                <div class="col-3 d-flex justify-content-center">
+                    <img src="../assets/img/grid 1.png" width="24px" height="24px">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                    <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                    <img src="../assets/img/Vector.png" width="24px" height="24px">
+                </div>
+                <div v-if="status === 'pekerja'">
+                    <div class="col-3 d-flex justify-content-center">
+                        <img style="border-radius:100%;" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="col-3 d-flex justify-content-center">
+                        <img style="border-radius:100%;" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
+                    </div>
+                </div>
+            </div>
+        </nav>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-
+  data () {
+    return {
+      status: localStorage.getItem('status'),
+      getid: localStorage.getItem('idpekerja'),
+      getidperekrut: localStorage.getItem('idperekrut')
+    }
+  },
+  computed: {
+    ...mapGetters({
+      detailPekerja: 'pekerja/getDetailPekerja',
+      detailPerekrut: 'perekrut/getDetailPerekrut'
+    })
+  },
+  methods: {
+    sendParamPerekrut () {
+      this.actgetDetailPerekrut(this.getidperekrut)
+    },
+    sendParam () {
+      this.actgetDetail(this.getid)
+    },
+    ...mapActions({
+      actgetDetail: 'pekerja/getDetailPekerja',
+      actgetDetailPerekrut: 'perekrut/getDetailPerekrut'
+    })
+  },
+  mounted () {
+    this.sendParam()
+    this.sendParamPerekrut()
+  }
 }
 </script>
 

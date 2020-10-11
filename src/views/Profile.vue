@@ -1,0 +1,64 @@
+<template>
+    <div>
+        <Navbar />
+<!-- <div class="top-bg fluid"> -->
+            <div class="container-fluid">
+            <b-col lg="12" class="profile py-5">
+                    <b-row class="content mx-5">
+                    <b-col lg="4" cols="12" class="user-card">
+                        <CardUser />
+                    </b-col>
+                    <b-col class="edit-profile" lg="8" cols="12">
+                        <EditProfile />
+                    </b-col>
+                </b-row>
+            </b-col>
+      </div>
+      <div>
+          <Footer />
+      </div>
+</div>
+</template>
+
+<script>
+import CardUser from '../components/CardUser'
+import Navbar from '../components/Navbar'
+import EditProfile from '../components/EditProfile'
+import Footer from '../components/Footer'
+
+export default {
+  data () {
+    return {
+      role: 0
+    }
+  },
+  components: {
+    CardUser,
+    Navbar,
+    EditProfile,
+    Footer
+  }
+}
+
+</script>
+<style scoped>
+    .container-fluid{
+        background: #F6F7F8;
+    }
+    .top-bg{
+        background: #5E50A1;
+        height: 200px;
+    }
+    .user-card{
+        height: 600px;
+    }
+    /* .profile{
+        padding: 0px 5px;
+        margin-top: 5px;
+    } */
+    @media only screen and (max-width: 600px) {
+  .edit-profile {
+    margin-top: 25px;
+  }
+}
+</style>

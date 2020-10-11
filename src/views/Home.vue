@@ -23,7 +23,6 @@
                         no-caret
                     >
                         <b-dropdown-item href="#">Sortir berdasarkan nama</b-dropdown-item>
-                        <b-dropdown-item href="#">Sortir berdasarkan Skill</b-dropdown-item>
                         <b-dropdown-item href="#">Sortir berdasarkan Lokasi</b-dropdown-item>
                         <b-dropdown-item href="#">Sortir berdasarkan freelance</b-dropdown-item>
                         <b-dropdown-item href="#">Sortir berdasarkan fulltime</b-dropdown-item>
@@ -34,21 +33,19 @@
                     </div>
                 </div>
             </div>
-            <div class="list-pekerja">
+            <div class="list-pekerja" v-for="(item,index) in allPekerja" :key=(index)>
                 <div class="cont-card">
-                    <div class="card-body">
+                    <div class="card-body" >
                         <div class="row pa-seeker">
                             <div class="col-2 d-flex h-100 align-items-center justify-content-center">
-                                <img style="border-radius:100%;" src="../assets/img/Ellipse 325.png">
+                                <img style="border-radius:100%;" :src="`http://localhost:3000/${item.imagepekerja}`" width="80%" height="70%">
                             </div>
                             <div class="col-8">
-                                <p class="name-pekerja">Louis Tomlinson</p>
-                                <p class="keahlian">Web developer</p>
-                                <p class="keahlian"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">Lorem ipsum</p>
+                                <p class="name-pekerja">{{ item.namapekerja }}</p>
+                                <p class="keahlian"></p>
+                                <p class="keahlian"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{ item.domisilipekerja }}</p>
                                 <div class="bakat">
-                                    <button type="button" class="btn b">PHP</button>
-                                    <button type="button" class="btn b">JavaScript</button>
-                                    <button type="button" class="btn b">HTML</button>
+                                    <button type="button" class="btn b" v-for="(skillz, index) in item.skill.split(',')" :key="index">{{ skillz }}</button>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -222,6 +219,8 @@
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import { Carousel, Slide } from 'vue-carousel'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   components: {
     Navbar,
@@ -238,13 +237,24 @@ export default {
       sliding: null
     }
   },
+  computed: {
+    ...mapGetters({
+      allPekerja: 'pekerja/getPekerja'
+    })
+  },
   methods: {
+    ...mapActions({
+      actionGetAllPekerja: 'pekerja/getPekerja'
+    }),
     onSlideStart (slide) {
       this.sliding = true
     },
     onSlideEnd (slide) {
       this.sliding = false
     }
+  },
+  mounted () {
+    this.actionGetAllPekerja()
   }
 }
 </script>
