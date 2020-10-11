@@ -1,6 +1,6 @@
 <template>
   <div>
-      <nav class="cont-nav">
+      <nav class="d-sm-block d-none cont-nav">
           <img src="../assets/img/Group 980 1.png">
           <div v-if="$route.path === '/'" class="btn-head d-inline float-right">
             <b-dropdown id="dropdown-1" text="Masuk" class="btn-login m-md-2">
@@ -18,6 +18,23 @@
               <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" src="../assets/img/Ellipse 325.png">
           </div>
       </nav>
+      <!-- responsive -->
+      <nav class="d-sm-none d-block cont-nav-hp fixed-bottom">
+          <div class="row no-gutters h-100 align-items-center">
+              <div class="col-3 d-flex justify-content-center">
+                  <img src="../assets/img/grid 1.png" width="24px" height="24px">
+              </div>
+              <div class="col-3 d-flex justify-content-center">
+                  <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
+              </div>
+              <div class="col-3 d-flex justify-content-center">
+                  <img src="../assets/img/Vector.png" width="24px" height="24px">
+              </div>
+              <div class="col-3 d-flex justify-content-center">
+                  <img style="border-radius:100%;" src="../assets/img/derick-mckinney-kfN-BBbWTWo-unsplash 1.png" width="24px" height="24px">
+              </div>
+          </div>
+      </nav>
   </div>
 </template>
 
@@ -31,6 +48,12 @@ export default {
 .cont-nav {
     padding: 30px 100px;
     height: 100px;
+}
+.cont-nav-hp {
+    height: 80px;
+    background: #FFFFFF;
+    box-shadow: 0px -6px 20px rgba(175, 175, 175, 0.25);
+    border-radius: 30px 30px 0px 0px;
 }
 .btn-secondary {
     color: #5E50A1;
