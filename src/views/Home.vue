@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <button style="margin-top:30px;" type="button" class="btn btn-search float-right">Lihat Profile</button>
+                                <button style="margin-top:30px;" @click="detailProfile(item.idpekerja, index)" class="btn btn-search float-right">Lihat Profile</button>
                             </div>
                         </div>
                         <hr class="mt-5" style="border: 2px solid #F2F3F4;">
@@ -281,8 +281,12 @@ export default {
           }
         })
         this.actionGetAllPekerja(skill)
-        // this.skill = ''
+        this.skill = ''
       }
+    },
+    detailProfile (idpekerja, index) {
+      alert(idpekerja)
+      alert(index)
     }
   },
   mounted () {
