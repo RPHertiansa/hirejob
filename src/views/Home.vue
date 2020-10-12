@@ -23,10 +23,9 @@
                           offset="-85"
                           no-caret
                       >
-                          <b-dropdown-item href="#">Sortir berdasarkan nama</b-dropdown-item>
-                          <b-dropdown-item href="#">Sortir berdasarkan Lokasi</b-dropdown-item>
-                          <b-dropdown-item href="#">Sortir berdasarkan freelance</b-dropdown-item>
-                          <b-dropdown-item href="#">Sortir berdasarkan fulltime</b-dropdown-item>
+                          <b-dropdown-item @click="sort('namapekerja')">Sortir berdasarkan Nama</b-dropdown-item>
+                          <b-dropdown-item @click="sort('domisilipekerja')">Sortir berdasarkan Lokasi</b-dropdown-item>
+                          <b-dropdown-item href="#">Sortir berdasarkan Skill</b-dropdown-item>
                       </b-dropdown>
                       </div>
                       <div>
@@ -275,7 +274,6 @@ export default {
         this.actionGetAllPekerja(' ')
       } else {
         this.$router.push({
-          path: '/home',
           query: {
             skill
           }
@@ -284,9 +282,14 @@ export default {
         this.skill = ''
       }
     },
+    sort (payload) {
+      alert(payload)
+    },
     detailProfile (idpekerja, index) {
-      alert(idpekerja)
-      alert(index)
+      this.$router.push({
+        path: '/profile',
+        query: { id: idpekerja }
+      })
     }
   },
   mounted () {

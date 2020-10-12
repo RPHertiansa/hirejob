@@ -1,23 +1,23 @@
 <template>
     <div>
         <Navbar />
-<!-- <div class="top-bg fluid"> -->
-            <div class="container-fluid">
-            <b-col lg="12" class="profile py-5">
-                    <b-row class="content mx-5">
-                    <b-col lg="4" cols="12" class="user-card">
-                        <CardUser />
-                    </b-col>
-                    <b-col class="edit-profile" lg="8" cols="12">
-                        <Riwayat />
-                    </b-col>
-                </b-row>
-            </b-col>
-            </div>
-      <div>
-          <Footer />
-      </div>
-</div>
+        <!-- <div class="top-bg fluid"> -->
+          <div class="container-fluid">
+          <b-col lg="12" class="profile py-5">
+                  <b-row class="content mx-5">
+                  <b-col lg="4" cols="12" class="user-card">
+                      <CardUser :idpekerja="id" />
+                  </b-col>
+                  <b-col class="edit-profile" lg="8" cols="12">
+                      <Riwayat />
+                  </b-col>
+              </b-row>
+          </b-col>
+          </div>
+          <div>
+              <Footer />
+          </div>
+    </div>
 </template>
 
 <script>
@@ -29,6 +29,7 @@ import Footer from '../components/Footer'
 export default {
   data () {
     return {
+      id: this.$route.query.id
     }
   },
   components: {

@@ -8,7 +8,7 @@
       </div>
       <div class="user-data mt-3">
         <div class="user-name">
-          <h5 class="font-weight-bold" style="margin-bottom: 0;">Louis Tomlinson</h5>
+          <h5 class="font-weight-bold" style="margin-bottom: 0;"> Louis Tomlinson</h5>
           <p>Web Developer</p>
         </div>
         <div>
@@ -59,7 +59,7 @@
       </div>
       <div class="user-data mt-3">
         <div class="user-name">
-          <h5 class="font-weight-bold" style="margin-bottom: 0;">Louis Tomlinson</h5>
+          <h5 class="font-weight-bold" style="margin-bottom: 0;">     {{ idpekerja }} AAA Louis Tomlinson</h5>
           <p>Web Developer</p>
         </div>
         <div>
@@ -103,10 +103,13 @@
 
 <script>
 export default {
+  props: ['idpekerja'],
   data () {
     return {
       status: localStorage.getItem('status')
     }
+  },
+  methods: {
   }
 }
 </script>

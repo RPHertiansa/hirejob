@@ -30,6 +30,7 @@ const actions = {
   getPekerja (context, payload) {
     return new Promise((resolve, reject) => {
       // console.log(payload)
+      // &sortby=${payload}
       axios.get(`${url}/pekerja/getall?skill=${payload}`)
         .then((response) => {
           context.commit('SET_ALL_DATA', response.data.data)
