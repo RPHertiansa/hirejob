@@ -18,6 +18,7 @@
                       <b-dropdown
                           menu-class="mt-4 border-0"
                           text="Kategori"
+                          toggle-class="brd-dr"
                           variant="white"
                           class="m-2"
                           offset="-85"
@@ -329,7 +330,7 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
-  margin-bottom: 10px;
+  padding-top: 10px;
   align-items: center;
 }
 .input-field {
@@ -344,9 +345,8 @@ export default {
   border: none;
 }
 .icon {
-  border-right: 1px solid #9EA0A5;
-  padding-top: 20px;
   padding-right: 20px;
+  border-right: 1px solid #9EA0A5;
 }
 .dropdown-search {
     margin-top: 25px;
