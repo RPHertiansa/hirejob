@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import auth from './auth'
 import pekerja from './pekerja'
 import perekrut from './perekrut'
+import chat from './chat'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,6 +17,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     pekerja,
-    perekrut
+    perekrut,
+    chat
   }
 })
