@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card-user" v-if="status === 'perekrut'">
+    <div class="card-user">
       <div class="user-box">
         <div class="profile-image">
           <span></span>
@@ -60,29 +60,28 @@ export default {
 .user-data {
   width: 100%;
 }
-.b {
-    background: rgba(251, 176, 23, 0.6);
-    margin: 5px;
-    border: 1px solid #FBB017;
-    box-sizing: border-box;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 20px;
-    color: #FFFFFF;
-    padding: 5px 20px;
-    margin-right: 10px;
+.btn-save{
+  width: 90%;
+  color: white;
+  background: #5E50A1;
+  border-radius: 4px;
 }
-.btn-search {
-    width: 100%;
-    height: 54px;
-    margin-right: 10px;
-    background: #5E50A1;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
-    color: #FFFFFF;
+.btn-save:hover{
+  color: #5E50A1;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #5E50A1;
+}
+.btn-cancel{
+  width: 90%;
+  border: 1px solid #5E50A1;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.btn-cancel:hover{
+  color: white;
+  background: #5E50A1;
+  border-radius: 4px;
+  border: 1px solid #5E50A1;
 }
 </style>

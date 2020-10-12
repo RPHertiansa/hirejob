@@ -85,6 +85,18 @@ const routes = [
     name: 'ProfilePerekrut',
     component: () => import('../views/ProfilePerekrut.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit-profile-pekerja',
+    name: 'EditProfilePekerja',
+    component: () => import('../views/EditProfilePekerja.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit-profile-perekrut',
+    name: 'EditProfilePerekrut',
+    component: () => import('../views/EditProfilePerekrut.vue'),
+    meta: { requiresAuth: true }
   }
 
 ]

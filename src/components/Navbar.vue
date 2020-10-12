@@ -87,7 +87,7 @@
                 </div>
                 <div v-if="status === 'pekerja'">
                     <div class="col-3 d-flex justify-content-center">
-                      <b-dropdown id="dropdown-drowup" size="lg" text="" class="ml-5">
+                      <b-dropdown id="dropdown-drowup" size="lg" text="" class="ml-2">
                         <template v-slot:button-content>
                           <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
                         </template>

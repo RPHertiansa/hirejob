@@ -21,7 +21,9 @@
                 <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
                 </div>
                 <div>
-                <button type="button" class="btn btn-search">Edit Profile</button>
+                <li class="btn btn-edit">
+                  <router-link to="/edit-profile-perekrut">Edit Profile</router-link>
+                </li>
                 </div>
 
                 <div class="text-secondary mt-3 ">
@@ -83,29 +85,16 @@ export default {
 .user-data {
   width: 60%;
 }
-.b {
-    background: rgba(251, 176, 23, 0.6);
-    margin: 5px;
-    border: 1px solid #FBB017;
-    box-sizing: border-box;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 20px;
-    color: #FFFFFF;
-    padding: 5px 20px;
-    margin-right: 10px;
+.btn-edit{
+  width: 90%;
+  color: white;
+  background: #5E50A1;
+  border-radius: 4px;
 }
-.btn-search {
-    width: 100%;
-    height: 54px;
-    margin-right: 10px;
-    background: #5E50A1;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
-    color: #FFFFFF;
+.btn-edit:hover{
+  color: #5E50A1;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #5E50A1;
 }
 </style>
