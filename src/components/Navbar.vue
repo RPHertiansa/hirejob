@@ -29,7 +29,7 @@
                         <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
                       </template>
                         <img class="ml-5 mb-3" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`">
-                        <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile">Profile</router-link></b-dropdown-item>
+                        <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
                         <b-dropdown-item><router-link style="color: #5E50A1;" to="/edit-profile-pekerja">Edit Profile</router-link></b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
                         <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
@@ -85,28 +85,31 @@
                         <img src="../assets/img/Vector.png" width="24px" height="24px">
                   </router-link>
                 </div>
-
-                <div v-if="status === 'pekerja'" class="col-3 d-flex justify-content-center">
-                  <b-dropdown id="dropdown-drowup" size="lg" text="" class="ml-5" no-caret>
-                    <template v-slot:button-content>
-                      <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
-                    </template>
-                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
-                      <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile">Profile</router-link></b-dropdown-item>
-                      <b-dropdown-divider></b-dropdown-divider>
-                      <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
-                  </b-dropdown>
+                <div v-if="status === 'pekerja'">
+                    <div class="col-3 d-flex justify-content-center">
+                      <b-dropdown id="dropdown-drowup" size="lg" text="" class="ml-5">
+                        <template v-slot:button-content>
+                          <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
+                        </template>
+                          <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
+                          <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile">Profile</router-link></b-dropdown-item>
+                          <b-dropdown-divider></b-dropdown-divider>
+                          <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
+                      </b-dropdown>
+                    </div>
                 </div>
-                <div v-else class="col-3 d-flex justify-content-center">
-                  <b-dropdown id="dropdown-1" size="lg" text="" class="ml-2" no-caret>
-                    <template v-slot:button-content>
-                      <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
-                    </template>
-                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
-                      <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
-                      <b-dropdown-divider></b-dropdown-divider>
-                      <b-dropdown-item><li class="text-danger" @click="logoutPerekrut()">Logout</li></b-dropdown-item>
-                  </b-dropdown>
+                <div v-else>
+                    <div class="col-3 d-flex justify-content-center">
+                      <b-dropdown id="dropdown-1" size="lg" text="" class="ml-2">
+                        <template v-slot:button-content>
+                          <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
+                        </template>
+                          <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
+                          <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
+                          <b-dropdown-divider></b-dropdown-divider>
+                          <b-dropdown-item><li class="text-danger" @click="logoutPerekrut()">Logout</li></b-dropdown-item>
+                      </b-dropdown>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -147,6 +150,12 @@ export default {
     },
     logoutPerekrut () {
       this.onLogoutPerekrut().then(() => { window.location = '/' })
+    },
+    detailProfile (idpekerja) {
+      this.$router.push({
+        path: '/profile',
+        query: { id: idpekerja }
+      })
     }
 
   },

@@ -7,20 +7,32 @@
         </div>
         <div class="main-content">
         <div class="portofolio mt-4" v-if="switchContent === 0">
-            <div class="portofolio-pict"><span>Mantap</span></div>
-            <div class="portofolio-pict"><span></span></div>
-            <div class="portofolio-pict"><span></span></div>
+          <div class="mx-auto text-center" v-for="(item, index) in dataPor" :key="index">
+            <b-card
+              overlay
+              :img-src="`http://localhost:3000/${item.image2}`"
+              img-alt="Image"
+              img-top
+              style="max-width: 250px"
+            >
+            </b-card>
+            <small>{{item.namaaplikasi}}</small>
+            <!-- <div class="portofolio-pict"><span></span></div>
+            <div class="portofolio-pict"><span></span></div> -->
+          </div>
         </div>
         <div class="exprerience mt-4" v-else>
-             <div class="experience-list">
-                  <div class="company-profile">
-                    <span></span>
+             <div class="experience-list row p-3" v-for="(item, index) in dataPeng" :key="index">
+                  <div class="company-profile mr-4">
+                    <span>
+                      <img src="../assets/img/gambar_default1.jpeg">
+                    </span>
                   </div>
                   <div class="experiece-bio">
-                    <h4 class="font-weight-bold">Engginer</h4>
-                    <h6>Tokopedia</h6>
-                    <h6 class="text-secondary">July 2019 - January 2020 6 months</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.</p>
+                    <h4 class="font-weight-bold">{{item.posisi}}</h4>
+                    <h6>{{item.namaperusahaan}}</h6>
+                    <h6 class="text-secondary">{{item.mulaikerja}} - {{item.selesaikerja}} | {{item.lamakerja}} months</h6>
+                    <p>{{item.deskripsi}}</p>
                   </div>
             </div>
         </div>
@@ -30,6 +42,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
@@ -38,6 +52,7 @@ export default {
       dataSkill: ['PHP', 'Phyton']
     }
   },
+  props: ['idpekerja'],
   methods: {
     switchToggle1 () {
       if (this.switchToggle === 1) {
@@ -66,12 +81,24 @@ export default {
         this.switchToggle = 1
       }
       this.switchContent = 1
-    }
+    },
+    ...mapActions({
+      getPortofolio: 'pekerja/getPortofolio',
+      getPengalaman: 'pekerja/getPengalaman'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      dataPor: 'pekerja/getPortofolio',
+      dataPeng: 'pekerja/getPengalaman'
+    })
   },
   mounted () {
     const tgl1 = document.querySelector('.switch-toggle')
     tgl1.classList.toggle('switch-nav2')
     this.switchToggle = 1
+    this.getPortofolio(this.idpekerja)
+    this.getPengalaman(this.idpekerja)
   }
 }
 </script>

@@ -54,31 +54,41 @@
     <div class="card-user" v-else>
       <div class="user-box">
         <div class="profile-image">
-          <span></span>
+          <span>
+            <img :src="`http://localhost:3000/${dataz.imagepekerja}`">
+          </span>
         </div>
       </div>
       <div class="user-data mt-3">
         <div class="user-name">
-          <h5 class="font-weight-bold" style="margin-bottom: 0;">     {{ idpekerja }} AAA Louis Tomlinson</h5>
-          <p>Web Developer</p>
+          <h5 class="font-weight-bold" style="margin-bottom: 0;"> {{dataz.namapekerja}}</h5>
+          <p>{{dataz.jobdescpekerja}}</p>
         </div>
-        <div>
-          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> Purwokerto, Jawa Tengah</p>
+
+        <div v-if="dataz.tipepekerjaan === 0">
+          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
           <p class="text-secondary">Freelancer</p>
         </div>
+        <div v-else>
+          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+          <p class="text-secondary">Fulltime</p>
+        </div>
+
         <div>
-          <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
+          <p class="text-secondary">{{dataz.deskripsi}}</p>
         </div>
 
         <div>
           <h2>Skill</h2>
         </div>
         <div>
-            <button class="btn b">Phyton</button>
+          <!-- {{dataz.skill.split(',')}} -->
+          <button type="button" class="btn b" v-for="(skillz, index) in dataz.skill.split(',')" :key="index">{{ skillz }}</button>
+            <!-- <button class="btn b">Phyton</button>
             <button class="btn b">Golang</button>
             <button class="btn b">Kotlin</button>
             <button class="btn b">PHP</button>
-            <button class="btn b">CSS</button>
+            <button class="btn b">CSS</button> -->
         </div>
         <div class="text-secondary mt-3 ">
           <img src="../assets/img/mail (3) 1.png" alt="">
@@ -102,6 +112,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   props: ['idpekerja'],
   data () {
@@ -110,6 +122,17 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      getData: 'pekerja/getDetailProfilPekerja'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      dataz: 'pekerja/getDetailProfilPekerja'
+    })
+  },
+  mounted () {
+    this.getData(this.idpekerja)
   }
 }
 </script>
@@ -127,10 +150,8 @@ export default {
   margin-bottom: 20px;
 }
 .profile-image {
-  width: 130px;
-  background-image: url('../assets/img/Ellipse 325.png');
+  /* background-image: url('../assets/img/Ellipse 325.png'); */
   background-size: cover;
-  height: 130px;
   border-radius: 70px;
 }
 .user-data {
