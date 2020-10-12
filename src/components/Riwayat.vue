@@ -78,7 +78,7 @@ export default {
 <style scoped>
 .portofolio-page {
   background-color: #F6F7F8;
-  height: 100vh;
+  height: 130vh;
 }
 .portofolio-content {
   background-color: #5E50A1;

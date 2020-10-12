@@ -121,6 +121,7 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  margin-bottom: 20px;
 }
 .profile-image {
   width: 130px;
