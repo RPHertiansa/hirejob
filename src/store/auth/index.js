@@ -53,6 +53,26 @@ const actions = {
         })
     })
   },
+  onLogoutPekerja (context) {
+    return new Promise(resolve => {
+      localStorage.removeItem('emailpekerja')
+      localStorage.removeItem('idpekerja')
+      localStorage.removeItem('refreshToken')
+      localStorage.removeItem('status')
+      localStorage.removeItem('token')
+      resolve()
+    })
+  },
+  onLogoutPerekrut (context) {
+    return new Promise(resolve => {
+      localStorage.removeItem('emailperekrut')
+      localStorage.removeItem('idperekrut')
+      localStorage.removeItem('refreshToken')
+      localStorage.removeItem('status')
+      localStorage.removeItem('token')
+      resolve()
+    })
+  },
   onRegisterPerekrut (context, payload) {
     return new Promise((resolve, reject) => {
       axios

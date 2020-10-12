@@ -1,51 +1,101 @@
 <template>
-  <div class="card-user">
-    <div class="user-box">
-      <div class="profile-image">
-        <span></span>
+  <div>
+    <div class="card-user" v-if="status === 'perekrut'">
+      <div class="user-box">
+        <div class="profile-image">
+          <span></span>
+        </div>
       </div>
-      <p class="text-secondary mt-3 text-center" style="margin-left: -15px;"><b-icon icon="pencil-fill" class="mr-1"></b-icon> Edit</p>
-    </div>
-    <div class="user-data mt-3">
-      <div class="user-name">
-        <h5 class="font-weight-bold" style="margin-bottom: 0;">Louis Tomlinson</h5>
-        <p>Web Developer</p>
-      </div>
-      <div>
-        <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> Purwokerto, Jawa Tengah</p>
-        <p class="text-secondary">Freelancer</p>
-      </div>
-      <div>
-        <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
-      </div>
-      <div>
+      <div class="user-data mt-3">
+        <div class="user-name">
+          <h5 class="font-weight-bold" style="margin-bottom: 0;">Louis Tomlinson</h5>
+          <p>Web Developer</p>
+        </div>
+        <div>
+          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> Purwokerto, Jawa Tengah</p>
+          <p class="text-secondary">Freelancer</p>
+        </div>
+        <div>
+          <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
+        </div>
+        <div>
           <button type="button" class="btn btn-search">Hire</button>
+        </div>
+
+        <div>
+          <h2>Skill</h2>
+        </div>
+        <div>
+            <button class="btn b">Phyton</button>
+            <button class="btn b">Golang</button>
+            <button class="btn b">Kotlin</button>
+            <button class="btn b">PHP</button>
+            <button class="btn b">CSS</button>
+        </div>
+        <div class="text-secondary mt-3 ">
+          <img src="../assets/img/mail (3) 1.png" alt="">
+            Louistommo@gmail.com
+        </div>
+        <div class="text-secondary mt-3">
+          <img src="../assets/img/instagram.png" alt="">
+          @Louist91
+        </div>
+        <div class="text-secondary mt-3">
+          <img src="../assets/img/gitub.png" alt="">
+          @Louistommo
+        </div>
+        <div class="text-secondary mt-3">
+          <img src="../assets/img/gitlab.png" alt="">
+          @Louistommo91
+        </div>
       </div>
-      <div>
-        <h2>Skill</h2>
+    </div>
+
+    <div class="card-user" v-else>
+      <div class="user-box">
+        <div class="profile-image">
+          <span></span>
+        </div>
       </div>
-      <div>
-          <button class="btn b">Phyton</button>
-          <button class="btn b">Golang</button>
-          <button class="btn b">Kotlin</button>
-          <button class="btn b">PHP</button>
-          <button class="btn b">CSS</button>
-      </div>
-      <div class="text-secondary mt-3 ">
-        <img src="../assets/img/mail (3) 1.png" alt="">
-          Louistommo@gmail.com
-      </div>
-      <div class="text-secondary mt-3">
-        <img src="../assets/img/instagram.png" alt="">
-        @Louist91
-      </div>
-      <div class="text-secondary mt-3">
-        <img src="../assets/img/gitub.png" alt="">
-        @Louistommo
-      </div>
-      <div class="text-secondary mt-3">
-        <img src="../assets/img/gitlab.png" alt="">
-        @Louistommo91
+      <div class="user-data mt-3">
+        <div class="user-name">
+          <h5 class="font-weight-bold" style="margin-bottom: 0;">Louis Tomlinson</h5>
+          <p>Web Developer</p>
+        </div>
+        <div>
+          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> Purwokerto, Jawa Tengah</p>
+          <p class="text-secondary">Freelancer</p>
+        </div>
+        <div>
+          <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
+        </div>
+
+        <div>
+          <h2>Skill</h2>
+        </div>
+        <div>
+            <button class="btn b">Phyton</button>
+            <button class="btn b">Golang</button>
+            <button class="btn b">Kotlin</button>
+            <button class="btn b">PHP</button>
+            <button class="btn b">CSS</button>
+        </div>
+        <div class="text-secondary mt-3 ">
+          <img src="../assets/img/mail (3) 1.png" alt="">
+            Louistommo@gmail.com
+        </div>
+        <div class="text-secondary mt-3">
+          <img src="../assets/img/instagram.png" alt="">
+          @Louist91
+        </div>
+        <div class="text-secondary mt-3">
+          <img src="../assets/img/gitub.png" alt="">
+          @Louistommo
+        </div>
+        <div class="text-secondary mt-3">
+          <img src="../assets/img/gitlab.png" alt="">
+          @Louistommo91
+        </div>
       </div>
     </div>
   </div>
@@ -53,7 +103,11 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      status: localStorage.getItem('status')
+    }
+  }
 }
 </script>
 
