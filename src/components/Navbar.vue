@@ -23,7 +23,9 @@
                           <p>Belum ada notifikasi</p>
                         </div>
                     </b-dropdown>
-                    <img class="ml-5" src="../assets/img/mail (3) 1.png">
+                    <router-link to="/inbox">
+                      <img class="ml-5" src="../assets/img/mail (3) 1.png">
+                    </router-link>
                     <b-dropdown id="dropdown-1" size="lg" text="" class="ml-5">
                       <template v-slot:button-content>
                         <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
@@ -45,7 +47,9 @@
                           <p>Belum ada notifikasi</p>
                         </div>
                     </b-dropdown>
-                    <img class="ml-5" src="../assets/img/mail (3) 1.png">
+                    <router-link to="/inbox">
+                      <img class="ml-5" src="../assets/img/mail (3) 1.png">
+                    </router-link>
                     <b-dropdown id="dropdown-1" size="lg" text="" class="ml-5">
                       <template v-slot:button-content>
                         <b-icon icon="gear-fill" aria-hidden="true"></b-icon>
