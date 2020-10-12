@@ -86,7 +86,15 @@
                         </div>
                     </div>
                     <div class="col-2 d-flex h-100 align-items-center">
-                        <img class="ml-4" src="../assets/img/bell (1) 1 (1).png">
+                        <b-dropdown size="sm" offset="-240" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
+                            <template v-slot:button-content>
+                            <img src="../assets/img/bell (1) 1 (1).png">
+                            </template>
+                            <div class="cont-notif">
+                              <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                              <p>Belum ada notifikasi</p>
+                            </div>
+                        </b-dropdown>
                     </div>
                 </div>
             </div>
