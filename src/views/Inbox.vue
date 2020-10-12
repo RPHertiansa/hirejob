@@ -57,7 +57,23 @@
       <div class="d-sm-none d-block">
         <div>
          <Navbar/>
-          <p>Ini Inbox</p>
+          <div class="cont-inbox-hp">
+            <p style="font-weight: 600;font-size: 16px;line-height: 22px;color: #9EA0A5;" >Utama</p>
+            <div class="user">
+              <div class="row no-gutters">
+              <div class="col-2">
+                <img class="img-user-chat" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
+              </div>
+              <div class="col-10 pl-3">
+                <div class="d-flex">
+                  <p class="name-user">Jonas adam</p>
+                  <p class="date-user ml-auto">12 Apr</p>
+                </div>
+                <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+              </div>
+            </div>
+            </div>
+          </div>
         </div>
       </div>
   </div>
@@ -172,5 +188,18 @@ export default {
   margin-left: 10px;
   padding-left: 8px;
   padding-top: 8px;
+}
+.cont-inbox-hp {
+  width: 100vw;
+  height: 100vh;
+  background-color: #F6F7F8;
+  padding-top: 75px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.date-user {
+  font-size: 14px;
+  line-height: 19px;
+  color: #9EA0A5;
 }
 </style>
