@@ -29,13 +29,28 @@
         <nav class="d-sm-none d-block cont-nav-hp fixed-bottom">
             <div class="row no-gutters h-100 align-items-center">
                 <div class="col-3 d-flex justify-content-center">
+                    <router-link v-if="$route.path === '/home'" to="/home">
                     <img src="../assets/img/grid 1.png" width="24px" height="24px">
+                    </router-link>
+                    <router-link v-else to="/home">
+                      <img src="../assets/img/grid 1 (1).png" width="24px" height="24px">
+                  </router-link>
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
+                    <router-link v-if="$route.path === '/search'" to="/search">
+                      <img src="../assets/img/search (2) 1 (1).png" width="24px" height="24px">
+                  </router-link>
+                  <router-link v-else to="/search">
+                      <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
+                  </router-link>
                 </div>
                 <div class="col-3 d-flex justify-content-center">
-                    <img src="../assets/img/Vector.png" width="24px" height="24px">
+                    <router-link v-if="$route.path === '/inbox'" to="">
+                        <img src="../assets/img/Vector (1).png" width="24px" height="24px">
+                  </router-link>
+                  <router-link v-else to="/inbox">
+                        <img src="../assets/img/Vector.png" width="24px" height="24px">
+                  </router-link>
                 </div>
                 <div v-if="status === 'pekerja'">
                     <div class="col-3 d-flex justify-content-center">
