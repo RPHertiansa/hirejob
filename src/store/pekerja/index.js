@@ -57,6 +57,7 @@ const actions = {
       axios.get(`${url}/pekerja/getall?skill=${payload}`)
         .then((response) => {
           context.commit('SET_ALL_DATA', response.data.data)
+          resolve(response.data.data)
         }).catch((err) => {
           console.log(err)
         })

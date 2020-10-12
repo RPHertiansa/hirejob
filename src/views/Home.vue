@@ -66,6 +66,7 @@
                     aria-controls="my-table"
                     size="lg"
                     page-class=""
+                    @click="pagi()"
                 ></b-pagination>
             </div>
         </div>
@@ -263,7 +264,6 @@ export default {
     onSlideEnd (slide) {
       this.sliding = false
     },
-
     searching (skill) {
       if (skill === '') {
         this.$router.push({
@@ -285,6 +285,9 @@ export default {
     },
     sort (payload) {
       alert(payload)
+    },
+    pagi () {
+      console.log(this.currentPage)
     },
     detailProfile (idpekerja, index) {
       this.$router.push({
