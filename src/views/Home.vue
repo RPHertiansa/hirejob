@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cont-pagination">
+            <div class="cont-pagination" @click="pagi()">
                 <b-pagination
                     v-model="currentPage"
                     :total-rows="rows"
@@ -66,7 +66,6 @@
                     aria-controls="my-table"
                     size="lg"
                     page-class=""
-                    @click="pagi()"
                 ></b-pagination>
             </div>
         </div>
@@ -241,9 +240,9 @@ export default {
   },
   data () {
     return {
-      perPage: 3,
+      perPage: 10,
       currentPage: 1,
-      rows: 10,
+      rows: null,
       slide: 0,
       sliding: null,
       skill: ''
@@ -279,7 +278,11 @@ export default {
             skill
           }
         })
-        this.actionGetAllPekerja(skill)
+        const fd = {
+          skill: skill,
+          page: this.currentPage
+        }
+        this.actionGetAllPekerja(fd)
         this.skill = ''
       }
     },
@@ -287,7 +290,11 @@ export default {
       alert(payload)
     },
     pagi () {
-      console.log(this.currentPage)
+      const fd = {
+        skill: '',
+        page: this.currentPage
+      }
+      this.actionGetAllPekerja(fd)
     },
     detailProfile (idpekerja, index) {
       this.$router.push({
@@ -298,6 +305,12 @@ export default {
   },
   mounted () {
     this.actionGetAllPekerja(' ')
+      .then((result) => {
+        this.rows = result.meta.total
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
