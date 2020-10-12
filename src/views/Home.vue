@@ -8,30 +8,32 @@
         </div>
         <div class="body-home">
             <div class="search-home mb-5">
-                <div class="input-container">
-                    <input class="input-field" placeholder="Search for any skill" type="text">
-                    <div class="h-100 icon">
-                        <img width="24px" height="24px" src="../assets/img/search (1) 1.png">
-                    </div>
-                    <div>
-                    <b-dropdown
-                        menu-class="mt-4 border-0"
-                        text="Kategori"
-                        variant="white"
-                        class="m-2"
-                        offset="-85"
-                        no-caret
-                    >
-                        <b-dropdown-item href="#">Sortir berdasarkan nama</b-dropdown-item>
-                        <b-dropdown-item href="#">Sortir berdasarkan Lokasi</b-dropdown-item>
-                        <b-dropdown-item href="#">Sortir berdasarkan freelance</b-dropdown-item>
-                        <b-dropdown-item href="#">Sortir berdasarkan fulltime</b-dropdown-item>
-                    </b-dropdown>
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-search">Search</button>
-                    </div>
-                </div>
+                <form @submit.prevent="searching(skill)">
+                    <div class="input-container">
+                      <input class="input-field" placeholder="Search for any skill" v-model="skill" type="text">
+                      <div class="h-100 icon">
+                          <img width="24px" height="24px" src="../assets/img/search (1) 1.png">
+                      </div>
+                      <div>
+                      <b-dropdown
+                          menu-class="mt-4 border-0"
+                          text="Kategori"
+                          variant="white"
+                          class="m-2"
+                          offset="-85"
+                          no-caret
+                      >
+                          <b-dropdown-item href="#">Sortir berdasarkan nama</b-dropdown-item>
+                          <b-dropdown-item href="#">Sortir berdasarkan Lokasi</b-dropdown-item>
+                          <b-dropdown-item href="#">Sortir berdasarkan freelance</b-dropdown-item>
+                          <b-dropdown-item href="#">Sortir berdasarkan fulltime</b-dropdown-item>
+                      </b-dropdown>
+                      </div>
+                      <div>
+                          <button type="submit" class="btn btn-search">Search</button>
+                      </div>
+                  </div>
+                </form>
             </div>
             <div class="list-pekerja" v-for="(item,index) in allPekerja" :key=(index)>
                 <div class="cont-card">
@@ -234,7 +236,8 @@ export default {
       currentPage: 1,
       rows: 10,
       slide: 0,
-      sliding: null
+      sliding: null,
+      skill: ''
     }
   },
   computed: {
@@ -251,10 +254,31 @@ export default {
     },
     onSlideEnd (slide) {
       this.sliding = false
+    },
+
+    searching (skill) {
+      if (skill === '') {
+        this.$router.push({
+          path: '/home',
+          query: {
+            skill
+          }
+        })
+        this.actionGetAllPekerja(' ')
+      } else {
+        this.$router.push({
+          path: '/home',
+          query: {
+            skill
+          }
+        })
+        this.actionGetAllPekerja(skill)
+        // this.skill = ''
+      }
     }
   },
   mounted () {
-    this.actionGetAllPekerja()
+    this.actionGetAllPekerja(' ')
   }
 }
 </script>

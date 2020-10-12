@@ -29,7 +29,8 @@ const mutations = {
 const actions = {
   getPekerja (context, payload) {
     return new Promise((resolve, reject) => {
-      axios.get(`${url}/pekerja/getall`)
+      // console.log(payload)
+      axios.get(`${url}/pekerja/getall?skill=${payload}`)
         .then((response) => {
           context.commit('SET_ALL_DATA', response.data.data)
         }).catch((err) => {
