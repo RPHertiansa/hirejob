@@ -200,9 +200,9 @@
 export default {
   data () {
     return {
-      status: 'pekerja',
       dataSkill: [],
-      skill: null
+      skill: null,
+      status: localStorage.getItem('status')
     }
   },
   methods: {

@@ -1,45 +1,41 @@
 <template>
   <div class="portofolio-page">
-    <Navbar />
-    <div class="portofolio-content">
-      <div class="container pt-5 portofolio-box">
-        <CardUser />
-        <div class="portofolio-experience">
-          <div class="navbar-portofolio">
-            <p class="switch-nav switch-toggle" @click="switchToggle1">Portofolio</p>
-            <p class="switch-nav switch-toggle2" @click="switchToggle2">Pengalaman Kerja</p>
-          </div>
-          <div class="main-content">
-            <div class="portofolio" v-if="switchContent === 0">
-              <div class="portofolio-pict"><span></span></div>
-              <div class="portofolio-pict"><span></span></div>
-              <div class="portofolio-pict"><span></span></div>
-            </div>
-            <div class="exprerience" v-else>
-              <div class="exprerience-pict"><span></span></div>
-              <div class="exprerience-pict"><span></span></div>
-              <div class="exprerience-pict"><span></span></div>
-            </div>
-          </div>
+    <div class="portofolio-experience">
+        <div class="navbar-portofolio">
+        <p class="switch-nav switch-toggle" @click="switchToggle1">Portofolio</p>
+        <p class="switch-nav switch-toggle2" @click="switchToggle2">Pengalaman Kerja</p>
         </div>
-      </div>
+        <div class="main-content">
+        <div class="portofolio mt-4" v-if="switchContent === 0">
+            <div class="portofolio-pict"><span>Mantap</span></div>
+            <div class="portofolio-pict"><span></span></div>
+            <div class="portofolio-pict"><span></span></div>
+        </div>
+        <div class="exprerience mt-4" v-else>
+             <div class="experience-list">
+                  <div class="company-profile">
+                    <span></span>
+                  </div>
+                  <div class="experiece-bio">
+                    <h4 class="font-weight-bold">Engginer</h4>
+                    <h6>Tokopedia</h6>
+                    <h6 class="text-secondary">July 2019 - January 2020 6 months</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum erat orci, mollis nec gravida sed, ornare quis urna. Curabitur eu lacus fringilla, vestibulum risus at.</p>
+                  </div>
+            </div>
+        </div>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-import CardUser from '../components/CardUser'
-import Navbar from '../components/Navbar'
 export default {
-  name: 'Portofolio',
-  components: {
-    CardUser,
-    Navbar
-  },
   data () {
     return {
       switchToggle: 0,
-      switchContent: 0
+      switchContent: 0,
+      dataSkill: ['PHP', 'Phyton']
     }
   },
   methods: {
@@ -55,6 +51,7 @@ export default {
         tgl1.classList.toggle('switch-nav2')
         this.switchToggle = 1
       }
+      this.switchContent = 0
     },
     switchToggle2 () {
       if (this.switchToggle === 1) {
@@ -68,6 +65,7 @@ export default {
         tgl2.classList.toggle('switch-nav2')
         this.switchToggle = 1
       }
+      this.switchContent = 1
     }
   },
   mounted () {
@@ -77,19 +75,14 @@ export default {
   }
 }
 </script>
-
-<style>
+<style scoped>
 .portofolio-page {
   background-color: #F6F7F8;
-  height: 200vh;
+  height: 100vh;
 }
 .portofolio-content {
   background-color: #5E50A1;
   height: 300px;
-}
-.portofolio-box {
-  display: grid;
-  grid-template-columns: 3.5fr 7fr;
 }
 .portofolio-experience {
   background-color: #fff;
@@ -131,7 +124,7 @@ export default {
 .portofolio-pict {
   width: 219px;
   height: 148px;
-  background-image: url();
+  /* background-image: url(); */
   background-size: cover;
   border-radius: 4px;
 }

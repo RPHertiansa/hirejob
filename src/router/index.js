@@ -57,12 +57,6 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/portfolio',
-    name: 'Portfolio',
-    component: () => import('../views/Portfolio.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
     path: '/profile',
     name: 'Profile',
     component: () => import('../views/Profile.vue'),
@@ -85,7 +79,14 @@ const routes = [
     name: 'Inbox',
     component: () => import('../views/Inbox.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile-perekrut',
+    name: 'ProfilePerekrut',
+    component: () => import('../views/ProfilePerekrut.vue'),
+    meta: { requiresAuth: true }
   }
+
 ]
 
 const router = new VueRouter({

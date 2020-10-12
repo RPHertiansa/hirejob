@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div class="cont-search pl-3 pr-3 pt-5">
+      <div class="d-sm-none d-block cont-search pl-3 pr-3 pt-5">
          <Navbar/>
          <div class="d-flex">
             <div class="w-search mr-2">
@@ -12,16 +12,15 @@
                 </div>
             </div>
             <div class="w-sort">
-                <div class="text-center">
-                   <img v-b-modal.modal-1 width="24px" height="24px" src="../assets/img/list 1.png">
-                </div>
-                <b-modal id="modal-1" size="sm" class="coba" centered hide-header hide-footer>
-                    <b-dropdown-item href="#">Sortir berdasarkan nama</b-dropdown-item>
-                    <b-dropdown-item href="#">Sortir berdasarkan Skill</b-dropdown-item>
-                    <b-dropdown-item href="#">Sortir berdasarkan Lokasi</b-dropdown-item>
-                    <b-dropdown-item href="#">Sortir berdasarkan freelance</b-dropdown-item>
-                    <b-dropdown-item href="#">Sortir berdasarkan fulltime</b-dropdown-item>
-                </b-modal>
+                <b-dropdown size="sm" offset="-240" center variant="link" menu-class="sorthp" toggle-class="text-decoration-none text-center" no-caret>
+                      <template v-slot:button-content>
+                      <img width="24px" height="24px" src="../assets/img/list 1.png">
+                      </template>
+                      <b-dropdown-item href="#">Sortir berdasarkan nama</b-dropdown-item>
+                      <b-dropdown-item href="#">Sortir berdasarkan Lokasi</b-dropdown-item>
+                      <b-dropdown-item href="#">Sortir berdasarkan freelance</b-dropdown-item>
+                      <b-dropdown-item href="#">Sortir berdasarkan fulltime</b-dropdown-item>
+                  </b-dropdown>
             </div>
          </div>
       </div>
@@ -84,5 +83,8 @@ export default {
 }
 .w-sort .text-center {
     padding-top: 10px;
+}
+.sorthp {
+  margin-top: 100px;
 }
 </style>

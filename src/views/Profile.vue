@@ -9,11 +9,11 @@
                         <CardUser />
                     </b-col>
                     <b-col class="edit-profile" lg="8" cols="12">
-                        <EditProfile />
+                        <Riwayat />
                     </b-col>
                 </b-row>
             </b-col>
-      </div>
+            </div>
       <div>
           <Footer />
       </div>
@@ -23,19 +23,18 @@
 <script>
 import CardUser from '../components/CardUser'
 import Navbar from '../components/Navbar'
-import EditProfile from '../components/EditProfile'
+import Riwayat from '../components/Riwayat'
 import Footer from '../components/Footer'
 
 export default {
   data () {
     return {
-      role: 0
     }
   },
   components: {
     CardUser,
     Navbar,
-    EditProfile,
+    Riwayat,
     Footer
   }
 }
