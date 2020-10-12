@@ -14,12 +14,28 @@
             </div>
             <div v-else class="btn-head d-inline float-right">
                 <div v-if="status === 'pekerja'">
-                    <img src="../assets/img/bell (1) 1.png">
+                    <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
+                        <template v-slot:button-content>
+                        <img src="../assets/img/bell (1) 1.png">
+                        </template>
+                        <div class="cont-notif">
+                          <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                          <p>Belum ada notifikasi</p>
+                        </div>
+                    </b-dropdown>
                     <img class="ml-5" src="../assets/img/mail (3) 1.png">
                     <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`">
                 </div>
                 <div v-else>
-                    <img src="../assets/img/bell (1) 1.png">
+                    <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
+                        <template v-slot:button-content>
+                        <img src="../assets/img/bell (1) 1.png">
+                        </template>
+                        <div class="cont-notif">
+                          <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                          <p>Belum ada notifikasi</p>
+                        </div>
+                    </b-dropdown>
                     <img class="ml-5" src="../assets/img/mail (3) 1.png">
                     <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`">
                 </div>
@@ -150,5 +166,18 @@ export default {
     background-color: #fff;
     border: 1px solid #5E50A1;
     border-radius: 4px;
+}
+.drdwn {
+  width: 258px;
+  height: 305px;
+}
+.cont-notif {
+  padding-top: 40%;
+  padding-left: 25%;
+}
+.cont-notif p{
+  font-size: 14px;
+  line-height: 20px;
+  color: #1F2A36;
 }
 </style>

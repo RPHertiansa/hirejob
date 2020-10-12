@@ -131,7 +131,7 @@ export default {
 .portofolio-pict {
   width: 219px;
   height: 148px;
-  background-image: url();
+  /* background-image: url(); */
   background-size: cover;
   border-radius: 4px;
 }
