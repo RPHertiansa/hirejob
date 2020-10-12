@@ -109,7 +109,7 @@ export default {
     alertActivate () {
       Swal.fire({
         icon: 'warning',
-        title: 'This Account need to verified!',
+        title: 'This Account need to be verified!',
         text: 'Please check your email account to activate'
       })
     },

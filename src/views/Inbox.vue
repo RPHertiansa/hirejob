@@ -12,13 +12,13 @@
                       <p>Chat</p>
                     </div>
                     <div class="cont-user w-100 p-3">
-                      <div class="user">
+                      <div class="user"  v-for="(item, index) in listPekerja" :key="index">
                         <div class="row no-gutters">
                         <div class="col-2">
-                          <img class="img-user-chat" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
+                          <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                         </div>
                         <div class="col-10 pl-3">
-                          <p class="name-user">Jonas adam</p>
+                          <p class="name-user">{{item.namapekerja}}</p>
                           <p class="chat-tmnl">Permisi kak, mau tanya...</p>
                         </div>
                       </div>
@@ -82,10 +82,35 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import io from 'socket.io-client'
+import { socket } from '../helper/env'
+
 export default {
   components: {
     Navbar,
     Footer
+  },
+  data () {
+    return {
+      socket: io(`${socket}`),
+      listPekerja: null,
+      idperekrut: localStorage.getItem('idperekrut'),
+      idpekerja: localStorage.getItem('idpekerja')
+    }
+  },
+  methods: {
+
+  },
+  mounted () {
+    this.socket.emit('get-all-pekerja', { idperekrut: this.idperekrut })
+    this.socket.on('listPekerja', (payload) => {
+      this.listPekerja = payload
+    })
+    console.log(this.idperekrut)
+    this.socket.emit('get-all-perekrut', { idpekerja: this.idpekerja })
+    this.socket.on('listPekerja', (payload) => {
+      this.listPerekrut = payload
+    })
   }
 }
 </script>
