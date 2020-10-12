@@ -75,19 +75,32 @@
          <Navbar/>
           <div class="cont-inbox-hp">
             <p style="font-weight: 600;font-size: 16px;line-height: 22px;color: #9EA0A5;" >Utama</p>
-            <div class="user">
-              <div class="row no-gutters">
-              <div class="col-2">
-                <img class="img-user-chat" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
-              </div>
-              <div class="col-10 pl-3">
-                <div class="d-flex">
-                  <p class="name-user">Jonas adam</p>
-                  <p class="date-user ml-auto">12 Apr</p>
+            <div class="user-box-hp">
+              <div v-b-modal.modal-receiver class="user-receiver"> <!-- <==looping disini -->
+                <div class="row no-gutters">
+                  <div class="col-2">
+                    <img class="img-user-chat" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
+                  </div>
+                  <div class="col-10 pl-3">
+                    <div class="d-flex">
+                      <p class="name-user">Jonas adam</p>
+                      <p class="date-user ml-auto">12 Apr</p>
+                    </div>
+                    <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                  </div>
                 </div>
-                <p class="chat-tmnl">Permisi kak, mau tanya...</p>
               </div>
-            </div>
+              <b-modal id="modal-receiver" title="Jonas adam" centered hide-footer>
+                <div class="chat-box"></div>
+                  <div class="chat-key">
+                    <div class="input-container">
+                      <input type="text" placeholder="type message..." class="input-field">
+                      <div class="icon">
+                        <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                      </div>
+                    </div>
+                  </div>
+              </b-modal>
             </div>
           </div>
         </div>
@@ -194,6 +207,8 @@ export default {
 }
 .img-user-chat {
   border-radius:100%;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 .name-chating {
   font-weight: 600;
@@ -250,5 +265,8 @@ export default {
   font-size: 14px;
   line-height: 19px;
   color: #9EA0A5;
+}
+.user-box-hp {
+  height: 70vh;
 }
 </style>
