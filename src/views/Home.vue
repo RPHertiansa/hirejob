@@ -286,8 +286,10 @@ export default {
       alert(payload)
     },
     detailProfile (idpekerja, index) {
-      alert(idpekerja)
-      alert(index)
+      this.$router.push({
+        path: '/profile',
+        query: { id: idpekerja }
+      })
     }
   },
   mounted () {

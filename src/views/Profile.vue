@@ -1,7 +1,7 @@
 <template>
     <div>
         <Navbar />
-<!-- <div class="top-bg fluid"> -->
+        <!-- <div class="top-bg fluid"> -->
           <div class="container-fluid">
           <b-col lg="12" class="profile py-5">
                   <b-row class="content mx-5">
@@ -29,6 +29,7 @@ import Footer from '../components/Footer'
 export default {
   data () {
     return {
+      id: this.$route.query.id
     }
   },
   components: {
