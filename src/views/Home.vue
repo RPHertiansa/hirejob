@@ -35,9 +35,9 @@
                   </div>
                 </form>
             </div>
-            <div class="list-pekerja" v-for="(item,index) in allPekerja" :key=(index)>
+            <div class="list-pekerja">
                 <div class="cont-card">
-                    <div class="card-body" >
+                    <div class="card-body" v-for="(item,index) in allPekerja" :key=(index)>
                         <div class="row pa-seeker">
                             <div class="col-2 d-flex h-100 align-items-center justify-content-center">
                                 <img style="border-radius:100%;" :src="`http://localhost:3000/${item.imagepekerja}`" width="80%" height="70%">
