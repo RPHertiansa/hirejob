@@ -12,17 +12,33 @@
                       <p>Chat</p>
                     </div>
                     <div class="cont-user w-100 p-3">
-                      <div class="user"  v-for="(item, index) in listPekerja" :key="index">
-                        <div class="row no-gutters">
-                        <div class="col-2">
-                          <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
-                        </div>
-                        <div class="col-10 pl-3">
-                          <p class="name-user">{{item.namapekerja}}</p>
-                          <p class="chat-tmnl">Permisi kak, mau tanya...</p>
-                        </div>
+                      <div v-if="status === 'perekrut'">
+                            <div class="user" v-for="(item, index) in listPekerja" :key="index">
+                              <div class="row no-gutters">
+                                <div class="col-2">
+                                  <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
+                                </div>
+                                <div class="col-10 pl-3">
+                                  <p class="name-user">{{item.namapekerja}}</p>
+                                  <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                                </div>
+                              </div>
+                            </div>
                       </div>
+                      <div v-else-if="status === 'pekerja'">
+                            <div class="user" v-for="(item, index) in listPerekrut" :key="index">
+                              <div class="row no-gutters">
+                                <div class="col-2">
+                                  <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imageperekrut}`">
+                                </div>
+                                <div class="col-10 pl-3">
+                                  <p class="name-user">{{item.namaperekrut}}</p>
+                                  <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                                </div>
+                              </div>
+                            </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -94,8 +110,10 @@ export default {
     return {
       socket: io(`${socket}`),
       listPekerja: null,
+      listPerekrut: [],
       idperekrut: localStorage.getItem('idperekrut'),
-      idpekerja: localStorage.getItem('idpekerja')
+      idpekerja: localStorage.getItem('idpekerja'),
+      status: localStorage.getItem('status')
     }
   },
   methods: {
@@ -105,12 +123,18 @@ export default {
     this.socket.emit('get-all-pekerja', { idperekrut: this.idperekrut })
     this.socket.on('listPekerja', (payload) => {
       this.listPekerja = payload
+      console.log(this.listPekerja)
     })
-    console.log(this.idperekrut)
+
     this.socket.emit('get-all-perekrut', { idpekerja: this.idpekerja })
-    this.socket.on('listPekerja', (payload) => {
-      this.listPerekrut = payload
+    this.socket.on('listPerekrut', (data) => {
+      this.listPerekrut = data
+      console.log(data)
+      console.log(this.idpekerja)
     })
+    console.log(this.listPerekrut)
+    console.log(this.idpekerja)
+    console.log(this.status)
   }
 }
 </script>
