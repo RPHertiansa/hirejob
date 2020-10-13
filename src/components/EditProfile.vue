@@ -33,7 +33,7 @@
 
                           <div>
                               <b-col lg="12" class="my-3">
-                                  <button class="btn btn-save">Simpan</button>
+                                  <button class="btn btn-save" @click="updatePekerja(dataz)">Simpan</button>
                               </b-col>
                               <b-col lg="12" class="my-3">
                                   <button class="btn btn-cancel">Batal</button>
@@ -97,7 +97,7 @@
                                 </div>
                                 <b-col lg="12">
                                     <div class="input-group mb-3">
-                                    <input type="text" class="form-control" required v-model="dataz.skill" :skill="dataz.skill" placeholder="Golang">
+                                    <input type="text" class="form-control" required v-model="skill" placeholder="Skill">
                                     <button class="btn search-btn mx-3" @click="saveSkill">Simpan</button>
                                     </div>
                                 </b-col>
@@ -109,7 +109,6 @@
                         <b-col lg="12" class="experience my-4 shadow">
                             <b-row class="px-5">
                               <h1 class="px-2 py-3">Pengalaman Kerja</h1>
-                              {{dataPeng}}
                                 <div class="line py-2"></div>
                                   <div class="row"  v-for="(item, index) in dataPeng" :key="index">
                                     <b-col lg="12">
@@ -312,7 +311,6 @@
                                                         Aplikasi Mobile
                                                     </label>
                                                     </div>
-                                                    {{item.tipeportofolio}}
                                                 </div>
                                             </b-col>
                                         </b-row>
@@ -368,7 +366,7 @@
 
                     <div class="text-center">
                         <b-col lg="12" class="my-3">
-                            <button class="btn btn-save">Simpan</button>
+                            <button class="btn btn-save" @click="updatePerusahaan(dataperekrut)">Simpan</button>
                         </b-col>
                         <b-col lg="12" class="my-3">
                             <button class="btn btn-cancel">Batal</button>
@@ -387,35 +385,35 @@
                           <form>
                               <div class="form-group">
                                   <label>Nama Perusahaan</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.nama" placeholder="Masukan nama Perusahaan">
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.namaperusahaan" :namaperusahaan="dataperekrut.namaperusahaan" placeholder="Masukan nama Perusahaan">
                               </div>
                               <div class="form-group">
                                   <label>Bidang</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.bidang" placeholder="Masukan bidang perusahaan ex : Financial">
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.bidang" :bidang="dataperekrut.bidang" placeholder="Masukan bidang perusahaan ex : Financial">
                               </div>
                               <div class="form-group">
                                   <label>Kota</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.kota" placeholder="Masukan Kota">
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.kota" :kota="dataperekrut.kota" placeholder="Masukan Kota">
                               </div>
                               <div class="form-group">
                                   <label>Deskripsi singkat</label>
-                                  <textarea class="form-control" rows="5" autofocus required v-model="profileperusahaan.desc" placeholder="Tuliskan deskripsi singkat"></textarea>
+                                  <textarea class="form-control" rows="5" autofocus required v-model="dataperekrut.deskripsi" :deskripsi="dataperekrut.deskripsi" placeholder="Tuliskan deskripsi singkat"></textarea>
                               </div>
                               <div class="form-group">
-                                  <label>Email</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.email" placeholder="Masukan Email">
+                                  <label>Email Perusahaan</label>
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.emailperusahaan" :emailperusahaan="dataperekrut.emailperusahaan" placeholder="Masukan Email Perusahaan">
                               </div>
                               <div class="form-group">
                                   <label>Instagram</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.ig" placeholder="Masukan Nama Instagram">
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.linkinstagram" :linkinstagram="dataperekrut.linkinstagram" placeholder="Masukan Nama Instagram">
                               </div>
                               <div class="form-group">
                                   <label>Nomor Telepon</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.phone" placeholder="Masukan Nomor Telepon">
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.phoneperekrut" :phoneperekrut="dataperekrut.phoneperekrut" placeholder="Masukan Nomor Telepon">
                               </div>
                               <div class="form-group">
                                   <label>Linkedin</label>
-                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.linkedIn" placeholder="Masukan Nama Linkedin" >
+                                  <input type="text" class="form-control" autofocus required v-model="dataperekrut.linklinkedin" :linklinkedin="dataperekrut.linklinkedin" placeholder="Masukan Nama Linkedin" >
                               </div>
                           </form>
                       </b-col>
@@ -490,10 +488,23 @@ export default {
         text: 'Something went wrong!'
       })
     },
+    updatePekerja () {
+      this.onUpdatePekerja(this.dataz)
+        .then((response) => {
+          alert(response.data.message)
+          this.getPengalaman(this.idpekerja)
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
     saveSkill () {
-      this.dataSkill.push(this.skill)
-      console.log(this.dataSkill)
-      this.skill = ''
+      const dataSkillDB = this.dataz.skill
+
+      console.log(dataSkillDB)
+      // this.dataSkill.push(this.skill)
+      // console.log(this.dataSkill)
+      // this.skill = ''
     },
     addPengalaman () {
       this.onAddPengalaman(this.newPeng)
@@ -573,13 +584,25 @@ export default {
         }
       })
     },
+    updatePerusahaan () {
+      // console.log(this.dataperekrut)
+      this.onUpdatePerusahaan(this.dataperekrut)
+        .then((response) => {
+          alert(response.data.message)
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
     ...mapActions({
+      onUpdatePekerja: 'pekerja/updatePekerja',
       getPortofolio: 'pekerja/getPortofolio',
       getPengalaman: 'pekerja/getPengalaman',
       onAddPengalaman: 'pekerja/addPengalaman',
       onUpdatePengalaman: 'pekerja/updatePengalaman',
       onDeletePengalaman: 'pekerja/deletePengalaman',
       getProfile: 'perekrut/getProfileDetail',
+      onUpdatePerusahaan: 'perekrut/updatePerusahaan',
       onUpdateImagePerekrut: 'perekrut/updateImage',
       onUpdateImagePekerja: 'pekerja/updateImage'
     })
