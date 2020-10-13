@@ -3,12 +3,8 @@
         <div v-if="this.status === 'pekerja'">
         <!-- form pencari kerja -->
         <b-row class="users">
-<<<<<<< HEAD
           {{dataz}}
-            <b-col lg="12" class="profile-user">
-=======
             <b-col lg="12" class="profile-user shadow">
->>>>>>> b89e3e5313301f5871e8d67b1c2de53cca1fe421
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Data Diri</h1>
                     <div class="line py-2"></div>
@@ -52,7 +48,7 @@
                 </b-row>
             </b-col>
             <!-- skil -->
-            <b-col lg="12" class="skill-search shadow my-4">
+            <b-col lg="12" class="skill-search my-4 shadow">
                 <b-row class="input-search px-5">
                   <h1 class="px-2 py-3"></h1>
                     <div v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index">
@@ -68,12 +64,8 @@
             </b-col>
 
             <!-- experience -->
-<<<<<<< HEAD
             {{dataPeng}}
-            <b-col lg="12" class="experience my-4">
-=======
             <b-col lg="12" class="experience my-4 shadow">
->>>>>>> b89e3e5313301f5871e8d67b1c2de53cca1fe421
                 <b-row class="px-5">
                   <h1 class="px-2 py-3">Pengalaman Kerja</h1>
                     <div class="line py-2"></div>
@@ -81,10 +73,42 @@
                         <b-col lg="12">
                           <form>
                             <div class="form-group">
-                              <label>Posisi</label>
-                                <input type="text" class="form-control" placeholder="Fullstack Developer"
-                                  v-model="item.posisi" :posisi="item.posisi"
-                                >
+                              <div class="row">
+                                <div class="col">
+                                  <label>Posisi</label>
+                                    <input type="text" class="form-control" placeholder="Fullstack Developer"
+                                      v-model="item.posisi" :posisi="item.posisi"
+                                      required
+                                    >
+                                </div>
+                                <div class="col">
+                                <b-dropdown variant="outline-success" right class="float-right mt-3" menu-class="dropmenu" no-caret>
+                                  <template v-slot:button-content>
+                                    <b-icon icon="gear" class=""></b-icon>
+                                  </template>
+                                  <b-dropdown-item-button class="">
+                                    <button class="btn btn-outline-info btn-block" @click.prevent="updatePengalaman(item.idpengalaman, index)">
+                                      <b-icon icon="pencil-fill" class="mr-3"></b-icon>
+                                      Edit
+                                    </button>
+                                  </b-dropdown-item-button>
+                                  <b-dropdown-item-button class="">
+                                    <button class="btn btn-outline-danger btn-block" @click.prevent="deletePengalaman(item.idpengalaman)">
+                                      <b-icon icon="trash" class="mr-3"></b-icon>
+                                      Delete
+                                    </button>
+                                  </b-dropdown-item-button>
+                                </b-dropdown>
+                                </div>
+                                <!-- <div class="col">
+                                  <div class="col text-right mt-3">
+                                    <button class="btn btn-outline-info">Edit</button>
+                                  </div>
+                                  <div class="col text-right mt-3">
+                                    <button class="btn btn-outline-danger">Hapus</button>
+                                  </div>
+                                </div> -->
+                              </div>
                             </div>
                           </form>
                         </b-col>
@@ -95,6 +119,7 @@
                                 <label>Nama Perusahaan</label>
                                 <input type="text" class="form-control" placeholder="PT Apa Aja Boleh"
                                 v-model="item.namaperusahaan" :namaperusahaan="item.namaperusahaan"
+                                required
                                 >
                               </div>
                             </b-col>
@@ -103,12 +128,14 @@
                                 <label class="text-left">Bulan/Tahun</label>
                                 <input type="text" class="form-control" placeholder="Januari 2088"
                                 v-model="item.mulaikerja" :mulaikerja="item.mulaikerja"
+                                required
                                 >
                               </div>
                               <div class="form-group">
                                 <label class="text-left">Bulan/Tahun</label>
                                 <input type="text" class="form-control" placeholder="Januari 2088"
                                 v-model="item.selesaikerja" :selesaikerja="item.selesaikerja"
+                                required
                                 >
                               </div>
                             </b-col>
@@ -119,76 +146,87 @@
                             <label>Deskripsi singkat</label>
                             <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
                             v-model="item.deskripsi" :deskripsi="item.deskripsi"
+                            required
                             ></textarea>
                           </div>
                          <hr>
                         </b-col>
                     </div>
 
-                    <!-- test -->
+                    <b-col lg="12" class="my-3">
+                      <b-button class="btn btn-experience" v-b-toggle.add-collapse>Tambah Pengalaman</b-button>
+                    </b-col>
 
-                    <div class="row">
-                      <b-col lg="12">
-                          <form>
+                    <!-- add -->
+
+                    <b-collapse id="add-collapse">
+
+                      <form @submit.prevent="addPengalaman">
+                      <b-row>
+                        <b-col lg="12">
+                            <div class="form-group">
+                              <label>Posisi</label>
+                                <input type="text" class="form-control" placeholder="Posisi"
+                                v-model="newPeng.posisi"
+                                required
+                                >
+                            </div>
+                        </b-col>
+                        <b-col lg="12">
+                          <b-row>
+                            <b-col lg="6" class="text-left">
                               <div class="form-group">
-                                  <label>Posisi</label>
-                                  <input type="text" class="form-control" placeholder="Fullstack Developer"
-                                  v-model="newPeng.posisi"
-                                  >
+                                <label>Nama Perusahaan</label>
+                                <input type="text" class="form-control" placeholder="Nama Perusahaan"
+                                v-model="newPeng.namaperusahaan"
+                                required
+                                >
                               </div>
-                          </form>
-                      </b-col>
-                      <b-col lg="12">
-                                  <b-row>
-                                      <b-col lg="6" class="text-left">
-                                          <div class="form-group">
-                                              <label>Nama Perusahaan</label>
-                                              <input type="text" class="form-control" placeholder="PT Apa Aja Boleh"
-                                              v-model="newPeng.namaperusahaan"
-                                              >
-                                          </div>
-                                      </b-col>
-                                      <b-col lg="6">
-                                          <div class="form-group">
-                                              <label class="text-left">Bulan/Tahun</label>
-                                              <input type="text" class="form-control" placeholder="Januari 2088"
-                                              v-model="newPeng.mulaikerja"
-                                              >
-                                          </div>
-                                          <div class="form-group">
-                                              <label class="text-left">Bulan/Tahun</label>
-                                              <input type="text" class="form-control" placeholder="Januari 2088"
-                                              v-model="newPeng.selasaikerja"
-                                              >
-                                          </div>
-                                      </b-col>
-                                  </b-row>
-                      </b-col>
-                      <b-col lg="12">
+                            </b-col>
+                            <b-col lg="6">
+                              <div class="form-group">
+                                <label class="text-left">Bulan/Tahun</label>
+                                <input type="date" class="form-control" placeholder="Mulai Kerja"
+                                v-model="newPeng.mulaikerja"
+                                required
+                                >
+                              </div>
+                              <div class="form-group">
+                                <label class="text-left">Bulan/Tahun</label>
+                                <input type="date" class="form-control" placeholder="Selesai Kerja"
+                                v-model="newPeng.selesaikerja"
+                                required
+                                >
+                              </div>
+                            </b-col>
+                          </b-row>
+                        </b-col>
+                        <b-col lg="12">
                           <div class="form-group">
-                                  <label>Deskripsi singkat</label>
-                                  <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
-                                  v-model="newPeng.deskripsi"
-                                  ></textarea>
+                            <label>Deskripsi singkat</label>
+                            <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
+                            v-model="newPeng.deskripsi"
+                            required
+                            ></textarea>
                           </div>
-                      </b-col>
-                      {{newPeng}}
-                    </div>
-                      <b-col lg="12" class="my-3">
-                          <button class="btn btn-experience" @click="addPengalaman">Tambah Pengalaman</button>
-                      </b-col>
+                        </b-col>
+                        <b-col lg="12" class="my-3">
+                          <b-button class="btn btn-add-experience" type="submit">Tambahkan</b-button>
+                        </b-col>
+                      </b-row>
+                        </form>
+
+                    </b-collapse>
+
+                    <!-- end add -->
+
                 </b-row>
             </b-col>
             <!-- end experience -->
 
             <!-- start portofolio -->
-<<<<<<< HEAD
-            <b-col lg="12" class="portofolio my-4" >
-                <b-row class="px-5" >
-=======
             <b-col lg="12" class="portofolio my-4 shadow">
-                <b-row class="px-5">
->>>>>>> b89e3e5313301f5871e8d67b1c2de53cca1fe421
+                <b-row class="px-5" >
                     <h1 class="px-2 py-3">Portofolio</h1>
                     <div class="line py-2"></div>
                     <b-col lg="12">
@@ -306,7 +344,7 @@ export default {
         posisi: '',
         namaperusahaan: '',
         mulaikerja: '',
-        selasaikerja: '',
+        selesaikerja: '',
         deskripsi: ''
       }
     }
@@ -319,11 +357,41 @@ export default {
     },
     addPengalaman () {
       this.onAddPengalaman(this.newPeng)
+        .then((response) => {
+          alert(response.data.message)
+          this.newPeng.posisi = ''
+          this.newPeng.namaperusahaan = ''
+          this.newPeng.mulaikerja = ''
+          this.newPeng.selesaikerja = ''
+          this.newPeng.deskripsi = ''
+          // this.$bvCollapse.hide('add-collapse')
+          this.getPengalaman(this.idpekerja)
+        })
+        .catch((err) => {
+          alert(err)
+        })
+    },
+    updatePengalaman (idpengalaman, index) {
+      alert(idpengalaman)
+      alert(index)
+    },
+    deletePengalaman (idpengalaman) {
+      if (confirm('Delete ?')) {
+        this.onDeletePengalaman(idpengalaman)
+          .then((response) => {
+            alert(response.data.message)
+            this.getPengalaman(this.idpekerja)
+          })
+          .catch((err) => {
+            alert(err)
+          })
+      }
     },
     ...mapActions({
       getPortofolio: 'pekerja/getPortofolio',
       getPengalaman: 'pekerja/getPengalaman',
-      onAddPengalaman: 'pekerja/addPengalaman'
+      onAddPengalaman: 'pekerja/addPengalaman',
+      onDeletePengalaman: 'pekerja/deletePengalaman'
     })
   },
   computed: {
@@ -395,6 +463,23 @@ export default {
     box-sizing: border-box;
     border-radius: 4px;
     background-color:  #FBB017;
+    color: white;
+}
+.btn-add-experience{
+    height: 60px;
+    width: 100%;
+    border: 2px solid #5E50A1;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #5E50A1;
+}
+.btn-add-experience:hover{
+    height: 60px;
+    width: 100%;
+    border: 2px solid #5E50A1;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color:  #5E50A1;
     color: white;
 }
 /* portofolio */

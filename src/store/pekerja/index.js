@@ -115,7 +115,29 @@ const actions = {
     })
   },
   addPengalaman (context, payload) {
-    console.log(payload)
+    // console.log(payload)
+    return new Promise((resolve, reject) => {
+      axios.post(`${url}/pengalaman/insert`, payload)
+        .then((response) => {
+          // console.log(response.data)
+          resolve(response)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  deletePengalaman (context, payload) {
+    // console.log(payload)
+    return new Promise((resolve, reject) => {
+      axios.delete(`${url}/pengalaman/delete/${payload}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    })
   }
 }
 export default {
