@@ -1,331 +1,414 @@
 <template>
     <div>
         <div v-if="this.status === 'pekerja'">
-        <!-- form pencari kerja -->
-        <b-row class="users">
-            <b-col lg="12" class="profile-user shadow">
-                <b-row class="px-5">
-                    <h1 class="px-2 py-3">Data Diri</h1>
-                    <div class="line py-2"></div>
-                    <b-col lg="12">
-                        <form>
-                            <div class="form-group">
-                                <label>Nama Lengkap</label>
-                                <input type="text" class="form-control" placeholder="Masukan nama lengkap"
-                                v-model="dataz.namapekerja" :namapekerja="dataz.namapekerja"
-                                required
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label>Jobdesk</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Jobdesk"
-                                 v-model="dataz.jobdescpekerja" :jobdescpekerja="dataz.jobdescpekerja"
-                                 required
-                                 >
-                            </div>
-                            <div class="form-group">
-                                <label>Domisili</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Domisili"
-                                 v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
-                                 required
-                                 >
-                            </div>
-                            <div class="form-group">
-                                <label>Tempat Kerja</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Tempat Kerja"
-                                 v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
-                                 >
-                            </div>
-                            <div class="form-group">
-                                <label>Deskripsi singkat</label>
-                                <textarea class="form-control" rows="5" placeholder="Tuliskan deskripsi singkat"
-                                v-model="dataz.deskripsi" :deskripsi="dataz.deskripsi"
-                                ></textarea>
-                            </div>
-                        </form>
-                    </b-col>
-                </b-row>
-            </b-col>
-            <!-- skil -->
-            <b-col lg="12" class="skill-search my-4 shadow">
-                <b-row class="input-search px-5">
-                  <h1 class="px-2 py-3"></h1>
-                    <div v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index">
-                        <button class="btn b">{{ skillz }}</button>
-                    </div>
-                    <b-col lg="12">
-                        <div class="input-group mb-3">
-                        <input type="text" class="form-control" required v-model="dataz.skill" :skill="dataz.skill" placeholder="Golang">
-                        <button class="btn search-btn mx-3" @click="saveSkill">Simpan</button>
+          <div class="container-fluid">
+            <b-col lg="12" class="profile py-5">
+              <b-row class="content mx-5">
+                  <b-col lg="4" cols="12" class="user-card">
+                    <div class="card-user shadow">
+                        <div class="user-box">
+                          <div class="profile-image">
+                            <img :src="`http://localhost:3000/${dataz.imagepekerja}`"  style="border-radius:100%;">
+                          </div>
+                          <p class="text-secondary mt-3 text-center" style="margin-left: -15px;"><b-icon icon="pencil-fill" class="mr-1"></b-icon> Edit</p>
                         </div>
-                    </b-col>
-                </b-row>
-            </b-col>
-
-            <!-- experience -->
-
-            <b-col lg="12" class="experience my-4 shadow">
-                <b-row class="px-5">
-                  <h1 class="px-2 py-3">Pengalaman Kerja</h1>
-                    <div class="line py-2"></div>
-                      <div class="row"  v-for="(item, index) in dataPeng" :key="index">
-                        <b-col lg="12">
-                          <form>
-                            <div class="form-group">
-                              <div class="row">
-                                <div class="col">
-                                  <label>Posisi</label>
-                                    <input type="text" class="form-control" placeholder="Fullstack Developer"
-                                      v-model="item.posisi" :posisi="item.posisi"
-                                      required
-                                    >
-                                </div>
-                                <div class="col">
-                                <b-dropdown variant="outline-success" right class="float-right mt-3" menu-class="dropmenu" no-caret>
-                                  <template v-slot:button-content>
-                                    <b-icon icon="gear" class=""></b-icon>
-                                  </template>
-                                  <b-dropdown-item-button class="">
-                                    <button class="btn btn-outline-info btn-block" @click.prevent="updatePengalaman(item.idpengalaman, index)">
-                                      <b-icon icon="pencil-fill" class="mr-3"></b-icon>
-                                      Edit
-                                    </button>
-                                  </b-dropdown-item-button>
-                                  <b-dropdown-item-button class="">
-                                    <button class="btn btn-outline-danger btn-block" @click.prevent="deletePengalaman(item.idpengalaman)">
-                                      <b-icon icon="trash" class="mr-3"></b-icon>
-                                      Delete
-                                    </button>
-                                  </b-dropdown-item-button>
-                                </b-dropdown>
-                                </div>
-                                <!-- <div class="col">
-                                  <div class="col text-right mt-3">
-                                    <button class="btn btn-outline-info">Edit</button>
-                                  </div>
-                                  <div class="col text-right mt-3">
-                                    <button class="btn btn-outline-danger">Hapus</button>
-                                  </div>
-                                </div> -->
-                              </div>
-                            </div>
-                          </form>
-                        </b-col>
-                        <b-col lg="12">
-                          <b-row>
-                            <b-col lg="6" class="text-left">
-                              <div class="form-group">
-                                <label>Nama Perusahaan</label>
-                                <input type="text" class="form-control" placeholder="PT Apa Aja Boleh"
-                                v-model="item.namaperusahaan" :namaperusahaan="item.namaperusahaan"
-                                required
-                                >
-                              </div>
-                            </b-col>
-                            <b-col lg="6">
-                              <div class="form-group">
-                                <label class="text-left">Bulan/Tahun</label>
-                                <input type="text" class="form-control" placeholder="Januari 2088"
-                                v-model="item.mulaikerja" :mulaikerja="item.mulaikerja"
-                                required
-                                >
-                              </div>
-                              <div class="form-group">
-                                <label class="text-left">Bulan/Tahun</label>
-                                <input type="text" class="form-control" placeholder="Januari 2088"
-                                v-model="item.selesaikerja" :selesaikerja="item.selesaikerja"
-                                required
-                                >
-                              </div>
-                            </b-col>
-                          </b-row>
-                        </b-col>
-                        <b-col lg="12">
-                          <div class="form-group">
-                            <label>Deskripsi singkat</label>
-                            <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
-                            v-model="item.deskripsi" :deskripsi="item.deskripsi"
-                            required
-                            ></textarea>
+                        <div class="user-data mt-3">
+                          <div class="user-name">
+                            <h5 class="font-weight-bold" style="margin-bottom: 0;">{{dataz.namapekerja}}</h5>
+                            <p>{{dataz.jobdescpekerja}}</p>
                           </div>
-                         <hr>
-                        </b-col>
+
+                          <div v-if="dataz.tipepekerjaan === 0">
+                            <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+                            <p class="text-secondary">Freelancer</p>
+                          </div>
+                          <div v-else>
+                            <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+                            <p class="text-secondary">Fulltime</p>
+                          </div>
+
+                          <div>
+                              <b-col lg="12" class="my-3">
+                                  <button class="btn btn-save">Simpan</button>
+                              </b-col>
+                              <b-col lg="12" class="my-3">
+                                  <button class="btn btn-cancel">Batal</button>
+                              </b-col>
+                          </div>
+                        </div>
                     </div>
-
-                    <b-col lg="12" class="my-3">
-                      <b-button class="btn btn-experience" v-b-toggle.add-collapse>Tambah Pengalaman</b-button>
-                    </b-col>
-
-                    <!-- add -->
-
-                    <b-collapse id="add-collapse">
-
-                      <form @submit.prevent="addPengalaman">
-                      <b-row>
-                        <b-col lg="12">
-                            <div class="form-group">
-                              <label>Posisi</label>
-                                <input type="text" class="form-control" placeholder="Posisi"
-                                v-model="newPeng.posisi"
-                                required
-                                >
-                            </div>
-                        </b-col>
-                        <b-col lg="12">
-                          <b-row>
-                            <b-col lg="6" class="text-left">
-                              <div class="form-group">
-                                <label>Nama Perusahaan</label>
-                                <input type="text" class="form-control" placeholder="Nama Perusahaan"
-                                v-model="newPeng.namaperusahaan"
-                                required
-                                >
-                              </div>
-                            </b-col>
-                            <b-col lg="6">
-                              <div class="form-group">
-                                <label class="text-left">Bulan/Tahun</label>
-                                <input type="date" class="form-control" placeholder="Mulai Kerja"
-                                v-model="newPeng.mulaikerja"
-                                required
-                                >
-                              </div>
-                              <div class="form-group">
-                                <label class="text-left">Bulan/Tahun</label>
-                                <input type="date" class="form-control" placeholder="Selesai Kerja"
-                                v-model="newPeng.selesaikerja"
-                                required
-                                >
-                              </div>
-                            </b-col>
-                          </b-row>
-                        </b-col>
-                        <b-col lg="12">
-                          <div class="form-group">
-                            <label>Deskripsi singkat</label>
-                            <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
-                            v-model="newPeng.deskripsi"
-                            required
-                            ></textarea>
-                          </div>
-                        </b-col>
-                        <b-col lg="12" class="my-3">
-                          <b-button class="btn btn-add-experience" type="submit">Tambahkan</b-button>
-                        </b-col>
-                      </b-row>
-                        </form>
-
-                    </b-collapse>
-
-                    <!-- end add -->
-
-                </b-row>
-            </b-col>
-            <!-- end experience -->
-
-            <!-- start portofolio -->
-
-            <b-col lg="12" class="portofolio my-4 shadow">
-                <b-row class="px-5">
-                    <h1 class="px-2 py-3">Portofolio</h1>
-                    <div class="line py-2"></div>
-                    <b-col lg="12">
-                        <form>
-                            <div class="form-group">
-                                <label>Nama Aplikasi</label>
-                                <input type="text" class="form-control" placeholder="Masukkan nama aplikasi">
-                            </div>
-                            <div class="form-group">
-                                <label>Link Repository</label>
-                                <input type="text" class="form-control" placeholder="Masukkan link repository">
-                            </div>
-                            <div class="form-group">
-                                <label>Type Portfolio</label>
-                                <b-row>
-                                <b-col lg="6" sm="6" cols="6" class="radio">
-                                    <div class="radio-box text-left  py-2">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Aplikasi Web
-                                        </label>
+                  </b-col>
+                  <b-col class="edit-profile" lg="8" cols="12">
+                    <!-- form pencari kerja -->
+                    <b-row class="users">
+                        <b-col lg="12" class="profile-user shadow">
+                            <b-row class="px-5">
+                                <h1 class="px-2 py-3">Data Diri</h1>
+                                <div class="line py-2"></div>
+                                <b-col lg="12">
+                                    <form>
+                                        <div class="form-group">
+                                            <label>Nama Lengkap</label>
+                                            <input type="text" class="form-control" placeholder="Masukan nama lengkap"
+                                            v-model="dataz.namapekerja" :namapekerja="dataz.namapekerja"
+                                            required
+                                            >
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label>Jobdesk</label>
+                                            <input type="text" class="form-control" placeholder="Masukan Jobdesk"
+                                            v-model="dataz.jobdescpekerja" :jobdescpekerja="dataz.jobdescpekerja"
+                                            required
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Domisili</label>
+                                            <input type="text" class="form-control" placeholder="Masukan Domisili"
+                                            v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
+                                            required
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tempat Kerja</label>
+                                            <input type="text" class="form-control" placeholder="Masukan Tempat Kerja"
+                                            v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Deskripsi singkat</label>
+                                            <textarea class="form-control" rows="5" placeholder="Tuliskan deskripsi singkat"
+                                            v-model="dataz.deskripsi" :deskripsi="dataz.deskripsi"
+                                            ></textarea>
+                                        </div>
+                                    </form>
                                 </b-col>
-                                <b-col lg="6" sm="6" cols="6" class="radio">
-                                    <div class="radio-box text-left  py-2">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Aplikasi Mobile
-                                        </label>
-                                        </div>
+                            </b-row>
+                        </b-col>
+                        <!-- skil -->
+                        <b-col lg="12" class="skill-search my-4 shadow">
+                            <b-row class="input-search px-5">
+                              <h1 class="px-2 py-3"></h1>
+                                <div v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index">
+                                    <button class="btn b">{{ skillz }}</button>
+                                </div>
+                                <b-col lg="12">
+                                    <div class="input-group mb-3">
+                                    <input type="text" class="form-control" required v-model="dataz.skill" :skill="dataz.skill" placeholder="Golang">
+                                    <button class="btn search-btn mx-3" @click="saveSkill">Simpan</button>
                                     </div>
                                 </b-col>
                             </b-row>
-                            </div>
-                            <div class="form-group">
-                                <label>Upload Gambar</label>
-                                <input type="file" class="form-control" >
-                            </div>
-                        </form>
-                    </b-col>
-                    <b-col lg="12" class="my-3">
-                        <button class="btn btn-experience">Tambah Portfolio</button>
-                    </b-col>
-                </b-row>
+                        </b-col>
+
+                        <!-- experience -->
+
+                        <b-col lg="12" class="experience my-4 shadow">
+                            <b-row class="px-5">
+                              <h1 class="px-2 py-3">Pengalaman Kerja</h1>
+                                <div class="line py-2"></div>
+                                  <div class="row"  v-for="(item, index) in dataPeng" :key="index">
+                                    <b-col lg="12">
+                                      <form>
+                                        <div class="form-group">
+                                          <div class="row">
+                                            <div class="col">
+                                              <label>Posisi</label>
+                                                <input type="text" class="form-control" placeholder="Fullstack Developer"
+                                                  v-model="item.posisi" :posisi="item.posisi"
+                                                  required
+                                                >
+                                            </div>
+                                            <div class="col">
+                                            <b-dropdown variant="outline-success" right class="float-right mt-3" menu-class="dropmenu" no-caret>
+                                              <template v-slot:button-content>
+                                                <b-icon icon="gear" class=""></b-icon>
+                                              </template>
+                                              <b-dropdown-item-button class="">
+                                                <button class="btn btn-outline-info btn-block" @click.prevent="updatePengalaman(item.idpengalaman, index)">
+                                                  <b-icon icon="pencil-fill" class="mr-3"></b-icon>
+                                                  Edit
+                                                </button>
+                                              </b-dropdown-item-button>
+                                              <b-dropdown-item-button class="">
+                                                <button class="btn btn-outline-danger btn-block" @click.prevent="deletePengalaman(item.idpengalaman)">
+                                                  <b-icon icon="trash" class="mr-3"></b-icon>
+                                                  Delete
+                                                </button>
+                                              </b-dropdown-item-button>
+                                            </b-dropdown>
+                                            </div>
+                                            <!-- <div class="col">
+                                              <div class="col text-right mt-3">
+                                                <button class="btn btn-outline-info">Edit</button>
+                                              </div>
+                                              <div class="col text-right mt-3">
+                                                <button class="btn btn-outline-danger">Hapus</button>
+                                              </div>
+                                            </div> -->
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </b-col>
+                                    <b-col lg="12">
+                                      <b-row>
+                                        <b-col lg="6" class="text-left">
+                                          <div class="form-group">
+                                            <label>Nama Perusahaan</label>
+                                            <input type="text" class="form-control" placeholder="PT Apa Aja Boleh"
+                                            v-model="item.namaperusahaan" :namaperusahaan="item.namaperusahaan"
+                                            required
+                                            >
+                                          </div>
+                                        </b-col>
+                                        <b-col lg="6">
+                                          <div class="form-group">
+                                            <label class="text-left">Bulan/Tahun</label>
+                                            <input type="text" class="form-control" placeholder="Januari 2088"
+                                            v-model="item.mulaikerja" :mulaikerja="item.mulaikerja"
+                                            required
+                                            >
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="text-left">Bulan/Tahun</label>
+                                            <input type="text" class="form-control" placeholder="Januari 2088"
+                                            v-model="item.selesaikerja" :selesaikerja="item.selesaikerja"
+                                            required
+                                            >
+                                          </div>
+                                        </b-col>
+                                      </b-row>
+                                    </b-col>
+                                    <b-col lg="12">
+                                      <div class="form-group">
+                                        <label>Deskripsi singkat</label>
+                                        <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
+                                        v-model="item.deskripsi" :deskripsi="item.deskripsi"
+                                        required
+                                        ></textarea>
+                                      </div>
+                                    <hr>
+                                    </b-col>
+                                </div>
+
+                                <b-col lg="12" class="my-3">
+                                  <b-button class="btn btn-experience" v-b-toggle.add-collapse>Tambah Pengalaman</b-button>
+                                </b-col>
+
+                                <!-- add -->
+
+                                <b-collapse id="add-collapse">
+
+                                  <form @submit.prevent="addPengalaman">
+                                  <b-row>
+                                    <b-col lg="12">
+                                        <div class="form-group">
+                                          <label>Posisi</label>
+                                            <input type="text" class="form-control" placeholder="Posisi"
+                                            v-model="newPeng.posisi"
+                                            required
+                                            >
+                                        </div>
+                                    </b-col>
+                                    <b-col lg="12">
+                                      <b-row>
+                                        <b-col lg="6" class="text-left">
+                                          <div class="form-group">
+                                            <label>Nama Perusahaan</label>
+                                            <input type="text" class="form-control" placeholder="Nama Perusahaan"
+                                            v-model="newPeng.namaperusahaan"
+                                            required
+                                            >
+                                          </div>
+                                        </b-col>
+                                        <b-col lg="6">
+                                          <div class="form-group">
+                                            <label class="text-left">Bulan/Tahun</label>
+                                            <input type="date" class="form-control" placeholder="Mulai Kerja"
+                                            v-model="newPeng.mulaikerja"
+                                            required
+                                            >
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="text-left">Bulan/Tahun</label>
+                                            <input type="date" class="form-control" placeholder="Selesai Kerja"
+                                            v-model="newPeng.selesaikerja"
+                                            required
+                                            >
+                                          </div>
+                                        </b-col>
+                                      </b-row>
+                                    </b-col>
+                                    <b-col lg="12">
+                                      <div class="form-group">
+                                        <label>Deskripsi singkat</label>
+                                        <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
+                                        v-model="newPeng.deskripsi"
+                                        required
+                                        ></textarea>
+                                      </div>
+                                    </b-col>
+                                    <b-col lg="12" class="my-3">
+                                      <b-button class="btn btn-add-experience" type="submit">Tambahkan</b-button>
+                                    </b-col>
+                                  </b-row>
+                                    </form>
+
+                                </b-collapse>
+
+                                <!-- end add -->
+
+                            </b-row>
+                        </b-col>
+                        <!-- end experience -->
+
+                        <!-- start portofolio -->
+
+                        <b-col lg="12" class="portofolio my-4 shadow">
+                            <b-row class="px-5">
+                                <h1 class="px-2 py-3">Portofolio</h1>
+                                <div class="line py-2"></div>
+                                <b-col lg="12">
+                                    <form>
+                                        <div class="form-group">
+                                            <label>Nama Aplikasi</label>
+                                            <input type="text" class="form-control" placeholder="Masukkan nama aplikasi">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Link Repository</label>
+                                            <input type="text" class="form-control" placeholder="Masukkan link repository">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Type Portfolio</label>
+                                            <b-row>
+                                            <b-col lg="6" sm="6" cols="6" class="radio">
+                                                <div class="radio-box text-left  py-2">
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <label class="form-check-label" for="exampleRadios1">
+                                                        Aplikasi Web
+                                                    </label>
+                                                    </div>
+                                                </div>
+                                            </b-col>
+                                            <b-col lg="6" sm="6" cols="6" class="radio">
+                                                <div class="radio-box text-left  py-2">
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <label class="form-check-label" for="exampleRadios1">
+                                                        Aplikasi Mobile
+                                                    </label>
+                                                    </div>
+                                                </div>
+                                            </b-col>
+                                        </b-row>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Upload Gambar</label>
+                                            <input type="file" class="form-control" >
+                                        </div>
+                                    </form>
+                                </b-col>
+                                <b-col lg="12" class="my-3">
+                                    <button class="btn btn-experience">Tambah Portfolio</button>
+                                </b-col>
+                            </b-row>
+                        </b-col>
+                        <!-- end portofolio -->
+                    </b-row>
+                    <!-- end form pencari kerja -->
+                  </b-col>
+              </b-row>
             </b-col>
-            <!-- end portofolio -->
-        </b-row>
-        <!-- end form pencari kerja -->
+          </div>
         </div>
 
         <div v-else>
         <!-- company / perekrut -->
-        <b-row >
-            <b-col lg="12" class="profile-company">
-                <b-row class="">
-                    <h1 class="px-2 py-3">Data Diri</h1>
-                    <div class="line py-2"></div>
-                    <b-col lg="12">
-                        <form>
-                            <div class="form-group">
-                                <label>Nama Perusahaan</label>
-                                <input type="text" class="form-control" placeholder="Masukan nama Perusahaan">
-                            </div>
-                            <div class="form-group">
-                                <label>Bidang</label>
-                                 <input type="text" class="form-control" placeholder="Masukan bidang perusahaan ex : Financial">
-                            </div>
-                            <div class="form-group">
-                                <label>Kota</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Kota">
-                            </div>
-                            <div class="form-group">
-                                <label>Deskripsi singkat</label>
-                                <textarea class="form-control" rows="5" placeholder="Tuliskan deskripsi singkat"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Email">
-                            </div>
-                            <div class="form-group">
-                                <label>Instagram</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Nama Instagram">
-                            </div>
-                            <div class="form-group">
-                                <label>Nomor Telepon</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Nomor Telepon">
-                            </div>
-                            <div class="form-group">
-                                <label>Linkedin</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Nama Linkedin">
-                            </div>
-                        </form>
-                    </b-col>
+        <div class="container-fluid">
+          <b-col lg="12" class="profile py-5">
+            <b-row class="content mx-5">
+              <b-col lg="4" cols="12" class="user-card">
+                <div class="card-user shadow">
+                  <div class="user-box">
+                    <div class="profile-image">
+                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" style="border-radius:100%;">
+                    </div>
+                    <p class="text-secondary mt-3 text-center" style="margin-left: -15px;">
+                      <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="upload($event)"> Edit
+                    </p>
+                  </div>
+                  <div class="user-data mt-3">
+                    <div class="user-name">
+                      <h5 class="font-weight-bold" style="margin-bottom: 0;"></h5>
+                      <p class="text-center">{{ dataperekrut.namaperusahaan }}</p>
+                    </div>
+
+                    <div class="text-center">
+                      <p class="text-secondary">{{ dataperekrut.bidang }}</p>
+                      <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin">{{ dataperekrut.kota }}</p>
+                    </div>
+
+                    <div class="text-center">
+                        <b-col lg="12" class="my-3">
+                            <button class="btn btn-save">Simpan</button>
+                        </b-col>
+                        <b-col lg="12" class="my-3">
+                            <button class="btn btn-cancel">Batal</button>
+                        </b-col>
+                    </div>
+                  </div>
+                </div>
+              </b-col>
+              <b-col class="edit-profile" lg="8" cols="12">
+                <b-row >
+                  <b-col lg="12" class="profile-company shadow">
+                    <b-row class="">
+                      <h1 class="px-2 py-3">Data Diri</h1>
+                      <div class="line py-2"></div>
+                      <b-col lg="12">
+                          <form>
+                              <div class="form-group">
+                                  <label>Nama Perusahaan</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.nama" placeholder="Masukan nama Perusahaan">
+                              </div>
+                              <div class="form-group">
+                                  <label>Bidang</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.bidang" placeholder="Masukan bidang perusahaan ex : Financial">
+                              </div>
+                              <div class="form-group">
+                                  <label>Kota</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.kota" placeholder="Masukan Kota">
+                              </div>
+                              <div class="form-group">
+                                  <label>Deskripsi singkat</label>
+                                  <textarea class="form-control" rows="5" autofocus required v-model="profileperusahaan.desc" placeholder="Tuliskan deskripsi singkat"></textarea>
+                              </div>
+                              <div class="form-group">
+                                  <label>Email</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.email" placeholder="Masukan Email">
+                              </div>
+                              <div class="form-group">
+                                  <label>Instagram</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.ig" placeholder="Masukan Nama Instagram">
+                              </div>
+                              <div class="form-group">
+                                  <label>Nomor Telepon</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.phone" placeholder="Masukan Nomor Telepon">
+                              </div>
+                              <div class="form-group">
+                                  <label>Linkedin</label>
+                                  <input type="text" class="form-control" autofocus required v-model="profileperusahaan.linkedIn" placeholder="Masukan Nama Linkedin" >
+                              </div>
+                          </form>
+                      </b-col>
+                    </b-row>
+                  </b-col>
                 </b-row>
-            </b-col>
-        </b-row>
+              </b-col>
+            </b-row>
+          </b-col>
+        </div>
+
         </div>
     </div>
 </template>
@@ -346,6 +429,16 @@ export default {
         mulaikerja: '',
         selesaikerja: '',
         deskripsi: ''
+      },
+      profileperusahaan: {
+        nama: null,
+        bidang: null,
+        kota: null,
+        desc: null,
+        email: null,
+        ig: null,
+        phone: null,
+        linkedIn: null
       }
     }
   },
@@ -397,7 +490,8 @@ export default {
   computed: {
     ...mapGetters({
       dataz: 'pekerja/getDetailPekerja',
-      dataPeng: 'pekerja/getPengalaman'
+      dataPeng: 'pekerja/getPengalaman',
+      dataperekrut: 'perekrut/getProfile'
     })
   },
   mounted () {
@@ -518,6 +612,48 @@ export default {
     padding: 0px 45px;
     background: #FFFFFF;
     border-radius: 8px;
+}
+/* Card-User */
+.card-user {
+  width: 320px;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.profile-image {
+  background-size: cover;
+  border-radius: 70px;
+}
+.user-data {
+  width: 100%;
+}
+.btn-save{
+  width: 90%;
+  color: white;
+  background: #5E50A1;
+  border-radius: 4px;
+}
+.btn-save:hover{
+  color: #5E50A1;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #5E50A1;
+}
+.btn-cancel{
+  width: 90%;
+  border: 1px solid #5E50A1;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.btn-cancel:hover{
+  color: white;
+  background: #5E50A1;
+  border-radius: 4px;
+  border: 1px solid #5E50A1;
 }
 @media only screen and (max-width: 600px) {
   .radio-box {
