@@ -47,7 +47,7 @@
                                 <p class="keahlian"></p>
                                 <p class="keahlian"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{ item.domisilipekerja }}</p>
                                 <div class="bakat">
-                                    <button type="button" class="btn b" v-for="(skillz, index) in item.skill.split(',')" :key="index">{{ skillz }}</button>
+                                    <button type="button" class="btn b" v-for="(skillz, index) in item.skill.replace('[', '').replace(']', '').split(',')" :key="index">{{ skillz }}</button>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -245,7 +245,8 @@ export default {
       rows: null,
       slide: 0,
       sliding: null,
-      skill: ''
+      skill: '',
+      skillnokoma: null
     }
   },
   computed: {
