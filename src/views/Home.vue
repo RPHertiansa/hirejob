@@ -18,6 +18,7 @@
                       <b-dropdown
                           menu-class="mt-4 border-0"
                           text="Kategori"
+                          toggle-class="brd-dr"
                           variant="white"
                           class="m-2"
                           offset="-85"
@@ -34,9 +35,9 @@
                   </div>
                 </form>
             </div>
-            <div class="list-pekerja" v-for="(item,index) in allPekerja" :key=(index)>
+            <div class="list-pekerja">
                 <div class="cont-card">
-                    <div class="card-body" >
+                    <div class="card-body" v-for="(item,index) in allPekerja" :key=(index)>
                         <div class="row pa-seeker">
                             <div class="col-2 d-flex h-100 align-items-center justify-content-center">
                                 <img style="border-radius:100%;" :src="`http://localhost:3000/${item.imagepekerja}`" width="80%" height="70%">
@@ -57,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cont-pagination">
+            <div class="cont-pagination" @click="pagi()">
                 <b-pagination
                     v-model="currentPage"
                     :total-rows="rows"
@@ -239,9 +240,9 @@ export default {
   },
   data () {
     return {
-      perPage: 3,
+      perPage: 10,
       currentPage: 1,
-      rows: 10,
+      rows: null,
       slide: 0,
       sliding: null,
       skill: ''
@@ -262,7 +263,6 @@ export default {
     onSlideEnd (slide) {
       this.sliding = false
     },
-
     searching (skill) {
       if (skill === '') {
         this.$router.push({
@@ -278,12 +278,23 @@ export default {
             skill
           }
         })
-        this.actionGetAllPekerja(skill)
+        const fd = {
+          skill: skill,
+          page: this.currentPage
+        }
+        this.actionGetAllPekerja(fd)
         this.skill = ''
       }
     },
     sort (payload) {
       alert(payload)
+    },
+    pagi () {
+      const fd = {
+        skill: '',
+        page: this.currentPage
+      }
+      this.actionGetAllPekerja(fd)
     },
     detailProfile (idpekerja, index) {
       this.$router.push({
@@ -294,6 +305,12 @@ export default {
   },
   mounted () {
     this.actionGetAllPekerja(' ')
+      .then((result) => {
+        this.rows = result.meta.total
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
@@ -329,7 +346,7 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
-  margin-bottom: 10px;
+  padding-top: 10px;
   align-items: center;
 }
 .input-field {
@@ -344,9 +361,8 @@ export default {
   border: none;
 }
 .icon {
-  border-right: 1px solid #9EA0A5;
-  padding-top: 20px;
   padding-right: 20px;
+  border-right: 1px solid #9EA0A5;
 }
 .dropdown-search {
     margin-top: 25px;

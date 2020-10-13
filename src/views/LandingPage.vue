@@ -11,7 +11,15 @@
           <div class="text-landing-2 mb-5">
              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
           </div>
-          <b-dropdown id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2">
+          <b-dropdown v-if="status === 'perekrut'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
+          </b-dropdown>
+          <b-dropdown v-else-if="status === 'pekerja'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
+                <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
+          </b-dropdown>
+          <b-dropdown v-else id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja</router-link></b-dropdown-item>
           </b-dropdown>
@@ -114,7 +122,15 @@
                 <p>Lorem ipsum dolor sit amet</p>
               </div>
               <div class="float-right btn-start-bottom">
-              <b-dropdown id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2">
+                <b-dropdown v-if="status === 'perekrut'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
+              </b-dropdown>
+              <b-dropdown v-else-if="status === 'pekerja'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
+                <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
+                <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
+              </b-dropdown>
+              <b-dropdown v-else id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-pekerja">Pekerja</router-link></b-dropdown-item>
               </b-dropdown>
@@ -132,7 +148,8 @@
             <p class="text-main"><img class="mr-2" src="../assets/img/layers 1.png">Peworld</p>
             <p class="text-body-hp">Temukan developer berbakat & terbaik di berbagai bidang keahlian</p>
             <button type="button" class="btn btn-pekerja btn-block btn-lg">
-              <router-link style="color: #5E50A1;" to="/login-pekerja">Masuk sebagai pekerja</router-link>
+              <router-link v-if="status !== null" style="color: #5E50A1;" to="/home">Home</router-link>
+              <router-link v-else style="color: #5E50A1;" to="/login-pekerja">Masuk sebagai pekerja</router-link>
             </button>
             <div class="row no-gutters mt-2">
               <div class="col-5"><hr class="line-landing"></div>
@@ -140,7 +157,9 @@
               <div class="col-5"><hr class="line-landing"></div>
             </div>
             <button type="button" class="btn btn-perekrut btn-block btn-lg">
-              <router-link class="text-white" to="/login-perekrut">Masuk sebagai perekrut</router-link>
+              <router-link v-if="status === 'pekerja'" class="text-white" to="/profile">Profile</router-link>
+              <router-link v-else-if="status === 'perekrut'" class="text-white" to="/profile-perekrut">Profile</router-link>
+              <router-link v-else class="text-white" to="/login-perekrut">Masuk sebagai perekrut</router-link>
             </button>
          </div>
        </div>
@@ -152,6 +171,8 @@
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import { Carousel, Slide } from 'vue-carousel'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   components: {
     Navbar,
@@ -161,17 +182,39 @@ export default {
   },
   data: function () {
     return {
+      status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
+      getid: localStorage.getItem('idpekerja') === undefined ? null : localStorage.getItem('idpekerja'),
       slide: 0,
       sliding: null
     }
   },
+  computed: {
+    ...mapGetters({
+      detailPekerja: 'pekerja/getDetailPekerja'
+    })
+  },
   methods: {
+    sendParam () {
+      this.actgetDetail(this.getid)
+    },
+    ...mapActions({
+      actgetDetail: 'pekerja/getDetailPekerja'
+    }),
     onSlideStart (slide) {
       this.sliding = true
     },
     onSlideEnd (slide) {
       this.sliding = false
+    },
+    detailProfile (idpekerja) {
+      this.$router.push({
+        path: '/profile',
+        query: { id: idpekerja }
+      })
     }
+  },
+  mounted () {
+    this.sendParam()
   }
 }
 </script>

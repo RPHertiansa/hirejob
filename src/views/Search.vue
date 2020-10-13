@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .cont-search {
     background: #F6F7F8;
     height: 100vh;
@@ -54,6 +54,7 @@ export default {
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(163, 162, 192, 0.25);
     border-radius: 4px;
+    padding-top: 8px;
 }
 .input-container {
   display: -ms-flexbox; /* IE10 */
@@ -75,9 +76,6 @@ export default {
   border: none;
 }
 .iconhp {
-  /* border-right: 1px solid #9EA0A5;
-  padding-top: 20px;
-  padding-right: 20px; */
   padding-top: 10px;
   padding-left: 10px;
 }
@@ -85,6 +83,6 @@ export default {
     padding-top: 10px;
 }
 .sorthp {
-  margin-top: 100px;
+  margin-top: 100px !important;
 }
 </style>

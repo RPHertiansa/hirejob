@@ -75,11 +75,12 @@
          <Navbar/>
           <div class="cont-inbox-hp">
             <p style="font-weight: 600;font-size: 16px;line-height: 22px;color: #9EA0A5;" >Utama</p>
-            <div v-if="status === 'perekrut'">
-                  <div class="user" v-for="(item, index) in listPekerja" :key="index">
+            <div class="user-box-hp">
+              <div v-if="status === 'perekrut'">
+                  <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPekerja" :key="index"> <!-- <==looping disini -->
                     <div class="row no-gutters">
                       <div class="col-2">
-                        <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
+                        <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                       </div>
                       <div class="col-10 pl-3">
                         <div class="d-flex">
@@ -90,12 +91,12 @@
                       </div>
                     </div>
                   </div>
-            </div>
-            <div v-else-if="status === 'pekerja'">
-                  <div class="user" v-for="(item, index) in listPerekrut" :key="index">
+              </div>
+              <div v-else-if="status === 'pekerja'">
+                  <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPerekrut" :key="index"> <!-- <==looping disini -->
                     <div class="row no-gutters">
                       <div class="col-2">
-                        <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imageperekrut}`">
+                        <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://localhost:3000/${item.imageperekrut}`">
                       </div>
                       <div class="col-10 pl-3">
                         <div class="d-flex">
@@ -106,6 +107,18 @@
                       </div>
                     </div>
                   </div>
+              </div>
+              <b-modal id="modal-receiver" title="Jonas adam" centered hide-footer>
+                <div class="chat-box"></div>
+                  <div class="chat-key">
+                    <div class="input-container">
+                      <input type="text" placeholder="type message..." class="input-field">
+                      <div class="icon">
+                        <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                      </div>
+                    </div>
+                  </div>
+              </b-modal>
             </div>
           </div>
         </div>
@@ -217,6 +230,11 @@ export default {
 .img-user-chat {
   border-radius:100%;
 }
+.img-user-chat-hp {
+  border-radius:100%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
 .name-chating {
   font-weight: 600;
   font-size: 16px;
@@ -272,5 +290,8 @@ export default {
   font-size: 14px;
   line-height: 19px;
   color: #9EA0A5;
+}
+.user-box-hp {
+  height: 70vh;
 }
 </style>

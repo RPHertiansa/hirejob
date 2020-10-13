@@ -9,7 +9,7 @@
                       <CardUser :idpekerja="id" />
                   </b-col>
                   <b-col class="edit-profile" lg="8" cols="12">
-                      <Riwayat />
+                      <Riwayat :idpekerja="id" />
                   </b-col>
               </b-row>
           </b-col>

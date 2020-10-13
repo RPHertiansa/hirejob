@@ -5,20 +5,20 @@
             <div class="card-user" >
             <div class="user-box">
                 <div class="profile-image">
-                <span></span>
+                  <img :src="`http://localhost:3000/${getProfile.imageperekrut}`" width="50%" height="100%" alt="profile">
                 </div>
             </div>
             <div class="user-data mt-3">
                 <div class="user-name">
-                <h5 class="font-weight-bold text-center" style="margin-bottom: 0;">Louis Tomlinson</h5>
-                <p class="text-center">Web Developer</p>
+                <h5 class="font-weight-bold text-center" style="margin-bottom: 0;">{{ getProfile.namaperekrut }}</h5>
+                <p class="text-center">{{ getProfile.namaperusahaan }}</p>
                 </div>
                 <div>
-                <p class="text-secondary text-center" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> Purwokerto, Jawa Tengah</p>
-                <p class="text-secondary text-center">Freelancer</p>
+                <p class="text-secondary text-center" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{getProfile.kota}}</p>
+                <p class="text-secondary text-center">{{ getProfile.jabatan }}</p>
                 </div>
                 <div>
-                <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
+                <p class="text-secondary">{{ getProfile.deskripsi }}</p>
                 </div>
                 <div>
                 <li class="btn btn-edit">
@@ -52,10 +52,33 @@
 <script>
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   components: {
     Navbar,
     Footer
+  },
+  data () {
+    return {
+      id: localStorage.getItem('idperekrut')
+    }
+  },
+  computed: {
+    ...mapGetters({
+      getProfile: 'perekrut/getProfile'
+    })
+  },
+  methods: {
+    ...mapActions({
+      actGetProfile: 'perekrut/getProfileDetail'
+    }),
+    sendParam () {
+      this.actGetProfile(this.id)
+    }
+  },
+  mounted () {
+    this.sendParam()
   }
 }
 </script>
@@ -76,8 +99,7 @@ export default {
   padding: 20px;
 }
 .profile-image {
-  width: 130px;
-  background-image: url('../assets/img/Ellipse 325.png');
+  text-align: center;
   background-size: cover;
   height: 130px;
   border-radius: 70px;
