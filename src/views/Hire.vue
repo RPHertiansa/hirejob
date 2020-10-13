@@ -5,7 +5,7 @@
 
     <b-row class="no-gutters">
       <b-col lg="5" class="mt-3">
-        <CardUser />
+        <CardUser :idpekerja="id" />
       </b-col>
       <b-col lg="7" class="mt-3 formSize">
         <div class="divHire">
@@ -60,6 +60,11 @@ import CardUser from '../components/CardUser'
 
 export default {
   name: 'Hire',
+  data () {
+    return {
+      id: this.$route.query.id
+    }
+  },
   components: {
     CardUser,
     Navbar,

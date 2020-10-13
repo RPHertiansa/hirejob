@@ -300,8 +300,7 @@ export default {
       this.$router.push({
         path: '/profile',
         query: {
-          id: idpekerja,
-          statusbtn: 0
+          id: idpekerja
         }
       })
     }
