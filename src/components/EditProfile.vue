@@ -330,12 +330,15 @@
               <b-col lg="4" cols="12" class="user-card">
                 <div class="card-user shadow">
                   <div class="user-box">
-                    <div class="profile-image">
-                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" style="border-radius:100%;">
+                    <div class="profile-image text-center">
+                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" width="50%" style="border-radius:100%;">
                     </div>
-                    <p class="text-secondary mt-3 text-center" style="margin-left: -15px;">
-                      <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="upload($event)"> Edit
-                    </p>
+                    <div class="text-center">
+                      <label class="custom-file-upload">
+                        <input type="file" @change="upload($event)" />
+                          <b-icon icon="pencil-fill" class="mr-1"></b-icon>Edit
+                      </label>
+                    </div>
                   </div>
                   <div class="user-data mt-3">
                     <div class="user-name">
@@ -422,6 +425,7 @@ export default {
       skill: null,
       status: localStorage.getItem('status'),
       idpekerja: localStorage.getItem('idpekerja'),
+      idperekrut: localStorage.getItem('idperekrut'),
       newPeng: {
         idpekerja: localStorage.getItem('idpekerja'),
         posisi: '',
@@ -484,7 +488,8 @@ export default {
       getPortofolio: 'pekerja/getPortofolio',
       getPengalaman: 'pekerja/getPengalaman',
       onAddPengalaman: 'pekerja/addPengalaman',
-      onDeletePengalaman: 'pekerja/deletePengalaman'
+      onDeletePengalaman: 'pekerja/deletePengalaman',
+      getProfilePerekrut: 'perekrut/getProfileDetail'
     })
   },
   computed: {
@@ -497,6 +502,7 @@ export default {
   mounted () {
     this.getPortofolio(this.idpekerja)
     this.getPengalaman(this.idpekerja)
+    this.getProfilePerekrut(this.idperekrut)
   }
 }
 </script>
@@ -627,6 +633,25 @@ export default {
 .profile-image {
   background-size: cover;
   border-radius: 70px;
+}
+input[type="file"] {
+  display: none;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 8px;
+  margin: 20px auto;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  border: 1px solid #5E50A1;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #5E50A1;
+  margin-bottom: 15px;
 }
 .user-data {
   width: 100%;
