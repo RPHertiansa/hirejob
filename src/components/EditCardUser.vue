@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card-user">
+    <div class="card-user shadow">
       <div class="user-box">
         <div class="profile-image">
           <span></span>

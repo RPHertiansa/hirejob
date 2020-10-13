@@ -21,11 +21,8 @@
                 <p class="text-secondary">{{ getProfile.deskripsi }}</p>
                 </div>
                 <div>
-                <li class="btn btn-edit">
-                  <router-link to="/edit-profile-perekrut">Edit Profile</router-link>
-                </li>
+                    <button class="btn btn-edit"><router-link to="/edit-profile-perekrut">Edit Profile</router-link></button>
                 </div>
-
                 <div class="text-secondary mt-3 ">
                 <img src="../assets/img/mail (3) 1.png" alt="">
                     Louistommo@gmail.com

@@ -3,7 +3,7 @@
         <div v-if="this.status === 'pekerja'">
         <!-- form pencari kerja -->
         <b-row class="users">
-            <b-col lg="12" class="profile-user">
+            <b-col lg="12" class="profile-user shadow">
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Data Diri</h1>
                     <div class="line py-2"></div>
@@ -34,7 +34,7 @@
                 </b-row>
             </b-col>
             <!-- skil -->
-            <b-col lg="12" class="skill-search my-4">
+            <b-col lg="12" class="skill-search shadow my-4">
                 <b-row class="input-search px-5">
                     <h1 class="px-2 py-3"></h1>
                     <div v-for="(item,index) in dataSkill" :key="index">
@@ -50,7 +50,7 @@
             </b-col>
 
             <!-- experience -->
-            <b-col lg="12" class="experience my-4">
+            <b-col lg="12" class="experience my-4 shadow">
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Pengalaman Kerja</h1>
                     <div class="line py-2"></div>
@@ -92,7 +92,7 @@
             <!-- end experience -->
 
             <!-- start portofolio -->
-            <b-col lg="12" class="portofolio my-4">
+            <b-col lg="12" class="portofolio my-4 shadow">
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Portofolio</h1>
                     <div class="line py-2"></div>

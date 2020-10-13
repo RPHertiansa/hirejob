@@ -299,7 +299,10 @@ export default {
     detailProfile (idpekerja, index) {
       this.$router.push({
         path: '/profile',
-        query: { id: idpekerja }
+        query: {
+          id: idpekerja,
+          statusbtn: 0
+        }
       })
     }
   },
