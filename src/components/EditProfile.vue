@@ -331,10 +331,9 @@
                                             </b-col>
                                         </b-row>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Upload Gambar</label>
-                                            <input type="file" class="form-control" >
-                                        </div>
+                                        <vue-dropzone ref="myVueDropzone" id="dropzone customdropzone" :options="dropzoneOptions" :useCustomSlot=true>
+                                            <!-- <img src="../assets/img/dragndrop.png" style="width:100%" alt="dragndrop"> -->
+                                        </vue-dropzone>
                                     </form>
                                     <hr>
                                 </b-col>
@@ -447,6 +446,7 @@
 <script>
 import Swal from 'sweetalert2'
 import { mapGetters, mapActions } from 'vuex'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   data () {
@@ -476,10 +476,23 @@ export default {
     }
   },
   methods: {
+    // alert
     alertSuccess () {
       Swal.fire({
         icon: 'success',
         title: 'Image Updated'
+      })
+    },
+    alertSuccessInsert () {
+      Swal.fire({
+        icon: 'success',
+        title: 'Update Data Success'
+      })
+    },
+    alertSuccessDelete () {
+      Swal.fire({
+        icon: 'success',
+        title: 'Delete Data Success'
       })
     },
     alertSize () {
@@ -503,6 +516,7 @@ export default {
         text: 'Something went wrong!'
       })
     },
+    // Pekerja
     updatePekerja () {
       const data = {
         idpekerja: this.dataz.idpekerja,
@@ -519,7 +533,7 @@ export default {
       }
       this.onUpdatePekerja(data)
         .then((response) => {
-          alert(response.data.message)
+          this.alertSuccessInsert()
           this.getPengalaman(this.idpekerja)
         })
         .catch((err) => {
@@ -533,7 +547,7 @@ export default {
     addPengalaman () {
       this.onAddPengalaman(this.newPeng)
         .then((response) => {
-          alert(response.data.message)
+          this.alertSuccessInsert()
           this.newPeng.posisi = ''
           this.newPeng.namaperusahaan = ''
           this.newPeng.mulaikerja = ''
@@ -550,7 +564,7 @@ export default {
       this.$delete(item, 'lamakerja')
       this.onUpdatePengalaman(item)
         .then((response) => {
-          alert(response.data.message)
+          this.alertSuccessInsert()
           this.getPengalaman(this.idpekerja)
         })
         .catch((err) => {
@@ -561,32 +575,13 @@ export default {
       if (confirm('Delete ?')) {
         this.onDeletePengalaman(idpengalaman)
           .then((response) => {
-            alert(response.data.message)
+            this.alertSuccessDelete()
             this.getPengalaman(this.idpekerja)
           })
           .catch((err) => {
             alert(err)
           })
       }
-    },
-    uploadPerekrut (event) {
-      this.image = event.target.files[0]
-    },
-    updatePerekrutImage () {
-      const data = {
-        idperekrut: this.idperekrut,
-        imageperekrut: this.image
-      }
-      this.onUpdateImagePerekrut(data).then((response) => {
-        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
-          this.alertSize()
-        } else if (response.data.message === 'Image type must be JPG or JPEG') {
-          this.alertValidation()
-        } else {
-          this.alertSuccess()
-          window.location = 'profile-perekrut'
-        }
-      })
     },
     uploadPekerja (event) {
       this.image = event.target.files[0]
@@ -608,11 +603,31 @@ export default {
         }
       })
     },
+    // Perekrut
+    uploadPerekrut (event) {
+      this.image = event.target.files[0]
+    },
+    updatePerekrutImage () {
+      const data = {
+        idperekrut: this.idperekrut,
+        imageperekrut: this.image
+      }
+      this.onUpdateImagePerekrut(data).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = 'profile-perekrut'
+        }
+      })
+    },
     updatePerusahaan () {
       // console.log(this.dataperekrut)
       this.onUpdatePerusahaan(this.dataperekrut)
         .then((response) => {
-          alert(response.data.message)
+          this.alertSuccessInsert()
         })
         .catch((err) => {
           alert(err)
