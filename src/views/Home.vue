@@ -287,7 +287,10 @@ export default {
       }
     },
     sort (payload) {
-      console.log(payload)
+      const fd = {
+        sort: payload
+      }
+      this.actionGetAllPekerja(fd)
     },
     pagi () {
       const fd = {
