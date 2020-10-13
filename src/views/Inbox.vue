@@ -79,7 +79,7 @@
               <div v-b-modal.modal-receiver class="user-receiver"> <!-- <==looping disini -->
                 <div class="row no-gutters">
                   <div class="col-2">
-                    <img class="img-user-chat" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
+                    <img class="img-user-chat-hp" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
                   </div>
                   <div class="col-10 pl-3">
                     <div class="d-flex">
@@ -206,6 +206,9 @@ export default {
   margin-bottom: 0px;
 }
 .img-user-chat {
+  border-radius:100%;
+}
+.img-user-chat-hp {
   border-radius:100%;
   margin-top: 10px;
   margin-left: 10px;
