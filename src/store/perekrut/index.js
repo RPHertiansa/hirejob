@@ -4,7 +4,8 @@ import { url } from '../../helper/env'
 const state = () => {
   return {
     dataPerekrut: [],
-    detail: []
+    detail: [],
+    getProfile: []
   }
 }
 
@@ -14,6 +15,9 @@ const getters = {
   },
   getDetailPerekrut (state) {
     return state.detail
+  },
+  getProfile (state) {
+    return state.getProfile
   }
 }
 
@@ -23,6 +27,9 @@ const mutations = {
   },
   SET_DETAIL_DATA (state, payload) {
     state.detail = payload
+  },
+  SET_PROFILE_DATA (state, payload) {
+    state.getProfile = payload
   }
 }
 
@@ -42,6 +49,16 @@ const actions = {
       axios.get(`${url}/perekrut/getdetail/${payload}`)
         .then((response) => {
           context.commit('SET_DETAIL_DATA', response.data.data[0])
+        }).catch((err) => {
+          console.log(err)
+        })
+    })
+  },
+  getProfileDetail (context, payload) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${url}/perekrut/getdetail/${payload}`)
+        .then((response) => {
+          context.commit('SET_PROFILE_DATA', response.data.data[0])
         }).catch((err) => {
           console.log(err)
         })

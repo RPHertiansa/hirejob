@@ -5,7 +5,7 @@
           <b-col lg="12" class="profile py-5">
                   <b-row class="content mx-5">
                   <b-col lg="4" cols="12" class="user-card">
-                      <EditCardUser />
+                      <EditCardUser :idperekrut="id" />
                   </b-col>
                   <b-col class="edit-profile" lg="8" cols="12">
                       <EditProfile />
@@ -29,6 +29,7 @@ export default {
   name: 'EditProfilePerekrut',
   data () {
     return {
+      id: localStorage.getItem('idperekrut')
     }
   },
   components: {

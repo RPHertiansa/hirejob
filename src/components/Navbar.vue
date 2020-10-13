@@ -4,7 +4,7 @@
             <router-link to="/home"> <img src="../assets/img/Group 980 1.png"> </router-link>
             <router-link v-if="$route.path === '/' && status !== null" to="/home" class="menu-home">Home</router-link>
             <div v-if="$route.path === '/' && status !== null" class="btn-head d-inline float-right">
-                <button v-if="status === 'pekerja'" class="btn btn-profile"><router-link class="tprf" to="/profile">Profile</router-link></button>
+                <button v-if="status === 'pekerja'" class="btn btn-profile" @click="detailProfile(detailPekerja.idpekerja)">Profile</button>
                 <button v-else class="btn btn-profile"><router-link class="tprf" to="/profile-perekrut">Profile</router-link></button>
             </div>
             <div v-else-if="$route.path === '/'" class="btn-head d-inline float-right">
@@ -35,14 +35,14 @@
                       <template v-slot:button-content>
                         <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                       </template>
-                        <img class="ml-5 mb-3" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`">
+                        <img class="ml-5 mb-3" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPekerja.imagepekerja}`">
                         <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
                         <b-dropdown-item><router-link style="color: #5E50A1;" to="/edit-profile-pekerja">Edit Profile</router-link></b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
                         <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div v-else>
+                <div v-else-if="status === 'perekrut'">
                     <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
                         <template v-slot:button-content>
                         <img src="../assets/img/bell (1) 1.png">
@@ -59,7 +59,7 @@
                       <template v-slot:button-content>
                         <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                       </template>
-                        <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`">
+                        <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPerekrut.imageperekrut}`">
                         <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
                         <b-dropdown-item><li class="text-danger" @click="logoutPerekrut()">Logout</li></b-dropdown-item>
@@ -100,19 +100,19 @@
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                     </template>
-                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
-                      <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile">Profile</router-link></b-dropdown-item>
+                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
+                      <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
                   </b-dropdown>
                 </div>
-                <div v-else class="col-3 d-flex justify-content-center">
+                <div v-else-if="status === 'perekrut'" class="col-3 d-flex justify-content-center">
                   <b-dropdown id="dropdown-1" size="lg" variant="link" text="" class="ml-2" no-caret>
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                     </template>
-                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
-                      <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
+                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
+                      <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile </router-link></b-dropdown-item>
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-item><li class="text-danger" @click="logoutPerekrut()">Logout</li></b-dropdown-item>
                   </b-dropdown>
@@ -128,8 +128,8 @@ export default {
   data () {
     return {
       status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
-      getid: localStorage.getItem('idpekerja'),
-      getidperekrut: localStorage.getItem('idperekrut')
+      getid: localStorage.getItem('idpekerja') === undefined ? null : localStorage.getItem('idpekerja'),
+      getidperekrut: localStorage.getItem('idperekrut') === undefined ? null : localStorage.getItem('idperekrut')
     }
   },
   computed: {
@@ -163,7 +163,6 @@ export default {
         query: { id: idpekerja }
       })
     }
-
   },
   mounted () {
     this.sendParam()

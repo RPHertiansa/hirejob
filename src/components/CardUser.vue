@@ -82,13 +82,7 @@
           <h2>Skill</h2>
         </div>
         <div>
-          <!-- {{dataz.skill.split(',')}} -->
-          <button type="button" class="btn b" v-for="(skillz, index) in dataz.skill.split(',')" :key="index">{{ skillz }}</button>
-            <!-- <button class="btn b">Phyton</button>
-            <button class="btn b">Golang</button>
-            <button class="btn b">Kotlin</button>
-            <button class="btn b">PHP</button>
-            <button class="btn b">CSS</button> -->
+          <button type="button" class="btn b" v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index"  > {{skillz}}</button>
         </div>
         <div class="text-secondary mt-3 ">
           <img src="../assets/img/mail (3) 1.png" alt="">

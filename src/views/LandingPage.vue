@@ -17,7 +17,7 @@
           </b-dropdown>
           <b-dropdown v-else-if="status === 'pekerja'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
-                <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile">Profile</router-link></b-dropdown-item>
+                <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
           </b-dropdown>
           <b-dropdown v-else id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
@@ -128,7 +128,7 @@
               </b-dropdown>
               <b-dropdown v-else-if="status === 'pekerja'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
-                <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile">Profile</router-link></b-dropdown-item>
+                <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
               </b-dropdown>
               <b-dropdown v-else id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
@@ -171,6 +171,8 @@
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import { Carousel, Slide } from 'vue-carousel'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   components: {
     Navbar,
@@ -181,17 +183,38 @@ export default {
   data: function () {
     return {
       status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
+      getid: localStorage.getItem('idpekerja') === undefined ? null : localStorage.getItem('idpekerja'),
       slide: 0,
       sliding: null
     }
   },
+  computed: {
+    ...mapGetters({
+      detailPekerja: 'pekerja/getDetailPekerja'
+    })
+  },
   methods: {
+    sendParam () {
+      this.actgetDetail(this.getid)
+    },
+    ...mapActions({
+      actgetDetail: 'pekerja/getDetailPekerja'
+    }),
     onSlideStart (slide) {
       this.sliding = true
     },
     onSlideEnd (slide) {
       this.sliding = false
+    },
+    detailProfile (idpekerja) {
+      this.$router.push({
+        path: '/profile',
+        query: { id: idpekerja }
+      })
     }
+  },
+  mounted () {
+    this.sendParam()
   }
 }
 </script>
