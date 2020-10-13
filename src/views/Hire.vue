@@ -14,30 +14,36 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
 
-        <b-form @submit.prevent="onHire()">
+        <b-form @submit.prevent="onHire">
             <b-form-text>Tujuan tentang posisi ini</b-form-text>
-            <b-form-select class="mb-4"></b-form-select>
+            <b-form-select v-model="selected" :options="options" class="mb-4"></b-form-select>
             <b-form-text>Nama Lengkap</b-form-text>
             <b-input
               type="text"
+              v-model="name"
               placeholder="Masukan nama lengkap"
               autofocus
+              required
               class="mb-4"
             ></b-input>
             <b-form-text>Email</b-form-text>
             <b-input
-              type="text"
+              v-model="email"
+              type="email"
               placeholder="Masukan email"
               class="mb-4"
+              required
             ></b-input>
             <b-form-text>No Handphone</b-form-text>
             <b-input
+              v-model="phone"
+              required
               type="number"
               class="mb-4"
               placeholder="Masukan no handphone"
             ></b-input>
             <b-form-text>Deskripsi</b-form-text>
-            <b-form-textarea placeholder="Deskripsikan jelaskan lebih detail" rows="8"></b-form-textarea>
+            <b-form-textarea placeholder="Deskripsikan jelaskan lebih detail" v-model="desc" rows="8"></b-form-textarea>
             <button class="mt-4 btn-hire" block>Hire</button>
           </b-form>
 
@@ -51,6 +57,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import CardUser from '../components/CardUser'
@@ -59,7 +67,53 @@ export default {
   name: 'Hire',
   data () {
     return {
-      id: this.$route.query.id
+      id: this.$route.query.id,
+      idperekrut: localStorage.getItem('idperekrut'),
+      selected: null,
+      options: [
+        { value: null, text: 'Please select an option' },
+        { value: 'Fulltime', text: 'Fulltime' },
+        { value: 'Freelance', text: 'Freelance' },
+        { value: 'Project', text: 'Project' }
+      ],
+      name: null,
+      email: null,
+      phone: null,
+      desc: null
+    }
+  },
+  methods: {
+    ...mapActions({
+      onHireTalent: 'hire/onHireTalent'
+    }),
+    onHire () {
+      const data = {
+        idperekrut: this.idperekrut,
+        idpekerja: this.id,
+        pesantujuan: this.selected,
+        namalengkap: this.name,
+        email: this.email,
+        phone: this.phone,
+        deskripsi: this.desc
+      }
+      console.log(data)
+      this.onHireTalent(data).then(result => {
+        this.alertActivate()
+      }).catch(err => this.alerError(err))
+    },
+    alertActivate () {
+      Swal.fire({
+        icon: 'success',
+        title: 'Your Recruit Talent Success',
+        text: 'Please Wait Confirm From Talent'
+      })
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops..',
+        text: 'Something Went Wrong!'
+      })
     }
   },
   components: {
