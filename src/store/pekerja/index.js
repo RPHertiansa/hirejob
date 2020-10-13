@@ -127,6 +127,18 @@ const actions = {
         })
     })
   },
+  updatePengalaman (context, payload) {
+    // console.log(payload)
+    return new Promise((resolve, reject) => {
+      axios.patch(`${url}/pengalaman/update/${payload.idpengalaman}`, payload)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
   deletePengalaman (context, payload) {
     // console.log(payload)
     return new Promise((resolve, reject) => {
@@ -135,7 +147,7 @@ const actions = {
           resolve(response)
         })
         .catch((err) => {
-          console.log(err)
+          reject.log(err)
         })
     })
   }
