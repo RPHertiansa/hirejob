@@ -11,10 +11,7 @@
         <div class="divHire">
         <h2 style="font-weight: bold">Hubungi Lous Tomlinson</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-          recusandae quo qui at neque repellat, nemo quisquam ratione dolorem
-          laudantium! Dignissimos, libero ea facilis iure maiores accusantium
-          expedita vel consectetur?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
 
         <b-form @submit.prevent="onHire()">
