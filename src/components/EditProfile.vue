@@ -3,7 +3,6 @@
         <div v-if="this.status === 'pekerja'">
         <!-- form pencari kerja -->
         <b-row class="users">
-          {{dataz}}
             <b-col lg="12" class="profile-user shadow">
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Data Diri</h1>
@@ -64,7 +63,7 @@
             </b-col>
 
             <!-- experience -->
-            {{dataPeng}}
+
             <b-col lg="12" class="experience my-4 shadow">
                 <b-row class="px-5">
                   <h1 class="px-2 py-3">Pengalaman Kerja</h1>
@@ -225,8 +224,9 @@
             <!-- end experience -->
 
             <!-- start portofolio -->
+
             <b-col lg="12" class="portofolio my-4 shadow">
-                <b-row class="px-5" >
+                <b-row class="px-5">
                     <h1 class="px-2 py-3">Portofolio</h1>
                     <div class="line py-2"></div>
                     <b-col lg="12">

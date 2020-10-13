@@ -4,6 +4,7 @@ import auth from './auth'
 import pekerja from './pekerja'
 import perekrut from './perekrut'
 import chat from './chat'
+import hire from './hire'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     auth,
     pekerja,
     perekrut,
-    chat
+    chat,
+    hire
   }
 })
