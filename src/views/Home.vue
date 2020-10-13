@@ -24,9 +24,9 @@
                           offset="-85"
                           no-caret
                       >
-                          <b-dropdown-item @click="sort('namapekerja')">Sortir berdasarkan Nama</b-dropdown-item>
-                          <b-dropdown-item @click="sort('domisilipekerja')">Sortir berdasarkan Lokasi</b-dropdown-item>
-                          <b-dropdown-item href="#">Sortir berdasarkan Skill</b-dropdown-item>
+                          <b-dropdown-item @click="sort('namapekerja','')">Sortir berdasarkan Nama</b-dropdown-item>
+                          <b-dropdown-item @click="sort('domisilipekerja','')">Sortir berdasarkan Lokasi</b-dropdown-item>
+                          <b-dropdown-item @click="sort('jumlahskill','DESC')">Sortir berdasarkan Skill</b-dropdown-item>
                       </b-dropdown>
                       </div>
                       <div>
@@ -286,9 +286,10 @@ export default {
         this.skill = ''
       }
     },
-    sort (payload) {
+    sort (sort, sorttype) {
       const fd = {
-        sort: payload
+        sort,
+        sorttype
       }
       this.actionGetAllPekerja(fd)
     },

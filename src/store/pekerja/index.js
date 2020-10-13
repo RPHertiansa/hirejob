@@ -54,10 +54,11 @@ const actions = {
     const fd = {
       skill: payload.skill === undefined ? '' : payload.skill,
       page: payload.page === undefined ? '' : payload.page,
-      sort: payload.sort === undefined ? '' : payload.sort
+      sort: payload.sort === undefined ? '' : payload.sort,
+      sorttype: payload.sorttype === undefined ? '' : payload.sorttype
     }
     return new Promise((resolve, reject) => {
-      axios.get(`${url}/pekerja/getall?skill=${fd.skill}&sortby=${fd.sort}&page=${fd.page}`)
+      axios.get(`${url}/pekerja/getall?skill=${fd.skill}&sortby=${fd.sort}&sorttype=${fd.sorttype}&page=${fd.page}`)
         .then((response) => {
           context.commit('SET_ALL_DATA', response.data.data)
           resolve(response.data)
