@@ -149,6 +149,15 @@ const actions = {
           reject.log(err)
         })
     })
+  },
+  updateImage (context, payload) {
+    return new Promise((resolve, reject) => {
+      const fd = new FormData()
+      fd.append('imagepekerja', payload.imagepekerja)
+      axios.patch(`${url}/pekerja/update/${payload.idpekerja}`, fd).then((response) => {
+        resolve(response)
+      }).catch((err) => reject(err))
+    })
   }
 }
 export default {

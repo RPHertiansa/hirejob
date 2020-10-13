@@ -6,13 +6,17 @@
               <b-row class="content mx-5">
                   <b-col lg="4" cols="12" class="user-card">
                     <div class="card-user shadow">
-                        <div class="user-box">
+                        <div class="user-box text-center">
                           <div class="profile-image">
-                            <img :src="`http://localhost:3000/${dataz.imagepekerja}`"  style="border-radius:100%;">
+                            <img :src="`http://localhost:3000/${dataz.imagepekerja}`" width="100%" height="100%" style="border-radius:100%;">
                           </div>
-                          <p class="text-secondary mt-3 text-center" style="margin-left: -15px;"><b-icon icon="pencil-fill" class="mr-1"></b-icon> Edit</p>
+                         <form enctype="multipart/form-data" @change.prevent="updatePekerjaImage">
+                            <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
+                              <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPekerja($event)"> Edit
+                            </label>
+                          </form>
                         </div>
-                        <div class="user-data mt-3">
+                        <div class="user-data mt-3 text-center">
                           <div class="user-name">
                             <h5 class="font-weight-bold" style="margin-bottom: 0;">{{dataz.namapekerja}}</h5>
                             <p>{{dataz.jobdescpekerja}}</p>
@@ -192,7 +196,7 @@
                                 </div>
 
                                 <b-col lg="12" class="my-3">
-                                  <b-button class="btn btn-experience" v-b-toggle.add-collapse>Tambah Pengalaman</b-button>
+                                  <b-button class="btn btn-experience" v-b-toggle.add-collapse>+ Tambah Pengalaman</b-button>
                                 </b-col>
 
                                 <!-- add -->
@@ -249,7 +253,7 @@
                                       </div>
                                     </b-col>
                                     <b-col lg="12" class="my-3">
-                                      <b-button class="btn btn-add-experience" type="submit">Tambahkan</b-button>
+                                      <b-button class="btn btn-add-experience" type="submit">Save Pengalaman</b-button>
                                     </b-col>
                                   </b-row>
                                     </form>
@@ -343,11 +347,13 @@
                 <div class="card-user shadow">
                   <div class="user-box text-center">
                     <div class="profile-image">
-                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" width="80%" style="border-radius:100%;">
+                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" width="100%" height="100%" style="border-radius:100%;">
                     </div>
-                    <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
-                      <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="upload($event)"> Edit
-                    </label>
+                    <form enctype="multipart/form-data" @change.prevent="updatePerekrutImage">
+                      <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
+                        <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPerekrut($event)"> Edit
+                      </label>
+                    </form>
                   </div>
                   <div class="user-data mt-3">
                     <div class="user-name">
@@ -425,6 +431,7 @@
     </div>
 </template>
 <script>
+import Swal from 'sweetalert2'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -456,6 +463,33 @@ export default {
     }
   },
   methods: {
+    alertSuccess () {
+      Swal.fire({
+        icon: 'success',
+        title: 'Image Updated'
+      })
+    },
+    alertSize () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Image size is too big!',
+        text: 'Please upload another one with size < 5mb'
+      })
+    },
+    alertValidation () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Image type must be JPG or JPEG'
+      })
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      })
+    },
     saveSkill () {
       this.dataSkill.push(this.skill)
       console.log(this.dataSkill)
@@ -500,13 +534,54 @@ export default {
           })
       }
     },
+    uploadPerekrut (event) {
+      this.image = event.target.files[0]
+    },
+    updatePerekrutImage () {
+      const data = {
+        idperekrut: this.idperekrut,
+        imageperekrut: this.image
+      }
+      this.onUpdateImagePerekrut(data).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = 'profile-perekrut'
+        }
+      })
+    },
+    uploadPekerja (event) {
+      this.image = event.target.files[0]
+    },
+    updatePekerjaImage () {
+      const data = {
+        idpekerja: this.idpekerja,
+        imagepekerja: this.image
+      }
+      console.log(data)
+      this.onUpdateImagePekerja(data).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = '/edit-profile-pekerja'
+        }
+      })
+    },
     ...mapActions({
       getPortofolio: 'pekerja/getPortofolio',
       getPengalaman: 'pekerja/getPengalaman',
       onAddPengalaman: 'pekerja/addPengalaman',
       onUpdatePengalaman: 'pekerja/updatePengalaman',
       onDeletePengalaman: 'pekerja/deletePengalaman',
-      getProfile: 'perekrut/getProfileDetail'
+      getProfile: 'perekrut/getProfileDetail',
+      onUpdateImagePerekrut: 'perekrut/updateImage',
+      onUpdateImagePekerja: 'pekerja/updateImage'
     })
   },
   computed: {
