@@ -240,7 +240,7 @@ export default {
   },
   data () {
     return {
-      perPage: 10,
+      perPage: 3,
       currentPage: 1,
       rows: null,
       slide: 0,
