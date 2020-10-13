@@ -3,8 +3,12 @@
         <div v-if="this.status === 'pekerja'">
         <!-- form pencari kerja -->
         <b-row class="users">
+<<<<<<< HEAD
           {{dataz}}
             <b-col lg="12" class="profile-user">
+=======
+            <b-col lg="12" class="profile-user shadow">
+>>>>>>> b89e3e5313301f5871e8d67b1c2de53cca1fe421
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Data Diri</h1>
                     <div class="line py-2"></div>
@@ -48,7 +52,7 @@
                 </b-row>
             </b-col>
             <!-- skil -->
-            <b-col lg="12" class="skill-search my-4">
+            <b-col lg="12" class="skill-search shadow my-4">
                 <b-row class="input-search px-5">
                   <h1 class="px-2 py-3"></h1>
                     <div v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index">
@@ -64,8 +68,12 @@
             </b-col>
 
             <!-- experience -->
+<<<<<<< HEAD
             {{dataPeng}}
             <b-col lg="12" class="experience my-4">
+=======
+            <b-col lg="12" class="experience my-4 shadow">
+>>>>>>> b89e3e5313301f5871e8d67b1c2de53cca1fe421
                 <b-row class="px-5">
                   <h1 class="px-2 py-3">Pengalaman Kerja</h1>
                     <div class="line py-2"></div>
@@ -174,8 +182,13 @@
             <!-- end experience -->
 
             <!-- start portofolio -->
+<<<<<<< HEAD
             <b-col lg="12" class="portofolio my-4" >
                 <b-row class="px-5" >
+=======
+            <b-col lg="12" class="portofolio my-4 shadow">
+                <b-row class="px-5">
+>>>>>>> b89e3e5313301f5871e8d67b1c2de53cca1fe421
                     <h1 class="px-2 py-3">Portofolio</h1>
                     <div class="line py-2"></div>
                     <b-col lg="12">

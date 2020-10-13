@@ -1,104 +1,118 @@
 <template>
   <div>
-    <div class="card-user" v-if="status === 'perekrut'">
-      <div class="user-box">
-        <div class="profile-image">
-          <span></span>
+    <div v-if="$route.path === `/profile`">
+      <div class="card-user shadow">
+        <div class="user-box">
+          <div class="profile-image">
+            <span>
+              <img :src="`http://localhost:3000/${dataz.imagepekerja}`">
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="user-data mt-3">
-        <div class="user-name">
-          <h5 class="font-weight-bold" style="margin-bottom: 0;"> Louis Tomlinson</h5>
-          <p>Web Developer</p>
-        </div>
-        <div>
-          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> Purwokerto, Jawa Tengah</p>
-          <p class="text-secondary">Freelancer</p>
-        </div>
-        <div>
-          <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique eum nihil aut ut fugit accusantium ratione magnam, ipsam quaerat laudantium voluptas, rerum neque porro? Voluptatibus non illo quisquam rem nesciunt!</p>
-        </div>
-        <div>
-          <button type="button" class="btn btn-search">Hire</button>
-        </div>
+        <div class="user-data mt-3">
+          <div class="user-name">
+            <h5 class="font-weight-bold" style="margin-bottom: 0;"> {{dataz.namapekerja}}</h5>
+            <p>{{dataz.jobdescpekerja}}</p>
+          </div>
 
-        <div>
-          <h2>Skill</h2>
-        </div>
-        <div>
-            <button class="btn b">Phyton</button>
-            <button class="btn b">Golang</button>
-            <button class="btn b">Kotlin</button>
-            <button class="btn b">PHP</button>
-            <button class="btn b">CSS</button>
-        </div>
-        <div class="text-secondary mt-3 ">
-          <img src="../assets/img/mail (3) 1.png" alt="">
-            Louistommo@gmail.com
-        </div>
-        <div class="text-secondary mt-3">
-          <img src="../assets/img/instagram.png" alt="">
-          @Louist91
-        </div>
-        <div class="text-secondary mt-3">
-          <img src="../assets/img/gitub.png" alt="">
-          @Louistommo
-        </div>
-        <div class="text-secondary mt-3">
-          <img src="../assets/img/gitlab.png" alt="">
-          @Louistommo91
+          <div v-if="dataz.tipepekerjaan === 0">
+            <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+            <p class="text-secondary">Freelancer</p>
+          </div>
+          <div v-else>
+            <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+            <p class="text-secondary">Fulltime</p>
+          </div>
+
+          <div>
+            <p class="text-secondary">{{dataz.deskripsi}}</p>
+          </div>
+          <div>
+            <div v-if="status === 'perekrut'">
+              <button type="button" class="btn btn-search" @click="hire(dataz.idpekerja)">Hire</button>
+            </div>
+            <div v-else>
+              <span></span>
+            </div>
+          </div>
+          <div>
+            <h2>Skill</h2>
+          </div>
+          <div>
+            <button type="button" class="btn b" v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index"  > {{skillz}}</button>
+          </div>
+          <div class="text-secondary mt-3 ">
+            <img src="../assets/img/mail (3) 1.png" alt="">
+              Louistommo@gmail.com
+          </div>
+          <div class="text-secondary mt-3">
+            <img src="../assets/img/instagram.png" alt="">
+            @Louist91
+          </div>
+          <div class="text-secondary mt-3">
+            <img src="../assets/img/gitub.png" alt="">
+            @Louistommo
+          </div>
+          <div class="text-secondary mt-3">
+            <img src="../assets/img/gitlab.png" alt="">
+            @Louistommo91
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card-user" v-else>
-      <div class="user-box">
-        <div class="profile-image">
-          <span>
-            <img :src="`http://localhost:3000/${dataz.imagepekerja}`">
-          </span>
+    <div v-else>
+      <div class="card-user shadow">
+        <div class="user-box">
+          <div class="profile-image">
+            <span>
+              <img :src="`http://localhost:3000/${dataz.imagepekerja}`">
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="user-data mt-3">
-        <div class="user-name">
-          <h5 class="font-weight-bold" style="margin-bottom: 0;"> {{dataz.namapekerja}}</h5>
-          <p>{{dataz.jobdescpekerja}}</p>
-        </div>
+        <div class="user-data mt-3">
+          <div class="user-name">
+            <h5 class="font-weight-bold" style="margin-bottom: 0;"> {{dataz.namapekerja}}</h5>
+            <p>{{dataz.jobdescpekerja}}</p>
+          </div>
 
-        <div v-if="dataz.tipepekerjaan === 0">
-          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
-          <p class="text-secondary">Freelancer</p>
-        </div>
-        <div v-else>
-          <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
-          <p class="text-secondary">Fulltime</p>
-        </div>
+          <div v-if="dataz.tipepekerjaan === 0">
+            <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+            <p class="text-secondary">Freelancer</p>
+          </div>
+          <div v-else>
+            <p class="text-secondary" style="margin-bottom: 0;"><img src="../assets/img/map-pin (4) 1.png" alt="mappin"> {{dataz.domisilipekerja}}</p>
+            <p class="text-secondary">Fulltime</p>
+          </div>
 
-        <div>
-          <p class="text-secondary">{{dataz.deskripsi}}</p>
-        </div>
-
-        <div>
-          <h2>Skill</h2>
-        </div>
-        <div>
-          <button type="button" class="btn b" v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index"  > {{skillz}}</button>
-        </div>
-        <div class="text-secondary mt-3 ">
-          <img src="../assets/img/mail (3) 1.png" alt="">
-            Louistommo@gmail.com
-        </div>
-        <div class="text-secondary mt-3">
-          <img src="../assets/img/instagram.png" alt="">
-          @Louist91
-        </div>
-        <div class="text-secondary mt-3">
-          <img src="../assets/img/gitub.png" alt="">
-          @Louistommo
-        </div>
-        <div class="text-secondary mt-3">
-          <img src="../assets/img/gitlab.png" alt="">
-          @Louistommo91
+          <div>
+            <p class="text-secondary">{{dataz.deskripsi}}</p>
+          </div>
+          <div>
+            <span></span>
+          </div>
+          <div>
+            <h2>Skill</h2>
+          </div>
+          <div>
+            <button type="button" class="btn b" v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index"  > {{skillz}}</button>
+          </div>
+          <div class="text-secondary mt-3 ">
+            <img src="../assets/img/mail (3) 1.png" alt="">
+              Louistommo@gmail.com
+          </div>
+          <div class="text-secondary mt-3">
+            <img src="../assets/img/instagram.png" alt="">
+            @Louist91
+          </div>
+          <div class="text-secondary mt-3">
+            <img src="../assets/img/gitub.png" alt="">
+            @Louistommo
+          </div>
+          <div class="text-secondary mt-3">
+            <img src="../assets/img/gitlab.png" alt="">
+            @Louistommo91
+          </div>
         </div>
       </div>
     </div>
@@ -118,7 +132,13 @@ export default {
   methods: {
     ...mapActions({
       getData: 'pekerja/getDetailProfilPekerja'
-    })
+    }),
+    hire (idpekerja) {
+      this.$router.push({
+        path: '/hire',
+        query: { id: idpekerja }
+      })
+    }
   },
   computed: {
     ...mapGetters({
