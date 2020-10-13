@@ -1,7 +1,8 @@
 <template>
   <div>
       <Navbar />
-      <div class="bg-profile-perekrut">
+      <div class="d-sm-block d-none">
+        <div class="bg-profile-perekrut">
         <div class="cont-profile-perekrut">
           <div class="bg-latar">
             <div class="ubah-latar">
@@ -38,6 +39,39 @@
         </div>
       </div>
       <Footer />
+      </div>
+      <!-- responsive -->
+      <div class="d-sm-none d-block">
+        <div class="bg-profile-perekrut-hp">
+            <div class="cont-card-profile-perekrut-hp">
+              <div class="text-center w-100">
+                <img class="img-profile-perekrut-hp" width="150px" height="150px" :src="`http://localhost:3000/${getProfile.imageperekrut}`">
+              </div>
+            <div class="name-company mt-3">
+              <p class="mb-2">{{ getProfile.namaperekrut }}</p>
+            </div>
+            <div class="type-company">
+              <p class="mb-2">{{ getProfile.namaperusahaan }}</p>
+            </div>
+            <div class="type-company">
+              <p class="mb-2">{{ getProfile.jabatan }}</p>
+            </div>
+            <div class="location-company">
+              <p class="mb-2"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{getProfile.kota}}</p>
+            </div>
+            <p class="des-company">
+              {{ getProfile.deskripsi }}
+            </p>
+            <router-link class="edit-profile-per" to="/edit-profile-perekrut"><button class="btn btn-block btn-edit-profile-perekrut-hp">Edit Profile</button></router-link>
+            <div class="mt-4">
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/mail (3) 1.png">Louistommo@gmail.com</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/instagram.png">@Louist91</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/gitub.png">@Louist91</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/gitlab.png">@Louist91</p>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -83,6 +117,14 @@ export default {
   padding-left: 100px;
   padding-bottom: 200px;
 }
+.bg-profile-perekrut-hp {
+  background: #F6F7F8;
+  padding-top: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 100vw;
+  height: 100vh;
+}
 .cont-profile-perekrut {
   width: 1140px;
   height: 800px;
@@ -108,10 +150,19 @@ export default {
   width: 614px;
   margin-top: 75px;
 }
+.cont-card-profile-perekrut-hp {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px 10px;
+}
 .img-profile-perekrut {
   position: absolute;
   bottom: -65px;
   right: 44%;
+  border-radius: 100%;
+}
+.img-profile-perekrut-hp {
   border-radius: 100%;
 }
 .name-company {
@@ -138,6 +189,15 @@ export default {
 }
 .btn-edit-profile-perekrut {
   width: 297px;
+  height: 50px;
+  background: #5E50A1;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+.btn-edit-profile-perekrut-hp {
   height: 50px;
   background: #5E50A1;
   border-radius: 4px;
