@@ -3,6 +3,7 @@
         <div v-if="this.status === 'pekerja'">
         <!-- form pencari kerja -->
         <b-row class="users">
+          {{dataz}}
             <b-col lg="12" class="profile-user">
                 <b-row class="px-5">
                     <h1 class="px-2 py-3">Data Diri</h1>
@@ -11,23 +12,36 @@
                         <form>
                             <div class="form-group">
                                 <label>Nama Lengkap</label>
-                                <input type="text" class="form-control" placeholder="Masukan nama lengkap">
+                                <input type="text" class="form-control" placeholder="Masukan nama lengkap"
+                                v-model="dataz.namapekerja" :namapekerja="dataz.namapekerja"
+                                required
+                                >
                             </div>
                             <div class="form-group">
                                 <label>Jobdesk</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Jobdesk">
+                                 <input type="text" class="form-control" placeholder="Masukan Jobdesk"
+                                 v-model="dataz.jobdescpekerja" :jobdescpekerja="dataz.jobdescpekerja"
+                                 required
+                                 >
                             </div>
                             <div class="form-group">
                                 <label>Domisili</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Domisili">
+                                 <input type="text" class="form-control" placeholder="Masukan Domisili"
+                                 v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
+                                 required
+                                 >
                             </div>
                             <div class="form-group">
                                 <label>Tempat Kerja</label>
-                                 <input type="text" class="form-control" placeholder="Masukan Tempat Kerja">
+                                 <input type="text" class="form-control" placeholder="Masukan Tempat Kerja"
+                                 v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
+                                 >
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi singkat</label>
-                                <textarea class="form-control" rows="5" placeholder="Tuliskan deskripsi singkat"></textarea>
+                                <textarea class="form-control" rows="5" placeholder="Tuliskan deskripsi singkat"
+                                v-model="dataz.deskripsi" :deskripsi="dataz.deskripsi"
+                                ></textarea>
                             </div>
                         </form>
                     </b-col>
@@ -36,13 +50,13 @@
             <!-- skil -->
             <b-col lg="12" class="skill-search my-4">
                 <b-row class="input-search px-5">
-                    <h1 class="px-2 py-3"></h1>
-                    <div v-for="(item,index) in dataSkill" :key="index">
-                        <button class="btn b">{{ item }}</button>
+                  <h1 class="px-2 py-3"></h1>
+                    <div v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index">
+                        <button class="btn b">{{ skillz }}</button>
                     </div>
                     <b-col lg="12">
                         <div class="input-group mb-3">
-                        <input type="text" class="form-control" v-model="skill" placeholder="Golang">
+                        <input type="text" class="form-control" required v-model="dataz.skill" :skill="dataz.skill" placeholder="Golang">
                         <button class="btn search-btn mx-3" @click="saveSkill">Simpan</button>
                         </div>
                     </b-col>
@@ -50,50 +64,118 @@
             </b-col>
 
             <!-- experience -->
+            {{dataPeng}}
             <b-col lg="12" class="experience my-4">
                 <b-row class="px-5">
-                    <h1 class="px-2 py-3">Pengalaman Kerja</h1>
+                  <h1 class="px-2 py-3">Pengalaman Kerja</h1>
                     <div class="line py-2"></div>
-                    <b-col lg="12">
-                        <form>
+                      <div class="row"  v-for="(item, index) in dataPeng" :key="index">
+                        <b-col lg="12">
+                          <form>
                             <div class="form-group">
-                                <label>Posisi</label>
-                                <input type="text" class="form-control" placeholder="Fullstack Developer">
+                              <label>Posisi</label>
+                                <input type="text" class="form-control" placeholder="Fullstack Developer"
+                                  v-model="item.posisi" :posisi="item.posisi"
+                                >
                             </div>
-                        </form>
-                    </b-col>
-                    <b-col lg="12">
-                                <b-row>
-                                    <b-col lg="6" class="text-left">
-                                        <div class="form-group">
-                                            <label>Nama Perusahaan</label>
-                                            <input type="text" class="form-control" placeholder="PT Apa Aja Boleh">
-                                        </div>
-                                    </b-col>
-                                    <b-col lg="6">
-                                        <div class="form-group">
-                                            <label class="text-left">Bulan/Tahun</label>
-                                            <input type="text" class="form-control" placeholder="Januari 2088">
-                                        </div>
-                                    </b-col>
-                                </b-row>
-                    </b-col>
-                    <b-col lg="12">
-                        <div class="form-group">
-                                <label>Deskripsi singkat</label>
-                                <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"></textarea>
-                        </div>
-                    </b-col>
-                    <b-col lg="12" class="my-3">
-                        <button class="btn btn-experience">Tambah Pengalaman</button>
-                    </b-col>
+                          </form>
+                        </b-col>
+                        <b-col lg="12">
+                          <b-row>
+                            <b-col lg="6" class="text-left">
+                              <div class="form-group">
+                                <label>Nama Perusahaan</label>
+                                <input type="text" class="form-control" placeholder="PT Apa Aja Boleh"
+                                v-model="item.namaperusahaan" :namaperusahaan="item.namaperusahaan"
+                                >
+                              </div>
+                            </b-col>
+                            <b-col lg="6">
+                              <div class="form-group">
+                                <label class="text-left">Bulan/Tahun</label>
+                                <input type="text" class="form-control" placeholder="Januari 2088"
+                                v-model="item.mulaikerja" :mulaikerja="item.mulaikerja"
+                                >
+                              </div>
+                              <div class="form-group">
+                                <label class="text-left">Bulan/Tahun</label>
+                                <input type="text" class="form-control" placeholder="Januari 2088"
+                                v-model="item.selesaikerja" :selesaikerja="item.selesaikerja"
+                                >
+                              </div>
+                            </b-col>
+                          </b-row>
+                        </b-col>
+                        <b-col lg="12">
+                          <div class="form-group">
+                            <label>Deskripsi singkat</label>
+                            <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
+                            v-model="item.deskripsi" :deskripsi="item.deskripsi"
+                            ></textarea>
+                          </div>
+                         <hr>
+                        </b-col>
+                    </div>
+
+                    <!-- test -->
+
+                    <div class="row">
+                      <b-col lg="12">
+                          <form>
+                              <div class="form-group">
+                                  <label>Posisi</label>
+                                  <input type="text" class="form-control" placeholder="Fullstack Developer"
+                                  v-model="newPeng.posisi"
+                                  >
+                              </div>
+                          </form>
+                      </b-col>
+                      <b-col lg="12">
+                                  <b-row>
+                                      <b-col lg="6" class="text-left">
+                                          <div class="form-group">
+                                              <label>Nama Perusahaan</label>
+                                              <input type="text" class="form-control" placeholder="PT Apa Aja Boleh"
+                                              v-model="newPeng.namaperusahaan"
+                                              >
+                                          </div>
+                                      </b-col>
+                                      <b-col lg="6">
+                                          <div class="form-group">
+                                              <label class="text-left">Bulan/Tahun</label>
+                                              <input type="text" class="form-control" placeholder="Januari 2088"
+                                              v-model="newPeng.mulaikerja"
+                                              >
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="text-left">Bulan/Tahun</label>
+                                              <input type="text" class="form-control" placeholder="Januari 2088"
+                                              v-model="newPeng.selasaikerja"
+                                              >
+                                          </div>
+                                      </b-col>
+                                  </b-row>
+                      </b-col>
+                      <b-col lg="12">
+                          <div class="form-group">
+                                  <label>Deskripsi singkat</label>
+                                  <textarea class="form-control" rows="5" placeholder="Deskripsi Pekerjaan anda"
+                                  v-model="newPeng.deskripsi"
+                                  ></textarea>
+                          </div>
+                      </b-col>
+                      {{newPeng}}
+                    </div>
+                      <b-col lg="12" class="my-3">
+                          <button class="btn btn-experience" @click="addPengalaman">Tambah Pengalaman</button>
+                      </b-col>
                 </b-row>
             </b-col>
             <!-- end experience -->
 
             <!-- start portofolio -->
-            <b-col lg="12" class="portofolio my-4">
-                <b-row class="px-5">
+            <b-col lg="12" class="portofolio my-4" >
+                <b-row class="px-5" >
                     <h1 class="px-2 py-3">Portofolio</h1>
                     <div class="line py-2"></div>
                     <b-col lg="12">
@@ -197,12 +279,23 @@
     </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
       dataSkill: [],
       skill: null,
-      status: localStorage.getItem('status')
+      status: localStorage.getItem('status'),
+      idpekerja: localStorage.getItem('idpekerja'),
+      newPeng: {
+        idpekerja: localStorage.getItem('idpekerja'),
+        posisi: '',
+        namaperusahaan: '',
+        mulaikerja: '',
+        selasaikerja: '',
+        deskripsi: ''
+      }
     }
   },
   methods: {
@@ -210,7 +303,25 @@ export default {
       this.dataSkill.push(this.skill)
       console.log(this.dataSkill)
       this.skill = ''
-    }
+    },
+    addPengalaman () {
+      this.onAddPengalaman(this.newPeng)
+    },
+    ...mapActions({
+      getPortofolio: 'pekerja/getPortofolio',
+      getPengalaman: 'pekerja/getPengalaman',
+      onAddPengalaman: 'pekerja/addPengalaman'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      dataz: 'pekerja/getDetailPekerja',
+      dataPeng: 'pekerja/getPengalaman'
+    })
+  },
+  mounted () {
+    this.getPortofolio(this.idpekerja)
+    this.getPengalaman(this.idpekerja)
   }
 }
 </script>

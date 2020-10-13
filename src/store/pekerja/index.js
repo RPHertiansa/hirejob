@@ -113,6 +113,9 @@ const actions = {
           console.log(err)
         })
     })
+  },
+  addPengalaman (context, payload) {
+    console.log(payload)
   }
 }
 export default {
