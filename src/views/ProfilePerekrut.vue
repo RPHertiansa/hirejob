@@ -26,7 +26,7 @@
             <p class="des-company">
               {{ getProfile.deskripsi }}
             </p>
-            <button class="btn btn-edit-profile-perekrut"><router-link class="edit-profile-per" to="/edit-profile-perekrut">Edit Profile</router-link></button>
+            <router-link class="edit-profile-per" to="/edit-profile-perekrut"><button class="btn btn-edit-profile-perekrut">Edit Profile</button></router-link>
             <div class="cont-sosmed">
               <p><img class="mr-2" width="24px" height="24px" src="../assets/img/mail (3) 1.png">Louistommo@gmail.com</p>
               <p><img class="mr-2" width="24px" height="24px" src="../assets/img/instagram.png">@Louist91</p>
