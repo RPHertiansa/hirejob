@@ -1,24 +1,6 @@
 # hirejob
 
-## Project setup
-```
-npm install
-```
+HireJob is a web application dedicated to make jobseeking process more simple. Jobseekers can make their profile as excellent as they can, while recruiters can pick the best them based on their profile and send offering email.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+This is a frontend repository for HireJob App. It is built using VueJS as a framework and Vuex as a state management. This app also has realtime chat feature built using socket.io to connect between recruiters and jobseekers.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
