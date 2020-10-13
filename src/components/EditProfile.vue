@@ -105,6 +105,7 @@
                         <b-col lg="12" class="experience my-4 shadow">
                             <b-row class="px-5">
                               <h1 class="px-2 py-3">Pengalaman Kerja</h1>
+                              {{dataPeng}}
                                 <div class="line py-2"></div>
                                   <div class="row"  v-for="(item, index) in dataPeng" :key="index">
                                     <b-col lg="12">
@@ -124,7 +125,7 @@
                                                 <b-icon icon="gear" class=""></b-icon>
                                               </template>
                                               <b-dropdown-item-button class="">
-                                                <button class="btn btn-outline-info btn-block" @click.prevent="updatePengalaman(item.idpengalaman, index)">
+                                                <button class="btn btn-outline-info btn-block" @click.prevent="updatePengalaman(item)">
                                                   <b-icon icon="pencil-fill" class="mr-3"></b-icon>
                                                   Edit
                                                 </button>
@@ -267,15 +268,20 @@
                             <b-row class="px-5">
                                 <h1 class="px-2 py-3">Portofolio</h1>
                                 <div class="line py-2"></div>
-                                <b-col lg="12">
+                                {{dataPor}}
+                                <b-col lg="12" v-for="(item, index) in dataPor" :key="index">
                                     <form>
                                         <div class="form-group">
                                             <label>Nama Aplikasi</label>
-                                            <input type="text" class="form-control" placeholder="Masukkan nama aplikasi">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama aplikasi"
+                                            v-model="item.namaaplikasi" :namaaplikasi="item.namaaplikasi"
+                                            >
                                         </div>
                                         <div class="form-group">
                                             <label>Link Repository</label>
-                                            <input type="text" class="form-control" placeholder="Masukkan link repository">
+                                            <input type="text" class="form-control" placeholder="Masukkan link repository"
+                                            v-model="item.linkrepository" :linkrepository="item.linkrepository"
+                                            >
                                         </div>
                                         <div class="form-group">
                                             <label>Type Portfolio</label>
@@ -283,7 +289,11 @@
                                             <b-col lg="6" sm="6" cols="6" class="radio">
                                                 <div class="radio-box text-left  py-2">
                                                     <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <input class="form-check-input"
+                                                    type="radio" name="exampleRadios" id="exampleRadios1"
+                                                    :value= item.portofolio
+                                                    :checked="item.tipeportofolio === 'Aplikasi Web'"
+                                                    >
                                                     <label class="form-check-label" for="exampleRadios1">
                                                         Aplikasi Web
                                                     </label>
@@ -293,11 +303,12 @@
                                             <b-col lg="6" sm="6" cols="6" class="radio">
                                                 <div class="radio-box text-left  py-2">
                                                     <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" :checked="item.tipeportofolio === 'Aplikasi Mobile'">
                                                     <label class="form-check-label" for="exampleRadios1">
                                                         Aplikasi Mobile
                                                     </label>
                                                     </div>
+                                                    {{item.tipeportofolio}}
                                                 </div>
                                             </b-col>
                                         </b-row>
@@ -307,6 +318,7 @@
                                             <input type="file" class="form-control" >
                                         </div>
                                     </form>
+                                    <hr>
                                 </b-col>
                                 <b-col lg="12" class="my-3">
                                     <button class="btn btn-experience">Tambah Portfolio</button>
@@ -464,9 +476,16 @@ export default {
           alert(err)
         })
     },
-    updatePengalaman (idpengalaman, index) {
-      alert(idpengalaman)
-      alert(index)
+    updatePengalaman (item) {
+      this.$delete(item, 'lamakerja')
+      this.onUpdatePengalaman(item)
+        .then((response) => {
+          alert(response.data.message)
+          this.getPengalaman(this.idpekerja)
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     deletePengalaman (idpengalaman) {
       if (confirm('Delete ?')) {
@@ -484,6 +503,7 @@ export default {
       getPortofolio: 'pekerja/getPortofolio',
       getPengalaman: 'pekerja/getPengalaman',
       onAddPengalaman: 'pekerja/addPengalaman',
+      onUpdatePengalaman: 'pekerja/updatePengalaman',
       onDeletePengalaman: 'pekerja/deletePengalaman'
     })
   },
@@ -491,6 +511,7 @@ export default {
     ...mapGetters({
       dataz: 'pekerja/getDetailPekerja',
       dataPeng: 'pekerja/getPengalaman',
+      dataPor: 'pekerja/getPortofolio',
       dataperekrut: 'perekrut/getProfile'
     })
   },
