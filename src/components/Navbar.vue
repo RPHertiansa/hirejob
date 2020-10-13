@@ -1,7 +1,7 @@
 <template>
   <div>
-        <nav class="d-sm-block d-none cont-nav">
-            <router-link to="/home"> <img src="../assets/img/Group 980 1.png"> </router-link>
+        <nav class="d-sm-block d-none cont-nav" :class="{shadownav: $route.path === '/'? false: true  }">
+            <router-link to="/"> <img src="../assets/img/Group 980 1.png"> </router-link>
             <router-link v-if="$route.path === '/' && status !== null" to="/home" class="menu-home">Home</router-link>
             <div v-if="$route.path === '/' && status !== null" class="btn-head d-inline float-right">
                 <button v-if="status === 'pekerja'" class="btn btn-profile" @click="detailProfile(detailPekerja.idpekerja)">Profile</button>
@@ -175,6 +175,9 @@ export default {
 .cont-nav {
     padding: 30px 100px;
     height: 100px;
+}
+.shadownav {
+    box-shadow: 0px 10px 50px rgba(132, 132, 132, 0.25);
 }
 .cont-nav-hp {
     height: 80px;
