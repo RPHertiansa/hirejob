@@ -39,7 +39,7 @@
             <h2>Skill</h2>
           </div>
           <div>
-            <button type="button" class="btn b" v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index"  > {{skillz}}</button>
+            <button type="button" class="btn b" v-for="(skillz, index) in (dataz.skill || '').replace('[', '').replace(']', '').split(',')" :key="index"  > {{skillz}}</button>
           </div>
           <div class="text-secondary mt-3 ">
             <img src="../assets/img/mail (3) 1.png" alt="">

@@ -245,8 +245,7 @@ export default {
       rows: null,
       slide: 0,
       sliding: null,
-      skill: '',
-      skillnokoma: null
+      skill: ''
     }
   },
   computed: {
@@ -288,7 +287,7 @@ export default {
       }
     },
     sort (payload) {
-      alert(payload)
+      console.log(payload)
     },
     pagi () {
       const fd = {
