@@ -341,16 +341,13 @@
             <b-row class="content mx-5">
               <b-col lg="4" cols="12" class="user-card">
                 <div class="card-user shadow">
-                  <div class="user-box">
-                    <div class="profile-image text-center">
-                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" width="50%" style="border-radius:100%;">
+                  <div class="user-box text-center">
+                    <div class="profile-image">
+                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" width="80%" style="border-radius:100%;">
                     </div>
-                    <div class="text-center">
-                      <label class="custom-file-upload">
-                        <input type="file" @change="upload($event)" />
-                          <b-icon icon="pencil-fill" class="mr-1"></b-icon>Edit
-                      </label>
-                    </div>
+                    <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
+                      <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="upload($event)"> Edit
+                    </label>
                   </div>
                   <div class="user-data mt-3">
                     <div class="user-name">
@@ -507,13 +504,9 @@ export default {
       getPortofolio: 'pekerja/getPortofolio',
       getPengalaman: 'pekerja/getPengalaman',
       onAddPengalaman: 'pekerja/addPengalaman',
-<<<<<<< HEAD
-      onDeletePengalaman: 'pekerja/deletePengalaman',
-      getProfilePerekrut: 'perekrut/getProfileDetail'
-=======
       onUpdatePengalaman: 'pekerja/updatePengalaman',
-      onDeletePengalaman: 'pekerja/deletePengalaman'
->>>>>>> e5d40296ba2cc7172cabe5914fc751792bf52773
+      onDeletePengalaman: 'pekerja/deletePengalaman',
+      getProfile: 'perekrut/getProfileDetail'
     })
   },
   computed: {
@@ -527,7 +520,7 @@ export default {
   mounted () {
     this.getPortofolio(this.idpekerja)
     this.getPengalaman(this.idpekerja)
-    this.getProfilePerekrut(this.idperekrut)
+    this.getProfile(this.idperekrut)
   }
 }
 </script>
@@ -655,10 +648,6 @@ export default {
   align-items: center;
   padding: 20px;
 }
-.profile-image {
-  background-size: cover;
-  border-radius: 70px;
-}
 input[type="file"] {
   display: none;
   border-radius: 10px;
@@ -677,6 +666,10 @@ input[type="file"] {
   border-radius: 10px;
   color: #5E50A1;
   margin-bottom: 15px;
+}
+.profile-image {
+  background-size: cover;
+  border-radius: 70px;
 }
 .user-data {
   width: 100%;
