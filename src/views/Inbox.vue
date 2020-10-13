@@ -14,7 +14,7 @@
                     <div class="cont-user w-100 p-3">
                       <div v-if="status === 'perekrut'">
                             <div class="user" v-for="(item, index) in listPekerja" :key="index">
-                              <div class="row no-gutters">
+                              <div class="row no-gutters" @click="selectUser(item.namapekerja)">
                                 <div class="col-2">
                                   <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                                 </div>
@@ -27,7 +27,7 @@
                       </div>
                       <div v-else-if="status === 'pekerja'">
                             <div class="user" v-for="(item, index) in listPerekrut" :key="index">
-                              <div class="row no-gutters">
+                              <div class="row no-gutters" @click="selectUser(item.namaperekrut, item.imageperekrut)">
                                 <div class="col-2">
                                   <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imageperekrut}`">
                                 </div>
@@ -44,22 +44,32 @@
                 </div>
               </div>
               <div class="col-9">
-                <div class="chating">
-                  <div class="head-chating pt-2 pl-4">
-                    <div class="name-chating">
-                      <p class="mb-0">
-                        <img class="img-user-chat mr-2" width="40px" height="40px" src="../assets/img/gdpr_profile-picture 1.png">
-                        Jonas adam
-                      </p>
-                    </div>
-                  </div>
-                  <div class="chat-box"></div>
-                  <div class="chat-key">
-                    <div class="input-container">
-                      <input type="text" placeholder="type message..." class="input-field">
-                      <div class="icon">
-                        <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                <div v-if="receiver !== null">
+                    <div class="chating">
+                      <div class="head-chating pt-2 pl-4">
+                        <div class="name-chating">
+                          <p class="mb-0">
+                            <img class="img-user-chat mr-2" width="40px" height="40px" :src="`http://localhost:3000/${receiverImg}`">
+                            {{receiver}}
+                          </p>
+                        </div>
                       </div>
+                      <div class="chat-box"></div>
+                      <div class="chat-key">
+                          <form class="input-container">
+                              <input type="text" placeholder="type message..." class="input-field">
+                              <div class="icon">
+                                <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                              </div>
+                          </form>
+                      </div>
+                    </div>
+                </div>
+                <div v-else>
+                  <div class="chating">
+                    <div class="empty-chat">
+                      <img src="../assets/img/logo.png" alt=""><br>
+                      Please select a user to start messaging
                     </div>
                   </div>
                 </div>
@@ -111,12 +121,12 @@
               <b-modal id="modal-receiver" title="Jonas adam" centered hide-footer>
                 <div class="chat-box"></div>
                   <div class="chat-key">
-                    <div class="input-container">
-                      <input type="text" placeholder="type message..." class="input-field">
-                      <div class="icon">
-                        <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
-                      </div>
-                    </div>
+                      <form class="input-container">
+                        <input type="text" placeholder="type message..." class="input-field">
+                        <div class="icon">
+                          <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                        </div>
+                      </form>
                   </div>
               </b-modal>
             </div>
@@ -145,10 +155,21 @@ export default {
       idperekrut: localStorage.getItem('idperekrut'),
       idpekerja: localStorage.getItem('idpekerja'),
       status: localStorage.getItem('status'),
-      sender: null
+      sender: null,
+      receiver: null,
+      receiverImg: null
     }
   },
   methods: {
+    selectUser (user, image) {
+      this.receiver = user
+      this.receiverImg = image
+      this.socket.emit('send-message', {
+        receiver: this.receiver,
+        receiverImg: this.receiverImg,
+        sender: this.sender
+      })
+    }
 
   },
   mounted () {
@@ -245,6 +266,12 @@ export default {
   height: 450px;
   overflow: auto;
 }
+.empty-chat{
+  color: #9B9B9B;
+  font-size: 150%;
+  text-align: center;
+  padding-top: 250px;
+}
 .chat-key {
   padding-left: 10px;
   padding-right: 10px;
@@ -273,10 +300,10 @@ export default {
   width: 40px;
   height: 40px;
   background: #5E50A1;
-  border-radius: 100%;
-  margin-left: 10px;
-  padding-left: 8px;
-  padding-top: 8px;
+  margin-left: 8px;
+  border-radius: 50%;
+  padding-top: 6px;
+  text-align: center;
 }
 .cont-inbox-hp {
   width: 100vw;

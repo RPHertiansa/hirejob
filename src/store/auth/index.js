@@ -26,6 +26,7 @@ const actions = {
         .then(result => {
           localStorage.setItem('emailpekerja', result.data.data.emailpekerja)
           localStorage.setItem('idpekerja', result.data.data.idpekerja)
+          localStorage.setItem('namapekerja', result.data.data.namapekerja)
           localStorage.setItem('refreshToken', result.data.data.refreshToken)
           localStorage.setItem('status', result.data.data.status)
           localStorage.setItem('token', result.data.data.token)
@@ -43,6 +44,7 @@ const actions = {
         .then(result => {
           localStorage.setItem('emailperekrut', result.data.data.emailperekrut)
           localStorage.setItem('idperekrut', result.data.data.idperekrut)
+          localStorage.setItem('namaperekrut', result.data.data.namaperekrut)
           localStorage.setItem('refreshToken', result.data.data.refreshToken)
           localStorage.setItem('status', result.data.data.status)
           localStorage.setItem('token', result.data.data.token)
@@ -57,6 +59,7 @@ const actions = {
     return new Promise(resolve => {
       localStorage.removeItem('emailpekerja')
       localStorage.removeItem('idpekerja')
+      localStorage.removeItem('namapekerja')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('status')
       localStorage.removeItem('token')
@@ -67,6 +70,7 @@ const actions = {
     return new Promise(resolve => {
       localStorage.removeItem('emailperekrut')
       localStorage.removeItem('idperekrut')
+      localStorage.removeItem('namaperekrut')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('status')
       localStorage.removeItem('token')
