@@ -5,7 +5,7 @@
         <div class="user-box">
           <div class="profile-image">
             <span>
-              <img :src="`http://localhost:3000/${dataz.imagepekerja}`">
+              <img :src="`http://localhost:3000/${dataz.imagepekerja}`"  width="100%" height="100%" style="border-radius:100%;" >
             </span>
           </div>
         </div>
@@ -43,19 +43,19 @@
           </div>
           <div class="text-secondary mt-3 ">
             <img src="../assets/img/mail (3) 1.png" alt="">
-              Louistommo@gmail.com
+              {{dataz.emailpekerja}}
           </div>
           <div class="text-secondary mt-3">
             <img src="../assets/img/instagram.png" alt="">
-            @Louist91
+              {{dataz.ig}}
           </div>
           <div class="text-secondary mt-3">
             <img src="../assets/img/gitub.png" alt="">
-            @Louistommo
+              {{dataz.github}}
           </div>
           <div class="text-secondary mt-3">
             <img src="../assets/img/gitlab.png" alt="">
-            @Louistommo91
+              {{dataz.gitlab}}
           </div>
         </div>
       </div>

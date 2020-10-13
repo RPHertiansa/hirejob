@@ -73,9 +73,25 @@
                                             >
                                         </div>
                                         <div class="form-group">
-                                            <label>Tempat Kerja</label>
-                                            <input type="text" class="form-control" placeholder="Masukan Tempat Kerja"
-                                            v-model="dataz.domisilipekerja" :domisilipekerja="dataz.domisilipekerja"
+                                             <b-form-text>Tipe Pekerjaan</b-form-text>
+                                              <b-form-select v-model="tipepekerjaan" :options="options" class="mb-4"></b-form-select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Instagram</label>
+                                            <input type="text" class="form-control" placeholder="Masukan Akun Instagram"
+                                            v-model="dataz.ig" :domisilipekerja="dataz.ig"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Github</label>
+                                            <input type="text" class="form-control" placeholder="Masukan Akun Github"
+                                            v-model="dataz.github" :domisilipekerja="dataz.github"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Gitlab</label>
+                                            <input type="text" class="form-control" placeholder="Masukan Akun Gitlab"
+                                            v-model="dataz.gitlab" :domisilipekerja="dataz.gitlab"
                                             >
                                         </div>
                                         <div class="form-group">
@@ -92,8 +108,8 @@
                         <b-col lg="12" class="skill-search my-4 shadow">
                             <b-row class="input-search px-5">
                               <h1 class="px-2 py-3"></h1>
-                                <div v-for="(skillz, index) in (dataz.skill || '').split(',')" :key="index">
-                                    <button class="btn b">{{ skillz }}</button>
+                                <div v-for="(item, index) in users.dataSkill" :key="index">
+                                    <button class="btn b">{{ item }}</button>
                                 </div>
                                 <b-col lg="12">
                                     <div class="input-group mb-3">
@@ -440,6 +456,12 @@ export default {
       status: localStorage.getItem('status'),
       idpekerja: localStorage.getItem('idpekerja'),
       idperekrut: localStorage.getItem('idperekrut'),
+      tipepekerjaan: null,
+      options: [
+        { value: null, text: 'Please select an option' },
+        { value: '1', text: 'Fulltime' },
+        { value: '0', text: 'Freelance' }
+      ],
       newPeng: {
         idpekerja: localStorage.getItem('idpekerja'),
         posisi: '',
@@ -448,15 +470,8 @@ export default {
         selesaikerja: '',
         deskripsi: ''
       },
-      profileperusahaan: {
-        nama: null,
-        bidang: null,
-        kota: null,
-        desc: null,
-        email: null,
-        ig: null,
-        phone: null,
-        linkedIn: null
+      users: {
+        dataSkill: []
       }
     }
   },
@@ -489,7 +504,20 @@ export default {
       })
     },
     updatePekerja () {
-      this.onUpdatePekerja(this.dataz)
+      const data = {
+        idpekerja: this.dataz.idpekerja,
+        namapekerja: this.dataz.namapekerja,
+        jobdescpekerja: this.dataz.jobdescpekerja,
+        domisilipekerja: this.dataz.domisilipekerja,
+        tipepekerjaan: this.tipepekerjaan,
+        ig: this.dataz.ig,
+        github: this.dataz.github,
+        gitlab: this.dataz.gitlab,
+        deskripsi: this.dataz.deskripsi,
+        skill: this.users.dataSkill.toString(),
+        jumlahskill: this.users.dataSkill.length
+      }
+      this.onUpdatePekerja(data)
         .then((response) => {
           alert(response.data.message)
           this.getPengalaman(this.idpekerja)
@@ -499,12 +527,8 @@ export default {
         })
     },
     saveSkill () {
-      const dataSkillDB = this.dataz.skill
-
-      console.log(dataSkillDB)
-      // this.dataSkill.push(this.skill)
-      // console.log(this.dataSkill)
-      // this.skill = ''
+      this.users.dataSkill.push(this.skill)
+      this.skill = ''
     },
     addPengalaman () {
       this.onAddPengalaman(this.newPeng)
