@@ -5,7 +5,7 @@
         <div class="user-box">
           <div class="profile-image">
             <span>
-              <img :src="`http://localhost:3000/${dataz.imagepekerja}`"  width="100%" height="100%" style="border-radius:100%;" >
+              <img :src="`http://localhost:3000/${dataz.imagepekerja}`"   width="150px" height="150px"  style="border-radius:100%;" >
             </span>
           </div>
         </div>
@@ -66,7 +66,7 @@
         <div class="user-box">
           <div class="profile-image">
             <span>
-              <img :src="`http://localhost:3000/${dataz.imagepekerja}`">
+              <img :src="`http://localhost:3000/${dataz.imagepekerja}`"  width="150px" height="150px" style="border-radius:100%;">
             </span>
           </div>
         </div>
