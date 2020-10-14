@@ -55,10 +55,23 @@
                         </div>
                       </div>
                       <div class="chat-box">
-                        <div v-if="sender === namapekerja || sender === namaperekrut" class="msg-sent">
-                          <div v-for="(item, index) in listMessage" :key="index">
-                          {{item.message}}
+                        <div  v-for="(item, index) in historyMsg" :key="`a`+index" class="msg-sent">
+                          <div  v-if="item.sender === namapekerja || item.sender === namaperekrut" class="text-right">
+                              {{item.message}}
+                          </div>
+                          <div v-else class="text-left">
+                              {{item.message}}
+                          </div>
                         </div>
+                        <div  v-for="(item, index) in privateChat" :key="index" class="msg-sent">
+                          <div  v-if="item.sender !== namapekerja || item.sender !== namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                            <div class="text-left">
+                              {{item.msg}}
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div class="chat-key">
@@ -168,6 +181,8 @@ export default {
       receiverImg: null,
       message: '',
       listMessage: [],
+      historyMsg: [],
+      privateChat: [],
       receivedMsg: null
     }
   },
@@ -175,27 +190,44 @@ export default {
     selectUser (user, image) {
       this.receiver = user
       this.receiverImg = image
+      this.setPrivateChat()
+      this.socket.emit('get-history', {
+        sender: this.sender,
+        receiver: this.receiver
+      })
+      this.getHistoryMessage()
     },
     sendMessage () {
-      // const chat = {
-      //   sender: this.sender,
-      //   receiver: this.receiver,
-      //   message: this.message
-      // }
+      const chat = {
+        sender: this.sender,
+        receiver: this.receiver,
+        message: this.message
+      }
+
+      this.listMessage = [...this.listMessage, chat]
 
       this.socket.emit('send-message', {
         sender: this.sender,
         receiver: this.receiver,
         message: this.message
       })
-
-      // this.socket.on('chat-list', (payload) => {
-      //   console.log(payload)
-
-      //   this.listMessage = [...this.listMessage, payload.message]
-      //   console.log(this.listMessage)
-      //   this.message = null
-      // })
+      this.message = ''
+      this.setPrivateChat()
+    },
+    getHistoryMessage () {
+      this.socket.on('historyMessage', (payload) => {
+        this.historyMsg = payload
+      })
+    },
+    setPrivateChat () {
+      const privateChats = this.listMessage.filter(e => {
+        if (this.receiver === null) {
+          return e.sender === this.receiver || e.sender === this.sender
+        } else {
+          return e.receiver === this.receiver || e.sender === this.receiver
+        }
+      })
+      this.privateChat = privateChats
     }
 
   },
@@ -214,17 +246,16 @@ export default {
     } else {
       this.sender = this.namapekerja
     }
+
     console.log(`${this.status}:${this.sender}`)
 
     this.socket.emit('join-room', this.sender)
-    this.socket.on('chatting', (payload) => {
-      this.receivedMsg = payload
-    })
 
-    this.socket.on('get-history', (payload) => {
-      this.listMessage = [...this.listMessage, payload.message]
-      console.log(payload)
-      console.log(this.listMessage)
+    this.socket.on('private-message', (payload) => {
+      this.listMessage = [...this.listMessage, payload]
+      if (this.receiver !== null) {
+        this.setPrivateChat()
+      }
     })
   }
 
@@ -308,11 +339,6 @@ export default {
   text-align: center;
   padding-top: 250px;
 }
-.msg-sent{
-  background-color: #5E50A1;
-  color: white;
-  text-align: right;
-}
 .msg-received{
   background-color: #9B9B9B;
   text-align: left;
@@ -367,5 +393,12 @@ export default {
 }
 .user-box-hp {
   height: 70vh;
+}
+.msg-sent{
+  margin: 10px;
+  padding: 20px;
+  background-color: #5E50A1;
+  border-radius: 10px;
+  color: white;
 }
 </style>
