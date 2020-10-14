@@ -13,12 +13,11 @@
               :img-src="`http://localhost:3000/${item.image2}`"
               img-alt="Image"
               img-top
-              style="max-width: 250px"
+              class="shadow"
+              style="max-width: 250px; height: "
             >
             </b-card>
             <small>{{item.namaaplikasi}}</small>
-            <!-- <div class="portofolio-pict"><span></span></div>
-            <div class="portofolio-pict"><span></span></div> -->
           </div>
         </div>
         <div class="exprerience mt-4" v-else>
