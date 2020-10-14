@@ -177,11 +177,11 @@ const actions = {
       axios.post(`${url}/portofolio/insert`, fd)
         .then((response) => {
           console.log(response.data)
-          // resolve(response)
+          resolve(response)
         })
         .catch((err) => {
-          // reject(err)
-          console.log(err)
+          reject(err)
+          // console.log(err)
         })
     })
   },

@@ -795,7 +795,16 @@ export default {
         this.newPor.image3 = dataImage[2]
       }
       // console.log(this.newPor)
-      this.onAddPortofolio(this.newPor)
+      this.onAddPortofolio(this.newPor).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = '/edit-profile-pekerja'
+        }
+      })
     },
     uploadPorEditImg1 (event) {
       this.imageTampungan1 = event.target.files[0]
