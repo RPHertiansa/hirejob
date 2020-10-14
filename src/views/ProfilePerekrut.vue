@@ -6,7 +6,7 @@
         <div class="cont-profile-perekrut">
           <div class="bg-latar">
             <div class="ubah-latar">
-              <p><img class="mr-2" src="../assets/img/edit (1) 1.png">Ubah Latar</p>
+              <!-- <p><img class="mr-2" src="../assets/img/edit (1) 1.png">Ubah Latar</p> -->
             </div>
             <img class="img-profile-perekrut" width="150px" height="150px" :src="`http://52.23.231.155:3000/${getProfile.imageperekrut}`">
           </div>

@@ -9,7 +9,7 @@
              <p>Talenta terbaik negri untuk perubahan revolusi 4.0</p>
           </div>
           <div class="text-landing-2 mb-5">
-             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
+             <p>Pemworld adalah aplikasi untuk perusahaan yang ingin mencari talenta terbaik, cukup buat akun anda dapat menukan talenta yang ada butuhkan</p>
           </div>
           <b-dropdown v-if="status === 'perekrut'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
@@ -33,13 +33,13 @@
         <div class="col-6">
           <div class="text-landing-cont">
             <div class="text-landing-3">
-              <p>Kenapa harus mencari tallent di peworld</p>
+              <p>Kenapa harus mencari talent di peworld</p>
             </div>
             <div class="tick mt-5">
-              <p class="mb-4" style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Lorem ipsum dolor sit amet.</p>
-              <p class="mb-4" style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Lorem ipsum dolor sit amet.</p>
-              <p class="mb-4" style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Lorem ipsum dolor sit amet.</p>
-              <p style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Lorem ipsum dolor sit amet.</p>
+              <p class="mb-4" style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Mudah menemukan talent</p>
+              <p class="mb-4" style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Aman</p>
+              <p class="mb-4" style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Cepat</p>
+              <p style="font-size: 16px;line-height: 28px;color: #46505C;"><img class="mr-4" src="../assets/img/tick 1.png">Gratis</p>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
               <p>Skill Tallent</p>
             </div>
             <div class="text-landing-2 mb-5">
-             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
+             <p>Setiap talent yang mendaftar pada Pemworld dipastikan memiliki Skill yang mumpuni, hanya talent terbaik yang akan anda dapatkan pada Pemworld</p>
             </div>
             <div class="row">
               <div class="col-6">
@@ -95,7 +95,7 @@
           <div class="start-bottom">
             <div class="start-bottom-2">
               <div class="text-start-bottom">
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>PEW PEW</p>
               </div>
               <div class="float-right btn-start-bottom">
                 <b-dropdown v-if="status === 'perekrut'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
