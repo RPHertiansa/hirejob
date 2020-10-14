@@ -17,7 +17,7 @@
           </b-dropdown>
           <b-dropdown v-else-if="status === 'pekerja'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
-                <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
+                <b-dropdown-item><li style="color: #5E50A1;" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
           </b-dropdown>
           <b-dropdown v-else id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="primary" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
@@ -78,36 +78,12 @@
                <b-row>
                 <b-col cols="12">
                   <Carousel :navigationEnabled="true" :autoplay="true" :perPage="3">
-                    <Slide class="p-2">
+                    <Slide v-for="(item,index) in allPekerja" :key=(index) class="p-2">
                       <b-card body-class="body-carousel" tag="article">
-                        <img class="img-border" src="../assets/img/Ellipse 320.png">
-                        <p class="card-name">Harry Styles</p>
-                        <p class="card-job">Web Developer</p>
-                        <p class="card-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel" tag="article">
-                        <img class="img-border" src="../assets/img/Ellipse 323.png">
-                        <p class="card-name">Niall Horan</p>
-                        <p class="card-job">Web Developer</p>
-                        <p class="card-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel" tag="article">
-                        <img class="img-border" src="../assets/img/Ellipse 325.png">
-                        <p class="card-name">Louis Tomlinson</p>
-                        <p class="card-job">Web Developer</p>
-                        <p class="card-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel" tag="article">
-                        <img class="img-border" src="../assets/img/Ellipse 320.png">
-                        <p class="card-name">Harry Styles</p>
-                        <p class="card-job">Web Developer</p>
-                        <p class="card-detail">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
+                        <img class="img-border" width="120px" height="120px" :src="`http://localhost:3000/${item.imagepekerja}`">
+                        <p class="card-name">{{ item.namapekerja }}</p>
+                        <p class="card-job">{{ item.domisilipekerja }}</p>
+                        <p class="card-detail">{{item.deskripsi}}</p>
                       </b-card>
                     </Slide>
                   </Carousel>
@@ -128,7 +104,7 @@
               </b-dropdown>
               <b-dropdown v-else-if="status === 'pekerja'" id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/home">Home</router-link></b-dropdown-item>
-                <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
+                <b-dropdown-item><li style="color: #5E50A1;" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
               </b-dropdown>
               <b-dropdown v-else id="dropdown-1" size="lg" text="Mulai Dari Sekarang" variant="outline-danger" class="m-md-2" no-caret>
                 <b-dropdown-item><router-link style="color: #5E50A1;" to="/login-perekrut">Perekrut</router-link></b-dropdown-item>
@@ -156,10 +132,14 @@
               <div class="col-2"><p class="text-main text-center mt-2">atau</p></div>
               <div class="col-5"><hr class="line-landing"></div>
             </div>
-            <button type="button" class="btn btn-perekrut btn-block btn-lg">
-              <router-link v-if="status === 'pekerja'" class="text-white" to="/profile">Profile</router-link>
-              <router-link v-else-if="status === 'perekrut'" class="text-white" to="/profile-perekrut">Profile</router-link>
-              <router-link v-else class="text-white" to="/login-perekrut">Masuk sebagai perekrut</router-link>
+            <button v-if="status === 'pekerja'" @click="detailProfile(detailPekerja.idpekerja)" type="button" class="btn btn-perekrut btn-block btn-lg">
+              <li class="text-white">Profile</li>
+            </button>
+            <button v-else-if="status === 'perekrut'" type="button" class="btn btn-perekrut btn-block btn-lg">
+              <router-link class="text-white" to="/profile-perekrut">Profile</router-link>
+            </button>
+            <button v-else type="button" class="btn btn-perekrut btn-block btn-lg">
+              <router-link class="text-white" to="/login-perekrut">Masuk sebagai perekrut</router-link>
             </button>
          </div>
        </div>
@@ -190,7 +170,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      detailPekerja: 'pekerja/getDetailPekerja'
+      detailPekerja: 'pekerja/getDetailPekerja',
+      allPekerja: 'pekerja/getPekerja'
     })
   },
   methods: {
@@ -198,7 +179,8 @@ export default {
       this.actgetDetail(this.getid)
     },
     ...mapActions({
-      actgetDetail: 'pekerja/getDetailPekerja'
+      actgetDetail: 'pekerja/getDetailPekerja',
+      actionGetAllPekerja: 'pekerja/getPekerja'
     }),
     onSlideStart (slide) {
       this.sliding = true
@@ -215,6 +197,7 @@ export default {
   },
   mounted () {
     this.sendParam()
+    this.actionGetAllPekerja(' ')
   }
 }
 </script>
