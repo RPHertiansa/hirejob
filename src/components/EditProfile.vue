@@ -827,8 +827,7 @@ export default {
         idportofolio: item.idportofolio,
         namaaplikasi: item.namaaplikasi,
         linkrepository: item.linkrepository,
-        tipeportofolio: item.tipeportofolio,
-        image1: item.image1
+        tipeportofolio: item.tipeportofolio
       }
       this.onUpdatePortofolio(data)
       // .then((response) => {
