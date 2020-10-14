@@ -14,7 +14,7 @@
                     <div class="cont-user w-100 p-3">
                       <div v-if="status === 'perekrut'">
                             <div class="user" v-for="(item, index) in listPekerja" :key="index">
-                              <div class="row no-gutters" @click="selectUser(item.namapekerja)">
+                              <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                                 <div class="col-2">
                                   <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                                 </div>
@@ -54,10 +54,16 @@
                           </p>
                         </div>
                       </div>
-                      <div class="chat-box"></div>
+                      <div class="chat-box">
+                        <div v-if="sender === namapekerja || sender === namaperekrut" class="msg-sent">
+                          <div v-for="(item, index) in listMessage" :key="index">
+                          {{item.message}}
+                        </div>
+                        </div>
+                      </div>
                       <div class="chat-key">
-                          <form class="input-container">
-                              <input type="text" placeholder="type message..." class="input-field">
+                          <form class="input-container" @submit.prevent="sendMessage">
+                              <input type="text" placeholder="type message..." v-model="message" class="input-field">
                               <div class="icon">
                                 <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
                               </div>
@@ -154,21 +160,42 @@ export default {
       listPerekrut: null,
       idperekrut: localStorage.getItem('idperekrut'),
       idpekerja: localStorage.getItem('idpekerja'),
+      namapekerja: localStorage.getItem('namapekerja'),
+      namaperekrut: localStorage.getItem('namaperekrut'),
       status: localStorage.getItem('status'),
       sender: null,
       receiver: null,
-      receiverImg: null
+      receiverImg: null,
+      message: '',
+      listMessage: [],
+      receivedMsg: null
     }
   },
   methods: {
     selectUser (user, image) {
       this.receiver = user
       this.receiverImg = image
+    },
+    sendMessage () {
+      // const chat = {
+      //   sender: this.sender,
+      //   receiver: this.receiver,
+      //   message: this.message
+      // }
+
       this.socket.emit('send-message', {
+        sender: this.sender,
         receiver: this.receiver,
-        receiverImg: this.receiverImg,
-        sender: this.sender
+        message: this.message
       })
+
+      // this.socket.on('chat-list', (payload) => {
+      //   console.log(payload)
+
+      //   this.listMessage = [...this.listMessage, payload.message]
+      //   console.log(this.listMessage)
+      //   this.message = null
+      // })
     }
 
   },
@@ -183,13 +210,22 @@ export default {
       this.listPerekrut = payload
     })
     if (this.status === 'perekrut') {
-      this.sender = localStorage.getItem('idperekrut')
+      this.sender = this.namaperekrut
     } else {
-      this.sender = localStorage.getItem('idpekerja')
+      this.sender = this.namapekerja
     }
     console.log(`${this.status}:${this.sender}`)
 
     this.socket.emit('join-room', this.sender)
+    this.socket.on('chatting', (payload) => {
+      this.receivedMsg = payload
+    })
+
+    this.socket.on('get-history', (payload) => {
+      this.listMessage = [...this.listMessage, payload.message]
+      console.log(payload)
+      console.log(this.listMessage)
+    })
   }
 
 }
@@ -272,6 +308,15 @@ export default {
   text-align: center;
   padding-top: 250px;
 }
+.msg-sent{
+  background-color: #5E50A1;
+  color: white;
+  text-align: right;
+}
+.msg-received{
+  background-color: #9B9B9B;
+  text-align: left;
+}
 .chat-key {
   padding-left: 10px;
   padding-right: 10px;
@@ -303,6 +348,8 @@ export default {
   margin-left: 8px;
   border-radius: 50%;
   padding-top: 6px;
+  padding-left: auto;
+  padding-right: auto;
   text-align: center;
 }
 .cont-inbox-hp {
