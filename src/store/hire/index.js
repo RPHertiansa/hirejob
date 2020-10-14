@@ -27,6 +27,18 @@ const actions = {
           reject(err.message)
         })
     })
+  },
+  // filter berdasarkan pesantujuan dan imageperekrut, nanti di notiflist tampilannya cuma imageperekrut sama pesantujuan
+  getNotif (context, payload) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${url}/hire/getall`, payload)
+        .then(result => {
+          resolve(result.data)
+        })
+        .catch(err => {
+          reject(err.message)
+        })
+    })
   }
 }
 export default {

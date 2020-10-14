@@ -24,8 +24,13 @@
                         <img src="../assets/img/bell (1) 1.png">
                         </template>
                         <div class="cont-notif">
-                          <img src="../assets/img/undraw_Notify_re_65on 1.png">
-                          <p>Belum ada notifikasi</p>
+                          <div v-if="notifList === null">
+                            <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                            <p>Belum ada notifikasi</p>
+                          </div>
+                          <div v-else>
+                            {{notifList}}
+                          </div>
                         </div>
                     </b-dropdown>
                     <router-link to="/inbox">
@@ -48,8 +53,13 @@
                         <img src="../assets/img/bell (1) 1.png">
                         </template>
                         <div class="cont-notif">
-                          <img src="../assets/img/undraw_Notify_re_65on 1.png">
-                          <p>Belum ada notifikasi</p>
+                          <div v-if="notifList === null">
+                            <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                            <p>Belum ada notifikasi</p>
+                          </div>
+                          <div v-else>
+                            {{notifList}}
+                          </div>
                         </div>
                     </b-dropdown>
                     <router-link to="/inbox">
@@ -121,7 +131,8 @@ export default {
     return {
       status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
       getid: localStorage.getItem('idpekerja') === undefined ? null : localStorage.getItem('idpekerja'),
-      getidperekrut: localStorage.getItem('idperekrut') === undefined ? null : localStorage.getItem('idperekrut')
+      getidperekrut: localStorage.getItem('idperekrut') === undefined ? null : localStorage.getItem('idperekrut'),
+      notifList: 'test'
     }
   },
   computed: {

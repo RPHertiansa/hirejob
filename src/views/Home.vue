@@ -93,8 +93,13 @@
                             <img src="../assets/img/bell (1) 1 (1).png">
                             </template>
                             <div class="cont-notif">
-                              <img src="../assets/img/undraw_Notify_re_65on 1.png">
-                              <p>Belum ada notifikasi</p>
+                              <div v-if="notifList === null">
+                                <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                                <p>Belum ada notifikasi</p>
+                              </div>
+                              <div v-else>
+                                {{notifList}}
+                              </div>
                             </div>
                         </b-dropdown>
                     </div>
@@ -176,7 +181,8 @@ export default {
       arrbulan: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
       tanggal: new Date().getDate(),
       bulan: new Date().getMonth(),
-      tahun: new Date().getFullYear()
+      tahun: new Date().getFullYear(),
+      notifList: 'test'
     }
   },
   computed: {

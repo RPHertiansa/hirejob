@@ -55,15 +55,17 @@
                         </div>
                       </div>
                       <div class="chat-box">
-                        <div  v-for="(item, index) in historyMsg" :key="`a`+index" class="msg-sent">
-                          <div  v-if="item.sender === namapekerja || item.sender === namaperekrut" class="text-right">
+                        <div  v-for="(item, index) in historyMsg" :key="`a`+index" class="msg-sent ">
+                          <div  v-if="item.sender === namapekerja || item.sender === namaperekrut">
+                            <div class="text-right">
                               {{item.message}}
+                            </div>
                           </div>
                           <div v-else class="text-left">
                               {{item.message}}
                           </div>
                         </div>
-                        <div  v-for="(item, index) in privateChat" :key="index" class="msg-sent">
+                        <div  v-for="(item, index) in privateChat" :key="index" class=" msg-sent ">
                           <div  v-if="item.sender !== namapekerja || item.sender !== namaperekrut">
                             <div class="text-right">
                               {{item.message}}
@@ -107,7 +109,7 @@
             <div class="user-box-hp">
               <div v-if="status === 'perekrut'">
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPekerja" :key="index"> <!-- <==looping disini -->
-                    <div class="row no-gutters">
+                    <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                       <div class="col-2">
                         <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                       </div>
@@ -123,7 +125,7 @@
               </div>
               <div v-else-if="status === 'pekerja'">
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPerekrut" :key="index"> <!-- <==looping disini -->
-                    <div class="row no-gutters">
+                    <div class="row no-gutters" @click="selectUser(item.namaperekrut, item.imageperekrut)">
                       <div class="col-2">
                         <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://localhost:3000/${item.imageperekrut}`">
                       </div>
@@ -137,14 +139,35 @@
                     </div>
                   </div>
               </div>
-              <b-modal id="modal-receiver" title="Jonas adam" centered hide-footer>
-                <div class="chat-box"></div>
-                  <div class="chat-key">
-                      <form class="input-container">
-                        <input type="text" placeholder="type message..." class="input-field">
-                        <div class="icon">
-                          <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+              <b-modal id="modal-receiver" :title="`${receiver}`" centered hide-footer>
+                <div class="chat-box">
+                    <div  v-for="(item, index) in historyMsg" :key="`a`+index" class="msg-sent ">
+                          <div  v-if="item.sender === namapekerja || item.sender === namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                          </div>
+                          <div v-else class="text-left">
+                              {{item.message}}
+                          </div>
                         </div>
+                        <div  v-for="(item, index) in privateChat" :key="index" class=" msg-sent ">
+                          <div  v-if="item.sender !== namapekerja || item.sender !== namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                            <div class="text-left">
+                              {{item.msg}}
+                            </div>
+                          </div>
+                        </div>
+                </div>
+                  <div class="chat-key">
+                      <form class="input-container" @submit.prevent="sendMessage">
+                          <input type="text" placeholder="type message..." v-model="message" class="input-field">
+                          <div class="icon">
+                            <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                          </div>
                       </form>
                   </div>
               </b-modal>
@@ -247,8 +270,6 @@ export default {
       this.sender = this.namapekerja
     }
 
-    console.log(`${this.status}:${this.sender}`)
-
     this.socket.emit('join-room', this.sender)
 
     this.socket.on('private-message', (payload) => {
@@ -339,10 +360,6 @@ export default {
   text-align: center;
   padding-top: 250px;
 }
-.msg-received{
-  background-color: #9B9B9B;
-  text-align: left;
-}
 .chat-key {
   padding-left: 10px;
   padding-right: 10px;
@@ -400,5 +417,11 @@ export default {
   background-color: #5E50A1;
   border-radius: 10px;
   color: white;
+}
+.msg-received{
+  margin: 10px;
+  padding: 20px;
+  background-color: #E2E5ED;
+  border-radius: 10px;
 }
 </style>
