@@ -869,7 +869,8 @@ export default {
     updatePortofolio (item) {
       this.onUpdatePortofolio(item)
         .then((response) => {
-          alert(response.data.message)
+          this.alertSuccessInsert()
+          window.location = '/edit-profile-pekerja'
         })
         .catch((err) => {
           alert(err)
@@ -880,7 +881,8 @@ export default {
       if (confirm('Delete ?')) {
         this.onDeletePortofolio(id)
           .then((response) => {
-            alert(response.data.message)
+            this.alertSuccessDelete()
+            window.location = '/edit-profile-pekerja'
           })
           .catch((err) => {
             alert(err)
