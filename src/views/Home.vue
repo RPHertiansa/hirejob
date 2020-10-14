@@ -4,7 +4,7 @@
       <Navbar/>
       <div class="cont-home">
         <div class="head-home d-flex align-items-center">
-          <p class="text-white font-weight-bold" style="font-size: 28px;line-height: 20px;">Top Jobs</p>
+          <p class="text-white font-weight-bold" style="font-size: 28px;line-height: 20px;">Top Talent</p>
         </div>
         <div class="body-home">
             <div class="search-home mb-5">
@@ -84,7 +84,7 @@
                             <p>{{tanggal}} {{arrbulan[bulan]}} {{tahun}}</p>
                         </div>
                         <div class="hello-sekk">
-                            <p>Hai, Mohammad!</p>
+                            <p>Top Talent</p>
                         </div>
                     </div>
                     <div class="col-2 d-flex h-100 align-items-center">
@@ -135,6 +135,7 @@
                     <div class="flex">
                         <button class="btn btn-sm btn-skill-home" v-for="(skillz, index) in item.skill.replace('[', '').replace(']', '').split(',')" :key="index">{{ skillz }}</button>
                     </div>
+                    <button style="margin-top:30px;" @click="detailProfile(item.idpekerja, index)" class="btn btn-profile-hp mt-0">Lihat Profile</button>
                   </b-card>
                 </b-col>
               </b-row>
@@ -403,9 +404,10 @@ export default {
 }
 .cont-dev {
     padding-left: 10px;
+    padding-right: 10px;
     padding-top: 5vh;
     background: #F6F7F8;
-    height: 1700px;
+    height: 1800px;
     padding-bottom: 80px;
 }
 
@@ -441,7 +443,7 @@ export default {
 }
 .card {
     width: 160px;
-    height: 220px;
+    height: 280px;
     background: #FFFFFF;
     box-shadow: 0px 8px 16px rgba(214, 214, 214, 0.25);
     border-radius: 4px;
@@ -486,7 +488,7 @@ export default {
     color: white;
 }
 .w-search {
-    width: 280px;
+    width: 100%;
     height: 50px;
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(163, 162, 192, 0.25);
@@ -529,5 +531,13 @@ export default {
 }
 .ss {
   margin-bottom: 20px;
+}
+.btn-profile-hp {
+  background: #5E50A1;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #FFFFFF;
+  margin-top: 10px !important;
 }
 </style>
