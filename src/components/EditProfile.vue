@@ -361,7 +361,6 @@
                                         <b-col class="border text-center">
                                           <div class="form-group">
                                             <b-col><label class="mb-5 mt-3">Gambar Aplikasi</label></b-col>
-                                              <form enctype="multipart/form-data" >
                                                 <b-row>
                                                   <b-col lg="4">
                                                     <b-col>
@@ -371,10 +370,12 @@
                                                       <small>{{item.image1}}</small>
                                                     </b-col>
                                                     <b-col>
+                                                      <form enctype="multipart/form-data"  @change.prevent="updateImagePortofolio1(item)">
                                                       <label class="text-secondary mt-3 text-center custom-file-upload">
                                                         <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPorEditImg1($event)"
                                                         > Edit
                                                       </label>
+                                                      </form>
                                                     </b-col>
                                                   </b-col>
                                                   <b-col lg="4">
@@ -385,9 +386,11 @@
                                                       <small>{{item.image2}}</small>
                                                     </b-col>
                                                     <b-col>
+                                                      <form enctype="multipart/form-data" >
                                                       <label class="text-secondary mt-3 text-center custom-file-upload">
                                                         <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPorEditImg2($event, item.image2)"> Edit
                                                       </label>
+                                                      </form>
                                                     </b-col>
                                                   </b-col>
                                                   <b-col lg="4">
@@ -398,18 +401,19 @@
                                                       <small>{{item.image3}}</small>
                                                     </b-col>
                                                     <b-col>
+                                                      <form enctype="multipart/form-data" >
                                                       <label class="text-secondary mt-3 text-center custom-file-upload">
                                                         <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPorEditImg3($event, item.image3)"> Edit
                                                       </label>
+                                                      </form>
                                                     </b-col>
                                                   </b-col>
                                                 </b-row>
-                                              </form>
                                             </div>
                                         </b-col>
                                     <hr>
                                 </b-col>
-                              </form>
+                                  </form>
                               <b-col lg="12" class="my-3">
                                 <b-button class="btn btn-experience" v-b-toggle.add-collapse-port>+ Tambah Portofolio</b-button>
                               </b-col>
@@ -794,8 +798,8 @@ export default {
       this.onAddPortofolio(this.newPor)
     },
     uploadPorEditImg1 (event) {
-      this.image = event.target.files[0]
-      // console.log(this.image1)
+      this.imageTampungan1 = event.target.files[0]
+      // console.log(this.image)
     },
     uploadPorEditImg2 (event) {
       this.imageTampungan2 = event.target.files[0]
@@ -805,37 +809,62 @@ export default {
       this.imageTampungan3 = event.target.files[0]
       // console.log(this.imageTampungan3)
     },
-    updateImagePortofolio () {
-      // const data = {
-      //   idpekerja: this.idpekerja,
-      //   imagepekerja: this.image
-      // }
-      // console.log(data)
-      // this.onUpdateImagePekerja(data).then((response) => {
-      //   if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
-      //     this.alertSize()
-      //   } else if (response.data.message === 'Image type must be JPG or JPEG') {
-      //     this.alertValidation()
-      //   } else {
-      //     this.alertSuccess()
-      //     window.location = '/edit-profile-pekerja'
-      //   }
-      // })
-    },
-    updatePortofolio (item) {
+    updateImagePortofolio1 (item) {
       const data = {
         idportofolio: item.idportofolio,
-        namaaplikasi: item.namaaplikasi,
-        linkrepository: item.linkrepository,
-        tipeportofolio: item.tipeportofolio
+        image1: this.imageTampungan1
       }
-      this.onUpdatePortofolio(data)
-      // .then((response) => {
-      //   alert(response.message)
-      // })
-      // .catch((err) => {
-      //   alert(err)
-      // })
+      this.onUpdateImagePortofolio1(data).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = '/edit-profile-pekerja'
+        }
+      })
+    },
+    updateImagePortofolio2 (item) {
+      const data = {
+        idportofolio: item.idportofolio,
+        image2: this.imageTampungan2
+      }
+      this.onUpdateImagePortofolio2(data).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = '/edit-profile-pekerja'
+        }
+      })
+    },
+    updateImagePortofolio3 (item) {
+      const data = {
+        idportofolio: item.idportofolio,
+        image3: this.imageTampungan3
+      }
+      this.onUpdateImagePortofolio3(data).then((response) => {
+        if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+          this.alertSize()
+        } else if (response.data.message === 'Image type must be JPG or JPEG') {
+          this.alertValidation()
+        } else {
+          this.alertSuccess()
+          window.location = '/edit-profile-pekerja'
+        }
+      })
+    },
+    updatePortofolio (item) {
+      this.onUpdatePortofolio(item)
+        .then((response) => {
+          alert(response.data.message)
+        })
+        .catch((err) => {
+          alert(err)
+        })
     },
     deletePortofolio (id) {
       // console.log(id)
@@ -892,7 +921,10 @@ export default {
       getProfile: 'perekrut/getProfileDetail',
       onUpdatePerusahaan: 'perekrut/updatePerusahaan',
       onUpdateImagePerekrut: 'perekrut/updateImage',
-      onUpdateImagePekerja: 'pekerja/updateImage'
+      onUpdateImagePekerja: 'pekerja/updateImage',
+      onUpdateImagePortofolio1: 'pekerja/updateImagePortofolio1',
+      onUpdateImagePortofolio2: 'pekerja/updateImagePortofolio2',
+      onUpdateImagePortofolio3: 'pekerja/updateImagePortofolio3'
     })
   },
   computed: {

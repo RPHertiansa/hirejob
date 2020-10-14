@@ -186,11 +186,18 @@ const actions = {
     })
   },
   updatePortofolio (context, payload) {
-    console.log(payload)
+    const fd = new FormData()
+    fd.append('idpekerja', payload.idpekerja)
+    fd.append('namaaplikasi', payload.namaaplikasi)
+    fd.append('linkrepository', payload.linkrepository)
+    fd.append('tipeportofolio', payload.tipeportofolio)
+    fd.append('image1', payload.image1)
+    fd.append('image2', payload.image2)
+    fd.append('image3', payload.image3)
     return new Promise((resolve, reject) => {
-      axios.patch(`${url}/portofolio/update/${payload.idportofolio}`, payload)
+      axios.patch(`${url}/portofolio/update/${payload.idportofolio}`, fd)
         .then((response) => {
-          // resolve(response)
+          resolve(response)
           console.log(response)
         })
         .catch((err) => {
@@ -215,6 +222,33 @@ const actions = {
       const fd = new FormData()
       fd.append('imagepekerja', payload.imagepekerja)
       axios.patch(`${url}/pekerja/update/${payload.idpekerja}`, fd).then((response) => {
+        resolve(response)
+      }).catch((err) => reject(err))
+    })
+  },
+  updateImagePortofolio1 (context, payload) {
+    return new Promise((resolve, reject) => {
+      const fd = new FormData()
+      fd.append('image1', payload.image1)
+      axios.patch(`${url}/portofolio/update/${payload.idportofolio}`, fd).then((response) => {
+        resolve(response)
+      }).catch((err) => reject(err))
+    })
+  },
+  updateImagePortofolio2 (context, payload) {
+    return new Promise((resolve, reject) => {
+      const fd = new FormData()
+      fd.append('image2', payload.image1)
+      axios.patch(`${url}/portofolio/update/${payload.idportofolio}`, fd).then((response) => {
+        resolve(response)
+      }).catch((err) => reject(err))
+    })
+  },
+  updateImagePortofolio3 (context, payload) {
+    return new Promise((resolve, reject) => {
+      const fd = new FormData()
+      fd.append('image3', payload.image1)
+      axios.patch(`${url}/portofolio/update/${payload.idportofolio}`, fd).then((response) => {
         resolve(response)
       }).catch((err) => reject(err))
     })

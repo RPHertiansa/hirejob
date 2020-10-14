@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-8">
                                 <p class="name-pekerja">{{ item.namapekerja }}</p>
-                                <p class="keahlian"></p>
+                                <p class="keahlian">{{ item.jobdescpekerja }}</p>
                                 <p class="keahlian"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{ item.domisilipekerja }}</p>
                                 <div class="bakat">
                                     <button type="button" class="btn b" v-for="(skillz, index) in item.skill.replace('[', '').replace(']', '').split(',')" :key="index">{{ skillz }}</button>
@@ -136,6 +136,7 @@
                   <b-card body-class="body-carousel-home" tag="article">
                     <img class="img-border-home" :src="`http://localhost:3000/${item.imagepekerja}`">
                     <p class="card-name-home">{{ item.namapekerja }}</p>
+                    <p class="card-job-home">{{ item.jobdescpekerja }}</p>
                     <p class="card-job-home"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{ item.domisilipekerja }}</p>
                     <div class="flex">
                         <button class="btn btn-sm btn-skill-home" v-for="(skillz, index) in item.skill.replace('[', '').replace(']', '').split(',')" :key="index">{{ skillz }}</button>
