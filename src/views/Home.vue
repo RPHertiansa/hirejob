@@ -81,7 +81,7 @@
                 <div class="row h-100 no-gutters">
                     <div class="col-10 cont-sekk">
                         <div class="date-sekk">
-                            <p>Sen, 21 April 2020</p>
+                            <p>{{tanggal}} {{arrbulan[bulan]}} {{tahun}}</p>
                         </div>
                         <div class="hello-sekk">
                             <p>Hai, Mohammad!</p>
@@ -102,124 +102,53 @@
             </div>
           </div>
              <div class="cont-dev">
+              <div class="d-flex ss">
+                <div class="w-search mr-2">
+                    <div class="input-container">
+                        <div class="h-100 iconhp">
+                            <img width="24px" height="24px" src="../assets/img/search (1) 1.png">
+                        </div>
+                        <input @keyup.enter="searching(skill)" v-model="skill" class="input-field" placeholder="Search for any skill" type="text">
+                    </div>
+                </div>
+                <div class="w-sort">
+                    <b-dropdown size="sm" offset="-240" center variant="link" menu-class="sorthp" toggle-class="text-decoration-none text-center" no-caret>
+                          <template v-slot:button-content>
+                          <img width="24px" height="24px" src="../assets/img/list 1.png">
+                          </template>
+                          <b-dropdown-item @click="sort('namapekerja','')">Sortir berdasarkan Nama</b-dropdown-item>
+                          <b-dropdown-item @click="sort('domisilipekerja','')">Sortir berdasarkan Lokasi</b-dropdown-item>
+                          <b-dropdown-item @click="sort('jumlahskill','DESC')">Sortir berdasarkan Skill</b-dropdown-item>
+                      </b-dropdown>
+                </div>
+            </div>
              <div class="carousel-web">
               <div class="text-dev">
-                  <p>Web developer</p>
+                  <p>Talent</p>
               </div>
                 <b-row class="no-gutters">
-                <b-col cols="12">
-                  <Carousel :perPage="2">
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                  </Carousel>
+                <b-col cols="6 mb-3" v-for="(item,index) in allPekerja" :key=(index)>
+                  <b-card body-class="body-carousel-home" tag="article">
+                    <img class="img-border-home" :src="`http://localhost:3000/${item.imagepekerja}`">
+                    <p class="card-name-home">{{ item.namapekerja }}</p>
+                    <p class="card-job-home"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{ item.domisilipekerja }}</p>
+                    <div class="flex">
+                        <button class="btn btn-sm btn-skill-home" v-for="(skillz, index) in item.skill.replace('[', '').replace(']', '').split(',')" :key="index">{{ skillz }}</button>
+                    </div>
+                  </b-card>
                 </b-col>
               </b-row>
           </div>
-          <div class="carousel-android">
-              <div class="text-dev">
-                  <p>Android developer</p>
-              </div>
-              <b-row class="no-gutters">
-                <b-col cols="12">
-                  <Carousel :perPage="2">
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                    <Slide class="p-2">
-                      <b-card body-class="body-carousel-home" tag="article">
-                        <img class="img-border-home" src="../assets/img/Rectangle 683.png">
-                        <p class="card-name-home">Louis Tomlinson</p>
-                        <p class="card-job-home">Web Developer</p>
-                        <div class="flex">
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                            <button class="btn btn-sm btn-skill-home">PHP</button>
-                        </div>
-                      </b-card>
-                    </Slide>
-                  </Carousel>
-                </b-col>
-              </b-row>
-          </div>
+          <div class="cont-pagination" @click="pagi()">
+                <b-pagination
+                    v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+                    size="md"
+                    page-class=""
+                ></b-pagination>
+            </div>
           </div>
       </div>
   </div>
@@ -228,24 +157,25 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
-import { Carousel, Slide } from 'vue-carousel'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
     Navbar,
-    Footer,
-    Carousel,
-    Slide
+    Footer
   },
   data () {
     return {
-      perPage: 3,
+      perPage: 10,
       currentPage: 1,
       rows: null,
       slide: 0,
       sliding: null,
-      skill: ''
+      skill: '',
+      arrbulan: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+      tanggal: new Date().getDate(),
+      bulan: new Date().getMonth(),
+      tahun: new Date().getFullYear()
     }
   },
   computed: {
@@ -475,7 +405,7 @@ export default {
     padding-left: 10px;
     padding-top: 5vh;
     background: #F6F7F8;
-    height: 100%;
+    height: 1700px;
     padding-bottom: 80px;
 }
 
@@ -554,5 +484,50 @@ export default {
 }
 .btn-skill-home:hover {
     color: white;
+}
+.w-search {
+    width: 280px;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(163, 162, 192, 0.25);
+    border-radius: 4px;
+}
+.w-sort {
+    width: 53px;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(163, 162, 192, 0.25);
+    border-radius: 4px;
+}
+.w-search .input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.w-search .input-field {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: 0px 10px;
+  background: #FAFAFA;
+  border:none;
+}
+.w-search .input-field:focus {
+  border: none;
+}
+.iconhp {
+  padding-left: 10px;
+}
+.w-sort .text-center {
+    padding-top: 10px;
+}
+.sorthp {
+  margin-top: 10px !important;
+}
+.ss {
+  margin-bottom: 20px;
 }
 </style>

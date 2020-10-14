@@ -58,7 +58,7 @@ const actions = {
       sorttype: payload.sorttype === undefined ? '' : payload.sorttype
     }
     return new Promise((resolve, reject) => {
-      axios.get(`${url}/pekerja/getall?skill=${fd.skill}&sortby=${fd.sort}&sorttype=${fd.sorttype}&page=${fd.page}&limit=3`)
+      axios.get(`${url}/pekerja/getall?skill=${fd.skill}&sortby=${fd.sort}&sorttype=${fd.sorttype}&page=${fd.page}`)
         .then((response) => {
           context.commit('SET_ALL_DATA', response.data.data)
           resolve(response.data)

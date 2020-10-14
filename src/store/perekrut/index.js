@@ -65,7 +65,6 @@ const actions = {
     })
   },
   updatePerusahaan (context, payload) {
-    // console.log(payload)
     return new Promise((resolve, reject) => {
       axios.patch(`${url}/perekrut/update/${payload.idperekrut}`, payload)
         .then((response) => {

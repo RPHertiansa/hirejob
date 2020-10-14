@@ -8,7 +8,7 @@
                     <div class="card-user shadow">
                         <div class="user-box text-center">
                           <div class="profile-image">
-                            <img :src="`http://localhost:3000/${dataz.imagepekerja}`" width="100%" height="100%" style="border-radius:100%;">
+                            <img :src="`http://localhost:3000/${dataz.imagepekerja}`"  width="150px" height="150px"  style="border-radius:100%;">
                           </div>
                          <form enctype="multipart/form-data" @change.prevent="updatePekerjaImage">
                             <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
@@ -360,7 +360,7 @@
                 <div class="card-user shadow">
                   <div class="user-box text-center">
                     <div class="profile-image">
-                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`" width="100%" height="100%" style="border-radius:100%;">
+                      <img :src="`http://localhost:3000/${dataperekrut.imageperekrut}`"  width="150px" height="150px"  style="border-radius:100%;">
                     </div>
                     <form enctype="multipart/form-data" @change.prevent="updatePerekrutImage">
                       <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
@@ -624,7 +624,7 @@ export default {
       })
     },
     updatePerusahaan () {
-      // console.log(this.dataperekrut)
+      console.log(this.dataperekrut)
       this.onUpdatePerusahaan(this.dataperekrut)
         .then((response) => {
           this.alertSuccessInsert()
