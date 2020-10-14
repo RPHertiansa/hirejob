@@ -79,19 +79,19 @@
                                         <div class="form-group">
                                             <label>Instagram</label>
                                             <input type="text" class="form-control" placeholder="Masukan Akun Instagram"
-                                            v-model="dataz.ig" :domisilipekerja="dataz.ig"
+                                            v-model="dataz.ig" :ig="dataz.ig"
                                             >
                                         </div>
                                         <div class="form-group">
                                             <label>Github</label>
                                             <input type="text" class="form-control" placeholder="Masukan Akun Github"
-                                            v-model="dataz.github" :domisilipekerja="dataz.github"
+                                            v-model="dataz.github" :githiub="dataz.github"
                                             >
                                         </div>
                                         <div class="form-group">
                                             <label>Gitlab</label>
                                             <input type="text" class="form-control" placeholder="Masukan Akun Gitlab"
-                                            v-model="dataz.gitlab" :domisilipekerja="dataz.gitlab"
+                                            v-model="dataz.gitlab" :gitlab="dataz.gitlab"
                                             >
                                         </div>
                                         <div class="form-group">
@@ -287,15 +287,36 @@
                             <b-row class="px-5">
                                 <h1 class="px-2 py-3">Portofolio</h1>
                                 <div class="line py-2"></div>
-                                {{dataPor}}
-                                <b-col lg="12" v-for="(item, index) in dataPor" :key="index">
-                                    <form>
-                                        <div class="form-group">
+                                {{dataPor[2]}}
+                                  <form enctype="multipart/form-data" >
+                                    <b-col lg="12" v-for="(item, index) in dataPor" :key="index">
+                                      <div class="row">
+                                        <div class="form-group col-lg-10">
                                             <label>Nama Aplikasi</label>
                                             <input type="text" class="form-control" placeholder="Masukkan nama aplikasi"
                                             v-model="item.namaaplikasi" :namaaplikasi="item.namaaplikasi"
                                             >
                                         </div>
+                                        <div class="col">
+                                            <b-dropdown variant="outline-success" right class="float-right mt-3" menu-class="dropmenu" no-caret>
+                                              <template v-slot:button-content>
+                                                <b-icon icon="gear" class=""></b-icon>
+                                              </template>
+                                              <b-dropdown-item-button class="">
+                                                <button class="btn btn-outline-info btn-block" @click.prevent="updatePortofolio(item)">
+                                                  <b-icon icon="pencil-fill" class="mr-3"></b-icon>
+                                                  Edit
+                                                </button>
+                                              </b-dropdown-item-button>
+                                              <b-dropdown-item-button class="">
+                                                <button class="btn btn-outline-danger btn-block" @click.prevent="deletePortofolio(item.idportofolio)">
+                                                  <b-icon icon="trash" class="mr-3"></b-icon>
+                                                  Delete
+                                                </button>
+                                              </b-dropdown-item-button>
+                                            </b-dropdown>
+                                            </div>
+                                      </div>
                                         <div class="form-group">
                                             <label>Link Repository</label>
                                             <input type="text" class="form-control" placeholder="Masukkan link repository"
@@ -310,7 +331,8 @@
                                                     <div class="form-check">
                                                     <input class="form-check-input"
                                                     type="radio" name="exampleRadios" id="exampleRadios1"
-                                                    :value= item.portofolio
+                                                    v-model="item.tipeportofolio"
+                                                    :value="'Aplikasi Web'"
                                                     :checked="item.tipeportofolio === 'Aplikasi Web'"
                                                     >
                                                     <label class="form-check-label" for="exampleRadios1">
@@ -322,8 +344,13 @@
                                             <b-col lg="6" sm="6" cols="6" class="radio">
                                                 <div class="radio-box text-left  py-2">
                                                     <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" :checked="item.tipeportofolio === 'Aplikasi Mobile'">
-                                                    <label class="form-check-label" for="exampleRadios1">
+                                                    <input class="form-check-input"
+                                                    type="radio" name="exampleRadios" id="exampleRadios2"
+                                                    v-model="item.tipeportofolio"
+                                                    :value="'Aplikasi Mobile'"
+                                                    :checked="item.tipeportofolio === 'Aplikasi Mobile'"
+                                                    >
+                                                    <label class="form-check-label" for="exampleRadios2">
                                                         Aplikasi Mobile
                                                     </label>
                                                     </div>
@@ -331,16 +358,140 @@
                                             </b-col>
                                         </b-row>
                                         </div>
-                                        <vue-dropzone ref="myVueDropzone" id="dropzone customdropzone" :options="dropzoneOptions" :useCustomSlot=true>
-                                            <!-- <img src="../assets/img/dragndrop.png" style="width:100%" alt="dragndrop"> -->
-                                        </vue-dropzone>
-                                    </form>
+                                        <b-col class="border text-center">
+                                          <div class="form-group">
+                                            <b-col><label class="mb-5 mt-3">Gambar Aplikasi</label></b-col>
+                                              <form enctype="multipart/form-data" >
+                                                <b-row>
+                                                  <b-col lg="4">
+                                                    <b-col>
+                                                      <img :src="`http://localhost:3000/${item.image1}`"  width="75px" height="75px">
+                                                    </b-col>
+                                                    <b-col>
+                                                      <small>{{item.image1}}</small>
+                                                    </b-col>
+                                                    <b-col>
+                                                      <label class="text-secondary mt-3 text-center custom-file-upload">
+                                                        <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPorEditImg1($event)"
+                                                        > Edit
+                                                      </label>
+                                                    </b-col>
+                                                  </b-col>
+                                                  <b-col lg="4">
+                                                    <b-col>
+                                                      <img :src="`http://localhost:3000/${item.image2}`"  width="75px" height="75px">
+                                                    </b-col>
+                                                    <b-col>
+                                                      <small>{{item.image2}}</small>
+                                                    </b-col>
+                                                    <b-col>
+                                                      <label class="text-secondary mt-3 text-center custom-file-upload">
+                                                        <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPorEditImg2($event, item.image2)"> Edit
+                                                      </label>
+                                                    </b-col>
+                                                  </b-col>
+                                                  <b-col lg="4">
+                                                    <b-col>
+                                                      <img :src="`http://localhost:3000/${item.image3}`"  width="75px" height="75px">
+                                                    </b-col>
+                                                    <b-col>
+                                                      <small>{{item.image3}}</small>
+                                                    </b-col>
+                                                    <b-col>
+                                                      <label class="text-secondary mt-3 text-center custom-file-upload">
+                                                        <b-icon icon="pencil-fill" class="mr-1"></b-icon><input type="file" @change="uploadPorEditImg3($event, item.image3)"> Edit
+                                                      </label>
+                                                    </b-col>
+                                                  </b-col>
+                                                </b-row>
+                                              </form>
+                                            </div>
+                                        </b-col>
+                                    <hr>
+                                </b-col>
+                              </form>
+                              <b-col lg="12" class="my-3">
+                                <b-button class="btn btn-experience" v-b-toggle.add-collapse-port>+ Tambah Portofolio</b-button>
+                              </b-col>
+                            </b-row>
+
+                            <!-- collapse -->
+
+                            <b-collapse id="add-collapse-port">
+                              <form enctype="multipart/form-data" @submit.prevent="AddPortofolio">
+                                    <b-col lg="12">
+                                      <div class="row">
+                                        <div class="form-group col-lg-10">
+                                            <label>Nama Aplikasi</label>
+                                            <input type="text" class="form-control" placeholder="Masukkan nama aplikasi"
+                                            v-model="newPor.namaaplikasi"
+                                            >
+                                        </div>
+                                      </div>
+                                        <div class="form-group">
+                                            <label>Link Repository</label>
+                                            <input type="text" class="form-control" placeholder="Masukkan link repository"
+                                            v-model="newPor.linkrepository"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Type Portfolio</label>
+                                            <b-row>
+                                            <b-col lg="6" sm="6" cols="6" class="radio">
+                                                <div class="radio-box text-left  py-2">
+                                                    <div class="form-check">
+                                                    <input class="form-check-input"
+                                                    type="radio" name="exampleRadios" id="exampleRadios1"
+                                                    v-model="newPor.tipeportofolio"
+                                                    :value="'Aplikasi Web'"
+                                                    >
+                                                    <label class="form-check-label" for="exampleRadios1">
+                                                        Aplikasi Web
+                                                    </label>
+                                                    </div>
+                                                </div>
+                                            </b-col>
+                                            <b-col lg="6" sm="6" cols="6" class="radio">
+                                                <div class="radio-box text-left  py-2">
+                                                    <div class="form-check">
+                                                    <input class="form-check-input"
+                                                    type="radio" name="exampleRadios" id="exampleRadios2"
+                                                    v-model="newPor.tipeportofolio"
+                                                    :value="'Aplikasi Mobile'"
+                                                    >
+                                                    <label class="form-check-label" for="exampleRadios2">
+                                                        Aplikasi Mobile
+                                                    </label>
+                                                    </div>
+                                                </div>
+                                            </b-col>
+                                        </b-row>
+                                        </div>
+                                        <b-col class="border text-center">
+                                          <div class="form-group">
+                                            <b-col><label class="mb-5 mt-3">Gambar Aplikasi</label></b-col>
+                                          </div>
+
+                                           <vue-dropzone
+                                            ref="myVueDropzone"
+                                            id="dropzone customdropzone"
+                                            :options="dropzoneOptions"
+                                            :useCustomSlot="true"
+                                          >
+                                            <img
+                                              src="../assets/img/dragndrop.png"
+                                              style="width: 100%"
+                                              alt="dragndrop"
+                                            />
+                                          </vue-dropzone>
+                                        </b-col>
                                     <hr>
                                 </b-col>
                                 <b-col lg="12" class="my-3">
-                                    <button class="btn btn-experience">Tambah Portfolio</button>
+                                  <b-button class="btn btn-add-experience" type="submit">Save Portofolio</b-button>
                                 </b-col>
-                            </b-row>
+                              </form>
+                            </b-collapse>
                         </b-col>
                         <!-- end portofolio -->
                     </b-row>
@@ -446,11 +597,20 @@
 <script>
 import Swal from 'sweetalert2'
 import { mapGetters, mapActions } from 'vuex'
+import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
+  components: {
+    vueDropzone: vue2Dropzone
+  },
   data () {
     return {
+      dropzoneOptions: {
+        url: 'https://httpbin.org/post',
+        thumbnailWidth: 200,
+        addRemoveLinks: true
+      },
       dataSkill: [],
       skill: null,
       status: localStorage.getItem('status'),
@@ -470,6 +630,17 @@ export default {
         selesaikerja: '',
         deskripsi: ''
       },
+      newPor: {
+        idpekerja: localStorage.getItem('idpekerja'),
+        linkrepository: null,
+        tipeportofolio: null,
+        image1: 'doc404.jpg',
+        image2: 'doc404.jpg',
+        image3: 'doc404.jpg'
+      },
+      imageTampungan1: null,
+      imageTampungan2: null,
+      imageTampungan3: null,
       users: {
         dataSkill: []
       }
@@ -603,6 +774,82 @@ export default {
         }
       })
     },
+    AddPortofolio () {
+      const dataImage = this.$refs.myVueDropzone.getAcceptedFiles()
+      // console.log(dataImage[0])
+      if (dataImage.length === 1) {
+        this.newPor.image1 = dataImage[0]
+        this.newPor.image2 = 'doc404.jpg'
+        this.newPor.image3 = 'doc404.jpg'
+      } else if (dataImage.length === 2) {
+        this.newPor.image1 = dataImage[0]
+        this.newPor.image2 = dataImage[1]
+        this.newPor.image3 = 'doc404.jpg'
+      } else if (dataImage.length === 3) {
+        this.newPor.image1 = dataImage[0]
+        this.newPor.image2 = dataImage[1]
+        this.newPor.image3 = dataImage[2]
+      }
+      // console.log(this.newPor)
+      this.onAddPortofolio(this.newPor)
+    },
+    uploadPorEditImg1 (event) {
+      this.image = event.target.files[0]
+      // console.log(this.image1)
+    },
+    uploadPorEditImg2 (event) {
+      this.imageTampungan2 = event.target.files[0]
+      // console.log(this.image2)
+    },
+    uploadPorEditImg3 (event) {
+      this.imageTampungan3 = event.target.files[0]
+      // console.log(this.imageTampungan3)
+    },
+    updateImagePortofolio () {
+      // const data = {
+      //   idpekerja: this.idpekerja,
+      //   imagepekerja: this.image
+      // }
+      // console.log(data)
+      // this.onUpdateImagePekerja(data).then((response) => {
+      //   if (response.data.message === 'Image size is too big! Please upload another one with size <5mb') {
+      //     this.alertSize()
+      //   } else if (response.data.message === 'Image type must be JPG or JPEG') {
+      //     this.alertValidation()
+      //   } else {
+      //     this.alertSuccess()
+      //     window.location = '/edit-profile-pekerja'
+      //   }
+      // })
+    },
+    updatePortofolio (item) {
+      const data = {
+        idportofolio: item.idportofolio,
+        namaaplikasi: item.namaaplikasi,
+        linkrepository: item.linkrepository,
+        tipeportofolio: item.tipeportofolio,
+        image1: item.image1
+      }
+      this.onUpdatePortofolio(data)
+      // .then((response) => {
+      //   alert(response.message)
+      // })
+      // .catch((err) => {
+      //   alert(err)
+      // })
+    },
+    deletePortofolio (id) {
+      // console.log(id)
+      if (confirm('Delete ?')) {
+        this.onDeletePortofolio(id)
+          .then((response) => {
+            alert(response.data.message)
+          })
+          .catch((err) => {
+            alert(err)
+          })
+      }
+    },
     // Perekrut
     uploadPerekrut (event) {
       this.image = event.target.files[0]
@@ -640,6 +887,9 @@ export default {
       onAddPengalaman: 'pekerja/addPengalaman',
       onUpdatePengalaman: 'pekerja/updatePengalaman',
       onDeletePengalaman: 'pekerja/deletePengalaman',
+      onAddPortofolio: 'pekerja/addPortofolio',
+      onUpdatePortofolio: 'pekerja/updatePortofolio',
+      onDeletePortofolio: 'pekerja/deletePortofolio',
       getProfile: 'perekrut/getProfileDetail',
       onUpdatePerusahaan: 'perekrut/updatePerusahaan',
       onUpdateImagePerekrut: 'perekrut/updateImage',
@@ -651,7 +901,8 @@ export default {
       dataz: 'pekerja/getDetailPekerja',
       dataPeng: 'pekerja/getPengalaman',
       dataPor: 'pekerja/getPortofolio',
-      dataperekrut: 'perekrut/getProfile'
+      dataperekrut: 'perekrut/getProfile',
+      dataImage: 'pekerja/getPortofolioImage'
     })
   },
   mounted () {

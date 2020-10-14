@@ -152,7 +152,7 @@ const actions = {
     })
   },
   deletePengalaman (context, payload) {
-    // console.log(payload)
+    console.log(payload)
     return new Promise((resolve, reject) => {
       axios.delete(`${url}/pengalaman/delete/${payload}`)
         .then((response) => {
@@ -160,6 +160,53 @@ const actions = {
         })
         .catch((err) => {
           reject.log(err)
+        })
+    })
+  },
+  addPortofolio (context, payload) {
+    // console.log(payload)
+    const fd = new FormData()
+    fd.append('idpekerja', payload.idpekerja)
+    fd.append('namaaplikasi', payload.namaaplikasi)
+    fd.append('linkrepository', payload.linkrepository)
+    fd.append('tipeportofolio', payload.tipeportofolio)
+    fd.append('image1', payload.image1)
+    fd.append('image2', payload.image2)
+    fd.append('image3', payload.image3)
+    return new Promise((resolve, reject) => {
+      axios.post(`${url}/portofolio/insert`, fd)
+        .then((response) => {
+          console.log(response.data)
+          // resolve(response)
+        })
+        .catch((err) => {
+          // reject(err)
+          console.log(err)
+        })
+    })
+  },
+  updatePortofolio (context, payload) {
+    console.log(payload)
+    return new Promise((resolve, reject) => {
+      axios.patch(`${url}/portofolio/update/${payload.idportofolio}`, payload)
+        .then((response) => {
+          // resolve(response)
+          console.log(response)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  },
+  deletePortofolio (context, payload) {
+    // console.log(payload)
+    return new Promise((resolve, reject) => {
+      axios.delete(`${url}/portofolio/delete/${payload}`)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((err) => {
+          reject(err)
         })
     })
   },
