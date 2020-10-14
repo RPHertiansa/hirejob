@@ -35,6 +35,11 @@ export default {
     padding-left: 100px;
     padding-top: 50px;
 }
+@media only screen and (max-width: 600px) {
+  .cont-footer {
+      display: none;
+  }
+}
 .text-footer{
     width: 381px;
     height: 84px;
