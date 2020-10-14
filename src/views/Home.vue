@@ -166,7 +166,7 @@ export default {
   },
   data () {
     return {
-      perPage: 3,
+      perPage: 10,
       currentPage: 1,
       rows: null,
       slide: 0,
@@ -405,7 +405,7 @@ export default {
     padding-left: 10px;
     padding-top: 5vh;
     background: #F6F7F8;
-    height: 1500px;
+    height: 1700px;
     padding-bottom: 80px;
 }
 
