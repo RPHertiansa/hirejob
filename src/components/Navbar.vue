@@ -70,7 +70,7 @@
         <!-- responsive -->
         <nav class="d-sm-none d-block cont-nav-hp fixed-bottom">
             <div class="row no-gutters h-100 align-items-center">
-                <div class="col-3 d-flex justify-content-center">
+                <div class="col-4 d-flex justify-content-center">
                     <router-link v-if="$route.path === '/home'" to="/home">
                     <img src="../assets/img/grid 1.png" width="24px" height="24px">
                     </router-link>
@@ -78,15 +78,7 @@
                       <img src="../assets/img/grid 1 (1).png" width="24px" height="24px">
                   </router-link>
                 </div>
-                <div class="col-3 d-flex justify-content-center">
-                    <router-link v-if="$route.path === '/search'" to="/search">
-                      <img src="../assets/img/search (2) 1 (1).png" width="24px" height="24px">
-                  </router-link>
-                  <router-link v-else to="/search">
-                      <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
-                  </router-link>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
+                <div class="col-4 d-flex justify-content-center">
                     <router-link v-if="$route.path === '/inbox'" to="">
                         <img src="../assets/img/Vector (1).png" width="24px" height="24px">
                   </router-link>
@@ -95,7 +87,7 @@
                   </router-link>
                 </div>
 
-                <div v-if="status === 'pekerja'" class="col-3 d-flex justify-content-center">
+                <div v-if="status === 'pekerja'" class="col-4 d-flex justify-content-center">
                   <b-dropdown id="dropdown-drowup" size="lg" variant="link" text="" class="ml-2" no-caret>
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
@@ -106,7 +98,7 @@
                       <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
                   </b-dropdown>
                 </div>
-                <div v-else-if="status === 'perekrut'" class="col-3 d-flex justify-content-center">
+                <div v-else-if="status === 'perekrut'" class="col-4 d-flex justify-content-center">
                   <b-dropdown id="dropdown-1" size="lg" variant="link" text="" class="ml-2" no-caret>
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
