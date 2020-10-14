@@ -98,6 +98,7 @@
                                 <p>Belum ada notifikasi</p>
                             </div>
                             <div v-else class="notification">
+                                <button class="btn btn-danger" style="margin-left:60%;">hapus</button>
                                 <p>{{notifList}}</p>
                             </div>
                         </b-dropdown>
