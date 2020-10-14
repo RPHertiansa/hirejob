@@ -90,16 +90,15 @@
                     <div class="col-2 d-flex h-100 align-items-center">
                         <b-dropdown size="sm" offset="-240" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
                             <template v-slot:button-content>
-                            <img src="../assets/img/bell (1) 1 (1).png">
+                            <img v-if="notifList === null" src="../assets/img/bell (1) 1 (1).png">
+                            <img v-else class="ada-notif" src="../assets/img/bell (1) 1 (1).png">
                             </template>
-                            <div class="cont-notif">
-                              <div v-if="notifList === null">
-                                <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                            <div v-if="notifList === null" class="cont-notif">
+                            <img src="../assets/img/undraw_Notify_re_65on 1.png">
                                 <p>Belum ada notifikasi</p>
-                              </div>
-                              <div v-else>
-                                {{notifList}}
-                              </div>
+                            </div>
+                            <div v-else class="notification">
+                                <p>{{notifList}}</p>
                             </div>
                         </b-dropdown>
                     </div>
@@ -545,5 +544,25 @@ export default {
   line-height: 24px;
   color: #FFFFFF;
   margin-top: 10px !important;
+}
+.cont-notif {
+  padding-top: 40%;
+  padding-left: 25%;
+}
+.cont-notif p{
+  font-size: 14px;
+  line-height: 20px;
+  color: #1F2A36;
+}
+.notification {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  overflow: auto;
+}
+.ada-notif {
+  background-image: url('../assets/img/Ellipse 7 (1).png');
+  background-repeat: no-repeat;
+  background-position: top right;
 }
 </style>

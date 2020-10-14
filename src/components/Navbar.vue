@@ -21,16 +21,15 @@
                 <div v-if="status === 'pekerja'">
                     <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
                         <template v-slot:button-content>
-                        <img src="../assets/img/bell (1) 1.png">
+                        <img v-if="notifList === null" src="../assets/img/bell (1) 1.png">
+                        <img v-else class="ada-notif" src="../assets/img/bell (1) 1.png">
                         </template>
-                        <div class="cont-notif">
-                          <div v-if="notifList === null">
-                            <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                        <div v-if="notifList === null" class="cont-notif">
+                        <img src="../assets/img/undraw_Notify_re_65on 1.png">
                             <p>Belum ada notifikasi</p>
-                          </div>
-                          <div v-else>
-                            {{notifList}}
-                          </div>
+                        </div>
+                        <div v-else class="notification">
+                            <p>{{notifList}}</p>
                         </div>
                     </b-dropdown>
                     <router-link to="/inbox">
@@ -50,16 +49,15 @@
                 <div v-else-if="status === 'perekrut'">
                     <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
                         <template v-slot:button-content>
-                        <img src="../assets/img/bell (1) 1.png">
+                        <img v-if="notifList === null" src="../assets/img/bell (1) 1.png">
+                        <img v-else class="ada-notif" src="../assets/img/bell (1) 1.png">
                         </template>
-                        <div class="cont-notif">
-                          <div v-if="notifList === null">
-                            <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                        <div v-if="notifList === null" class="cont-notif">
+                        <img src="../assets/img/undraw_Notify_re_65on 1.png">
                             <p>Belum ada notifikasi</p>
-                          </div>
-                          <div v-else>
-                            {{notifList}}
-                          </div>
+                        </div>
+                        <div v-else class="notification">
+                            <p>{{notifList}}</p>
                         </div>
                     </b-dropdown>
                     <router-link to="/inbox">
@@ -239,6 +237,13 @@ export default {
   line-height: 20px;
   color: #1F2A36;
 }
+.notification {
+  padding: 10px;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  overflow: auto;
+}
 .btn-profile {
   background: #5E50A1;
   border-radius: 4px;
@@ -267,5 +272,10 @@ export default {
 }
 .tprf:hover {
   color:white;
+}
+.ada-notif {
+  background-image: url('../assets/img/Ellipse 7 (1).png');
+  background-repeat: no-repeat;
+  background-position: top right;
 }
 </style>
