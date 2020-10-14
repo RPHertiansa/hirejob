@@ -1,7 +1,8 @@
 <template>
-  <div style="background: #f6f7f8">
+  <div>
     <Navbar />
-    <div class="container">
+    <div class="d-sm-block d-none">
+    <div style="background: #f6f7f8" class="pl-5">
 
     <b-row class="no-gutters">
       <b-col lg="5" class="mt-3">
@@ -53,6 +54,50 @@
     </div>
 
     <Footer/>
+    </div>
+    <div class="d-sm-none d-block">
+      <CardUser :idpekerja="id" />
+      <div class="divHire-hp">
+        <h2 style="font-weight: bold">Hubungi Lous Tomlinson</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+
+        <b-form @submit.prevent="onHire">
+            <b-form-text>Tujuan tentang posisi ini</b-form-text>
+            <b-form-select v-model="selected" :options="options" class="mb-4"></b-form-select>
+            <b-form-text>Nama Lengkap</b-form-text>
+            <b-input
+              type="text"
+              v-model="name"
+              placeholder="Masukan nama lengkap"
+              autofocus
+              required
+              class="mb-4"
+            ></b-input>
+            <b-form-text>Email</b-form-text>
+            <b-input
+              v-model="email"
+              type="email"
+              placeholder="Masukan email"
+              class="mb-4"
+              required
+            ></b-input>
+            <b-form-text>No Handphone</b-form-text>
+            <b-input
+              v-model="phone"
+              required
+              type="number"
+              class="mb-4"
+              placeholder="Masukan no handphone"
+            ></b-input>
+            <b-form-text>Deskripsi</b-form-text>
+            <b-form-textarea placeholder="Deskripsikan jelaskan lebih detail" v-model="desc" rows="8"></b-form-textarea>
+            <button class="mt-4 btn-hire" block>Hire</button>
+          </b-form>
+
+        </div>
+    </div>
   </div>
 </template>
 
@@ -144,6 +189,11 @@ button:hover {
 }
 .divHire{
   margin-right: 110px;
+}
+.divHire-hp{
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 90px;
 }
 .buttonSkill button {
   pointer-events: none;

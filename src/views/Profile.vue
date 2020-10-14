@@ -57,8 +57,24 @@ export default {
         margin-top: 5px;
     } */
     @media only screen and (max-width: 600px) {
-  .edit-profile {
-    margin-top: 25px;
-  }
+    .edit-profile {
+      margin-top: 25px;
+    }
+    .profile {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .user-card {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .container-fluid {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .edit-profile {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
 }
 </style>

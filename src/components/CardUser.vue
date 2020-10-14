@@ -163,6 +163,11 @@ export default {
   padding: 20px;
   margin-bottom: 20px;
 }
+@media only screen and (max-width: 600px) {
+  .card-user {
+    width: 100%;
+  }
+}
 .profile-image {
   /* background-image: url('../assets/img/Ellipse 325.png'); */
   background-size: cover;

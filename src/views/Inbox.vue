@@ -14,7 +14,7 @@
                     <div class="cont-user w-100 p-3">
                       <div v-if="status === 'perekrut'">
                             <div class="user" v-for="(item, index) in listPekerja" :key="index">
-                              <div class="row no-gutters" @click="selectUser(item.namapekerja)">
+                              <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                                 <div class="col-2">
                                   <img class="img-user-chat" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                                 </div>
@@ -54,10 +54,31 @@
                           </p>
                         </div>
                       </div>
-                      <div class="chat-box"></div>
+                      <div class="chat-box">
+                        <div  v-for="(item, index) in historyMsg" :key="`a`+index" class="msg-sent ">
+                          <div  v-if="item.sender === namapekerja || item.sender === namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                          </div>
+                          <div v-else class="text-left">
+                              {{item.message}}
+                          </div>
+                        </div>
+                        <div  v-for="(item, index) in privateChat" :key="index" class=" msg-sent ">
+                          <div  v-if="item.sender !== namapekerja || item.sender !== namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                            <div class="text-left">
+                              {{item.msg}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                       <div class="chat-key">
-                          <form class="input-container">
-                              <input type="text" placeholder="type message..." class="input-field">
+                          <form class="input-container" @submit.prevent="sendMessage">
+                              <input type="text" placeholder="type message..." v-model="message" class="input-field">
                               <div class="icon">
                                 <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
                               </div>
@@ -88,7 +109,7 @@
             <div class="user-box-hp">
               <div v-if="status === 'perekrut'">
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPekerja" :key="index"> <!-- <==looping disini -->
-                    <div class="row no-gutters">
+                    <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                       <div class="col-2">
                         <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://localhost:3000/${item.imagepekerja}`">
                       </div>
@@ -104,7 +125,7 @@
               </div>
               <div v-else-if="status === 'pekerja'">
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPerekrut" :key="index"> <!-- <==looping disini -->
-                    <div class="row no-gutters">
+                    <div class="row no-gutters" @click="selectUser(item.namaperekrut, item.imageperekrut)">
                       <div class="col-2">
                         <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://localhost:3000/${item.imageperekrut}`">
                       </div>
@@ -118,14 +139,35 @@
                     </div>
                   </div>
               </div>
-              <b-modal id="modal-receiver" title="Jonas adam" centered hide-footer>
-                <div class="chat-box"></div>
-                  <div class="chat-key">
-                      <form class="input-container">
-                        <input type="text" placeholder="type message..." class="input-field">
-                        <div class="icon">
-                          <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+              <b-modal id="modal-receiver" :title="`${receiver}`" centered hide-footer>
+                <div class="chat-box">
+                    <div  v-for="(item, index) in historyMsg" :key="`a`+index" class="msg-sent ">
+                          <div  v-if="item.sender === namapekerja || item.sender === namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                          </div>
+                          <div v-else class="text-left">
+                              {{item.message}}
+                          </div>
                         </div>
+                        <div  v-for="(item, index) in privateChat" :key="index" class=" msg-sent ">
+                          <div  v-if="item.sender !== namapekerja || item.sender !== namaperekrut">
+                            <div class="text-right">
+                              {{item.message}}
+                            </div>
+                            <div class="text-left">
+                              {{item.msg}}
+                            </div>
+                          </div>
+                        </div>
+                </div>
+                  <div class="chat-key">
+                      <form class="input-container" @submit.prevent="sendMessage">
+                          <input type="text" placeholder="type message..." v-model="message" class="input-field">
+                          <div class="icon">
+                            <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
+                          </div>
                       </form>
                   </div>
               </b-modal>
@@ -154,21 +196,61 @@ export default {
       listPerekrut: null,
       idperekrut: localStorage.getItem('idperekrut'),
       idpekerja: localStorage.getItem('idpekerja'),
+      namapekerja: localStorage.getItem('namapekerja'),
+      namaperekrut: localStorage.getItem('namaperekrut'),
       status: localStorage.getItem('status'),
       sender: null,
       receiver: null,
-      receiverImg: null
+      receiverImg: null,
+      message: '',
+      listMessage: [],
+      historyMsg: [],
+      privateChat: [],
+      receivedMsg: null
     }
   },
   methods: {
     selectUser (user, image) {
       this.receiver = user
       this.receiverImg = image
-      this.socket.emit('send-message', {
-        receiver: this.receiver,
-        receiverImg: this.receiverImg,
-        sender: this.sender
+      this.setPrivateChat()
+      this.socket.emit('get-history', {
+        sender: this.sender,
+        receiver: this.receiver
       })
+      this.getHistoryMessage()
+    },
+    sendMessage () {
+      const chat = {
+        sender: this.sender,
+        receiver: this.receiver,
+        message: this.message
+      }
+
+      this.listMessage = [...this.listMessage, chat]
+
+      this.socket.emit('send-message', {
+        sender: this.sender,
+        receiver: this.receiver,
+        message: this.message
+      })
+      this.message = ''
+      this.setPrivateChat()
+    },
+    getHistoryMessage () {
+      this.socket.on('historyMessage', (payload) => {
+        this.historyMsg = payload
+      })
+    },
+    setPrivateChat () {
+      const privateChats = this.listMessage.filter(e => {
+        if (this.receiver === null) {
+          return e.sender === this.receiver || e.sender === this.sender
+        } else {
+          return e.receiver === this.receiver || e.sender === this.receiver
+        }
+      })
+      this.privateChat = privateChats
     }
 
   },
@@ -183,13 +265,19 @@ export default {
       this.listPerekrut = payload
     })
     if (this.status === 'perekrut') {
-      this.sender = localStorage.getItem('idperekrut')
+      this.sender = this.namaperekrut
     } else {
-      this.sender = localStorage.getItem('idpekerja')
+      this.sender = this.namapekerja
     }
-    console.log(`${this.status}:${this.sender}`)
 
     this.socket.emit('join-room', this.sender)
+
+    this.socket.on('private-message', (payload) => {
+      this.listMessage = [...this.listMessage, payload]
+      if (this.receiver !== null) {
+        this.setPrivateChat()
+      }
+    })
   }
 
 }
@@ -303,6 +391,8 @@ export default {
   margin-left: 8px;
   border-radius: 50%;
   padding-top: 6px;
+  padding-left: auto;
+  padding-right: auto;
   text-align: center;
 }
 .cont-inbox-hp {
@@ -320,5 +410,18 @@ export default {
 }
 .user-box-hp {
   height: 70vh;
+}
+.msg-sent{
+  margin: 10px;
+  padding: 20px;
+  background-color: #5E50A1;
+  border-radius: 10px;
+  color: white;
+}
+.msg-received{
+  margin: 10px;
+  padding: 20px;
+  background-color: #E2E5ED;
+  border-radius: 10px;
 }
 </style>

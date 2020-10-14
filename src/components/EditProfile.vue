@@ -2,7 +2,7 @@
     <div>
         <div v-if="this.status === 'pekerja'">
           <div class="container-fluid">
-            <b-col lg="12" class="profile py-5">
+            <b-col lg="12" class="profile py-sm-5 py-0">
               <b-row class="content mx-5">
                   <b-col lg="4" cols="12" class="user-card">
                     <div class="card-user shadow">
@@ -913,6 +913,15 @@ export default {
 }
 </script>
 <style scoped>
+.container-fluid {
+  background-color: #F6F7F8;
+}
+@media only screen and (max-width: 600px) {
+  .container-fluid {
+    padding-bottom: 80px;
+    padding-top: 20px;
+}
+}
 .profile-user{
     background: #FFFFFF;
     border-radius: 8px;
@@ -1035,6 +1044,19 @@ export default {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .card-user {
+      width: 100% !important;
+  }
+  .user-card {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .profile {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
 }
 input[type="file"] {
   display: none;

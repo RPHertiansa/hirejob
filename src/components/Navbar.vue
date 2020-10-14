@@ -21,11 +21,16 @@
                 <div v-if="status === 'pekerja'">
                     <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
                         <template v-slot:button-content>
-                        <img src="../assets/img/bell (1) 1.png">
+                        <img v-if="notifList === null" src="../assets/img/bell (1) 1.png">
+                        <img v-else class="ada-notif" src="../assets/img/bell (1) 1.png">
                         </template>
-                        <div class="cont-notif">
-                          <img src="../assets/img/undraw_Notify_re_65on 1.png">
-                          <p>Belum ada notifikasi</p>
+                        <div v-if="notifList === null" class="cont-notif">
+                        <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                            <p>Belum ada notifikasi</p>
+                        </div>
+                        <div v-else class="notification">
+                            <button class="btn btn-danger" style="margin-left:60%;">hapus</button>
+                            <p>{{notifList}}</p>
                         </div>
                     </b-dropdown>
                     <router-link to="/inbox">
@@ -45,11 +50,16 @@
                 <div v-else-if="status === 'perekrut'">
                     <b-dropdown size="sm" offset="-110" center variant="link" menu-class="drdwn" toggle-class="text-decoration-none" no-caret>
                         <template v-slot:button-content>
-                        <img src="../assets/img/bell (1) 1.png">
+                        <img v-if="notifList === null" src="../assets/img/bell (1) 1.png">
+                        <img v-else class="ada-notif" src="../assets/img/bell (1) 1.png">
                         </template>
-                        <div class="cont-notif">
-                          <img src="../assets/img/undraw_Notify_re_65on 1.png">
-                          <p>Belum ada notifikasi</p>
+                        <div v-if="notifList === null" class="cont-notif">
+                        <img src="../assets/img/undraw_Notify_re_65on 1.png">
+                            <p>Belum ada notifikasi</p>
+                        </div>
+                        <div v-else class="notification">
+                            <button class="btn btn-danger" style="margin-left:60%;">hapus</button>
+                            <p>{{notifList}}</p>
                         </div>
                     </b-dropdown>
                     <router-link to="/inbox">
@@ -70,7 +80,7 @@
         <!-- responsive -->
         <nav class="d-sm-none d-block cont-nav-hp fixed-bottom">
             <div class="row no-gutters h-100 align-items-center">
-                <div class="col-3 d-flex justify-content-center">
+                <div class="col-4 d-flex justify-content-center">
                     <router-link v-if="$route.path === '/home'" to="/home">
                     <img src="../assets/img/grid 1.png" width="24px" height="24px">
                     </router-link>
@@ -78,15 +88,7 @@
                       <img src="../assets/img/grid 1 (1).png" width="24px" height="24px">
                   </router-link>
                 </div>
-                <div class="col-3 d-flex justify-content-center">
-                    <router-link v-if="$route.path === '/search'" to="/search">
-                      <img src="../assets/img/search (2) 1 (1).png" width="24px" height="24px">
-                  </router-link>
-                  <router-link v-else to="/search">
-                      <img src="../assets/img/search (2) 1.png" width="24px" height="24px">
-                  </router-link>
-                </div>
-                <div class="col-3 d-flex justify-content-center">
+                <div class="col-4 d-flex justify-content-center">
                     <router-link v-if="$route.path === '/inbox'" to="">
                         <img src="../assets/img/Vector (1).png" width="24px" height="24px">
                   </router-link>
@@ -95,7 +97,7 @@
                   </router-link>
                 </div>
 
-                <div v-if="status === 'pekerja'" class="col-3 d-flex justify-content-center">
+                <div v-if="status === 'pekerja'" class="col-4 d-flex justify-content-center">
                   <b-dropdown id="dropdown-drowup" size="lg" variant="link" text="" class="ml-2" no-caret>
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
@@ -106,7 +108,7 @@
                       <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
                   </b-dropdown>
                 </div>
-                <div v-else-if="status === 'perekrut'" class="col-3 d-flex justify-content-center">
+                <div v-else-if="status === 'perekrut'" class="col-4 d-flex justify-content-center">
                   <b-dropdown id="dropdown-1" size="lg" variant="link" text="" class="ml-2" no-caret>
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
@@ -129,7 +131,8 @@ export default {
     return {
       status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
       getid: localStorage.getItem('idpekerja') === undefined ? null : localStorage.getItem('idpekerja'),
-      getidperekrut: localStorage.getItem('idperekrut') === undefined ? null : localStorage.getItem('idperekrut')
+      getidperekrut: localStorage.getItem('idperekrut') === undefined ? null : localStorage.getItem('idperekrut'),
+      notifList: 'test'
     }
   },
   computed: {
@@ -236,6 +239,13 @@ export default {
   line-height: 20px;
   color: #1F2A36;
 }
+.notification {
+  padding: 10px;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  overflow: auto;
+}
 .btn-profile {
   background: #5E50A1;
   border-radius: 4px;
@@ -264,5 +274,10 @@ export default {
 }
 .tprf:hover {
   color:white;
+}
+.ada-notif {
+  background-image: url('../assets/img/Ellipse 7 (1).png');
+  background-repeat: no-repeat;
+  background-position: top right;
 }
 </style>
