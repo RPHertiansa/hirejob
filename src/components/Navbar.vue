@@ -40,7 +40,7 @@
                       <template v-slot:button-content>
                         <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                       </template>
-                        <img class="ml-5 mb-3" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPekerja.imagepekerja}`">
+                        <img class="ml-5 mb-3" style="border-radius:100%;" width="30px" height="30px" :src="`http://52.23.231.155:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://52.23.231.155:3000/${detailPekerja.imagepekerja}`">
                         <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
                         <b-dropdown-item><router-link style="color: #5E50A1;" to="/edit-profile-pekerja">Edit Profile</router-link></b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
@@ -69,7 +69,7 @@
                       <template v-slot:button-content>
                         <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                       </template>
-                        <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPerekrut.imageperekrut}`">
+                        <img class="ml-5" style="border-radius:100%;" width="30px" height="30px" :src="`http://52.23.231.155:3000/${detailPerekrut.imageperekrut}` === undefined ? `../assets/img/mail (3) 1.png` : `http://52.23.231.155:3000/${detailPerekrut.imageperekrut}`">
                         <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile</router-link></b-dropdown-item>
                         <b-dropdown-divider></b-dropdown-divider>
                         <b-dropdown-item><li class="text-danger" @click="logoutPerekrut()">Logout</li></b-dropdown-item>
@@ -102,7 +102,7 @@
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                     </template>
-                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
+                      <img class="ml-5" style="border-radius:100%;" :src="`http://52.23.231.155:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://52.23.231.155:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
                       <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
@@ -113,7 +113,7 @@
                     <template v-slot:button-content>
                       <b-icon icon="gear-fill" style="color: #5E50A1;" aria-hidden="true"></b-icon>
                     </template>
-                      <img class="ml-5" style="border-radius:100%;" :src="`http://localhost:3000/${detailPerekrut.imageperekrut}` === undefined ? `../assets/img/mail (3) 1.png` : `http://localhost:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
+                      <img class="ml-5" style="border-radius:100%;" :src="`http://52.23.231.155:3000/${detailPerekrut.imageperekrut}` === undefined ? `../assets/img/mail (3) 1.png` : `http://52.23.231.155:3000/${detailPerekrut.imageperekrut}`" width="24px" height="24px">
                       <b-dropdown-item><router-link style="color: #5E50A1;" to="/profile-perekrut">Profile </router-link></b-dropdown-item>
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-item><li class="text-danger" @click="logoutPerekrut()">Logout</li></b-dropdown-item>
@@ -132,7 +132,7 @@ export default {
       status: localStorage.getItem('status') === undefined ? null : localStorage.getItem('status'),
       getid: localStorage.getItem('idpekerja') === undefined ? null : localStorage.getItem('idpekerja'),
       getidperekrut: localStorage.getItem('idperekrut') === undefined ? null : localStorage.getItem('idperekrut'),
-      notifList: 'test'
+      notifList: null
     }
   },
   computed: {

@@ -80,7 +80,7 @@
                   <Carousel :navigationEnabled="true" :autoplay="true" :perPage="3">
                     <Slide v-for="(item,index) in allPekerja" :key=(index) class="p-2">
                       <b-card body-class="body-carousel" tag="article">
-                        <img class="img-border" width="120px" height="120px" :src="`http://localhost:3000/${item.imagepekerja}`">
+                        <img class="img-border" width="120px" height="120px" :src="`http://52.23.231.155:3000/${item.imagepekerja}`">
                         <p class="card-name">{{ item.namapekerja }}</p>
                         <p class="card-job">{{ item.domisilipekerja }}</p>
                         <p class="card-detail">{{item.deskripsi}}</p>

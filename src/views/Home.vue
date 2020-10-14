@@ -40,7 +40,7 @@
                     <div class="card-body" v-for="(item,index) in allPekerja" :key=(index)>
                         <div class="row pa-seeker">
                             <div class="col-2 d-flex h-100 align-items-center justify-content-center">
-                                <img style="border-radius:100%;" :src="`http://localhost:3000/${item.imagepekerja}`" width="80%" height="70%">
+                                <img style="border-radius:100%;" :src="`http://52.23.231.155:3000/${item.imagepekerja}`" width="80%" height="70%">
                             </div>
                             <div class="col-8">
                                 <p class="name-pekerja">{{ item.namapekerja }}</p>
@@ -134,7 +134,7 @@
                 <b-row class="no-gutters">
                 <b-col cols="6 mb-3" v-for="(item,index) in allPekerja" :key=(index)>
                   <b-card body-class="body-carousel-home" tag="article">
-                    <img class="img-border-home" :src="`http://localhost:3000/${item.imagepekerja}`">
+                    <img class="img-border-home" :src="`http://52.23.231.155:3000/${item.imagepekerja}`">
                     <p class="card-name-home">{{ item.namapekerja }}</p>
                     <p class="card-job-home">{{ item.jobdescpekerja }}</p>
                     <p class="card-job-home"><img class="mr-2" src="../assets/img/map-pin (4) 1.png">{{ item.domisilipekerja }}</p>
