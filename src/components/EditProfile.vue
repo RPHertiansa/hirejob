@@ -287,7 +287,6 @@
                             <b-row class="px-5">
                                 <h1 class="px-2 py-3">Portofolio</h1>
                                 <div class="line py-2"></div>
-                                {{dataPor[2]}}
                                   <form enctype="multipart/form-data" >
                                     <b-col lg="12" v-for="(item, index) in dataPor" :key="index">
                                       <div class="row">
