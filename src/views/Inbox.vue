@@ -16,7 +16,7 @@
                             <div class="user" v-for="(item, index) in listPekerja" :key="index">
                               <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                                 <div class="col-2">
-                                  <img class="img-user-chat" width="40px" height="40px" :src="`http://52.23.231.155:3000/${item.imagepekerja}`">
+                                  <img class="img-user-chat" width="40px" height="40px" :src="`http://54.164.193.160:3000/${item.imagepekerja}`">
                                 </div>
                                 <div class="col-10 pl-3">
                                   <p class="name-user">{{item.namapekerja}}</p>
@@ -29,7 +29,7 @@
                             <div class="user" v-for="(item, index) in listPerekrut" :key="index">
                               <div class="row no-gutters" @click="selectUser(item.namaperekrut, item.imageperekrut)">
                                 <div class="col-2">
-                                  <img class="img-user-chat" width="40px" height="40px" :src="`http://52.23.231.155:3000/${item.imageperekrut}`">
+                                  <img class="img-user-chat" width="40px" height="40px" :src="`http://54.164.193.160:3000/${item.imageperekrut}`">
                                 </div>
                                 <div class="col-10 pl-3">
                                   <p class="name-user">{{item.namaperekrut}}</p>
@@ -49,7 +49,7 @@
                       <div class="head-chating pt-2 pl-4">
                         <div class="name-chating">
                           <p class="mb-0">
-                            <img class="img-user-chat mr-2" width="40px" height="40px" :src="`http://52.23.231.155:3000/${receiverImg}`">
+                            <img class="img-user-chat mr-2" width="40px" height="40px" :src="`http://54.164.193.160:3000/${receiverImg}`">
                             {{receiver}}
                           </p>
                         </div>
@@ -111,7 +111,7 @@
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPekerja" :key="index"> <!-- <==looping disini -->
                     <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                       <div class="col-2">
-                        <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://52.23.231.155:3000/${item.imagepekerja}`">
+                        <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://54.164.193.160:3000/${item.imagepekerja}`">
                       </div>
                       <div class="col-10 pl-3">
                         <div class="d-flex">
@@ -127,7 +127,7 @@
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPerekrut" :key="index"> <!-- <==looping disini -->
                     <div class="row no-gutters" @click="selectUser(item.namaperekrut, item.imageperekrut)">
                       <div class="col-2">
-                        <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://52.23.231.155:3000/${item.imageperekrut}`">
+                        <img class="img-user-chat-hp" width="40px" height="40px" :src="`http://54.164.193.160:3000/${item.imageperekrut}`">
                       </div>
                       <div class="col-10 pl-3">
                         <div class="d-flex">

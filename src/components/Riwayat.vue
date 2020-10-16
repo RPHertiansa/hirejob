@@ -9,7 +9,7 @@
         <div class="portofolio mt-4" v-if="switchContent === 0">
           <div class="mx-auto text-center" v-for="(item, index) in dataPor" :key="index">
             <div class="col" @click="openModal(item)">
-              <img :src="`http://52.23.231.155:3000/${item.image2}`">
+              <img :src="`http://54.164.193.160:3000/${item.image2}`">
             </div>
             <small>{{item.namaaplikasi}}</small>
           </div>
@@ -39,17 +39,17 @@
         <Carousel :navigationEnabled="true" :autoplay="true" :perPage="3">
           <Slide class="p-2">
             <div class="col">
-              <img class="img-border" width="120px" height="120px" :src="`http://52.23.231.155:3000/${displayModal.image1}`">
+              <img class="img-border" width="120px" height="120px" :src="`http://54.164.193.160:3000/${displayModal.image1}`">
             </div>
           </Slide>
           <Slide class="p-2">
             <div class="col">
-              <img class="img-border" width="120px" height="120px" :src="`http://52.23.231.155:3000/${displayModal.image2}`">
+              <img class="img-border" width="120px" height="120px" :src="`http://54.164.193.160:3000/${displayModal.image2}`">
             </div>
           </Slide>
           <Slide class="p-2">
             <div class="col">
-              <img class="img-border" width="120px" height="120px" :src="`http://52.23.231.155:3000/${displayModal.image3}`">
+              <img class="img-border" width="120px" height="120px" :src="`http://54.164.193.160:3000/${displayModal.image3}`">
             </div>
           </Slide>
         </Carousel>

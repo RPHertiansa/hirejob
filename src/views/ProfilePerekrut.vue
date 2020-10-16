@@ -8,7 +8,7 @@
             <div class="ubah-latar">
               <!-- <p><img class="mr-2" src="../assets/img/edit (1) 1.png">Ubah Latar</p> -->
             </div>
-            <img class="img-profile-perekrut" width="150px" height="150px" :src="`http://52.23.231.155:3000/${getProfile.imageperekrut}`">
+            <img class="img-profile-perekrut" width="150px" height="150px" :src="`http://54.164.193.160:3000/${getProfile.imageperekrut}`">
           </div>
           <div class="d-flex justify-content-center">
             <div class="text-center cont-card-profile-perekrut">
@@ -45,7 +45,7 @@
         <div class="bg-profile-perekrut-hp">
             <div class="cont-card-profile-perekrut-hp">
               <div class="text-center w-100">
-                <img class="img-profile-perekrut-hp" width="150px" height="150px" :src="`http://52.23.231.155:3000/${getProfile.imageperekrut}`">
+                <img class="img-profile-perekrut-hp" width="150px" height="150px" :src="`http://54.164.193.160:3000/${getProfile.imageperekrut}`">
               </div>
             <div class="name-company mt-3">
               <p class="mb-2">{{ getProfile.namaperekrut }}</p>

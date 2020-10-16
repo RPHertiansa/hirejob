@@ -8,7 +8,7 @@
                     <div class="card-user shadow">
                         <div class="user-box text-center">
                           <div class="profile-image">
-                            <img :src="`http://52.23.231.155:3000/${dataz.imagepekerja}`"  width="150px" height="150px"  style="border-radius:100%;">
+                            <img :src="`http://54.164.193.160:3000/${dataz.imagepekerja}`"  width="150px" height="150px"  style="border-radius:100%;">
                           </div>
                          <form enctype="multipart/form-data" @change.prevent="updatePekerjaImage">
                             <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
@@ -363,7 +363,7 @@
                                                 <b-row>
                                                   <b-col lg="4">
                                                     <b-col>
-                                                      <img :src="`http://52.23.231.155:3000/${item.image1}`"  width="75px" height="75px">
+                                                      <img :src="`http://54.164.193.160:3000/${item.image1}`"  width="75px" height="75px">
                                                     </b-col>
                                                     <b-col>
                                                       <small>{{item.image1}}</small>
@@ -379,7 +379,7 @@
                                                   </b-col>
                                                   <b-col lg="4">
                                                     <b-col>
-                                                      <img :src="`http://52.23.231.155:3000/${item.image2}`"  width="75px" height="75px">
+                                                      <img :src="`http://54.164.193.160:3000/${item.image2}`"  width="75px" height="75px">
                                                     </b-col>
                                                     <b-col>
                                                       <small>{{item.image2}}</small>
@@ -394,7 +394,7 @@
                                                   </b-col>
                                                   <b-col lg="4">
                                                     <b-col>
-                                                      <img :src="`http://52.23.231.155:3000/${item.image3}`"  width="75px" height="75px">
+                                                      <img :src="`http://54.164.193.160:3000/${item.image3}`"  width="75px" height="75px">
                                                     </b-col>
                                                     <b-col>
                                                       <small>{{item.image3}}</small>
@@ -514,7 +514,7 @@
                 <div class="card-user shadow">
                   <div class="user-box text-center">
                     <div class="profile-image">
-                      <img :src="`http://52.23.231.155:3000/${dataperekrut.imageperekrut}`"  width="150px" height="150px"  style="border-radius:100%;">
+                      <img :src="`http://54.164.193.160:3000/${dataperekrut.imageperekrut}`"  width="150px" height="150px"  style="border-radius:100%;">
                     </div>
                     <form enctype="multipart/form-data" @change.prevent="updatePerekrutImage">
                       <label class="text-secondary mt-3 text-center custom-file-upload" style="margin-left: -15px;">
