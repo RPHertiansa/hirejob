@@ -183,7 +183,7 @@ export default {
       tanggal: new Date().getDate(),
       bulan: new Date().getMonth(),
       tahun: new Date().getFullYear(),
-      notifList: 'test'
+      notifList: null
     }
   },
   computed: {

@@ -118,7 +118,7 @@
                           <p class="name-user">{{item.namapekerja}}</p>
                           <p class="date-user ml-auto">12 Apr</p>
                         </div>
-                        <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                        <p class="chat-tmnl">...</p>
                       </div>
                     </div>
                   </div>
@@ -134,7 +134,7 @@
                           <p class="name-user">{{item.namaperekrut}}</p>
                           <p class="date-user ml-auto">12 Apr</p>
                         </div>
-                        <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                        <p class="chat-tmnl">...</p>
                       </div>
                     </div>
                   </div>

@@ -64,10 +64,10 @@
             </p>
             <router-link class="edit-profile-per" to="/edit-profile-perekrut"><button class="btn btn-block btn-edit-profile-perekrut-hp">Edit Profile</button></router-link>
             <div class="mt-4">
-              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/mail (3) 1.png">Louistommo@gmail.com</p>
-              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/instagram.png">@Louist91</p>
-              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/gitub.png">@Louist91</p>
-              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/gitlab.png">@Louist91</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/mail (3) 1.png">{{ getProfile.emailperusahaan }}</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/instagram.png">{{ getProfile.linkinstagram }}</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/phone.png">{{ getProfile.phoneperekrut }}</p>
+              <p><img class="mr-2" width="24px" height="24px" src="../assets/img/linkedin 1.png">{{ getProfile.linklinkedin }}</p>
             </div>
           </div>
         </div>
