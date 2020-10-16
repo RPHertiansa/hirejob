@@ -98,7 +98,7 @@ export default {
           localStorage.removeItem('status')
           localStorage.removeItem('token')
         } else {
-          window.location = '/home'
+          window.location = '/'
         }
       }).catch(err => this.alertError(err.message))
     },

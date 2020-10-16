@@ -773,7 +773,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/edit-profile-pekerja'
+          window.location = '/'
         }
       })
     },
@@ -829,7 +829,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/edit-profile-pekerja'
+          window.location = '/'
         }
       })
     },
@@ -845,7 +845,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/edit-profile-pekerja'
+          window.location = '/'
         }
       })
     },
@@ -861,7 +861,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/edit-profile-pekerja'
+          window.location = '/'
         }
       })
     },
@@ -904,7 +904,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = 'profile-perekrut'
+          window.location = '/'
         }
       })
     },

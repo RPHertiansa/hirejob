@@ -24,7 +24,7 @@ if (localStorage.getItem('status') === 'pekerja') {
           .then(res => {
             resolve()
             localStorage.setItem('token', res.data.data.token)
-            window.location = '/home'
+            window.location = '/'
           })
           .catch(err => reject(err.message))
       })
@@ -43,7 +43,7 @@ if (localStorage.getItem('status') === 'pekerja') {
             resolve()
             console.log(res.data.data.token)
             localStorage.setItem('token', res.data.data.token)
-            window.location = '/home'
+            window.location = '/'
           })
           .catch(err => reject(err.message))
       })
