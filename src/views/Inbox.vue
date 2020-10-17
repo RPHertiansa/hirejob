@@ -11,29 +11,29 @@
                     <div class="text-head-user">
                       <p>Chat</p>
                     </div>
-                    <div class="cont-user w-100 p-3">
+                    <div class="cont-user w-100 p-3 mt-2">
                       <div v-if="status === 'perekrut'">
-                            <div class="user" v-for="(item, index) in listPekerja" :key="index">
+                            <div class="user mt-3" v-for="(item, index) in listPekerja" :key="index">
                               <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
                                 <div class="col-2">
                                   <img class="img-user-chat" width="40px" height="40px" :src="`http://54.164.193.160:3000/${item.imagepekerja}`">
                                 </div>
                                 <div class="col-10 pl-3">
                                   <p class="name-user">{{item.namapekerja}}</p>
-                                  <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                                  <p class="chat-tmnl">...</p>
                                 </div>
                               </div>
                             </div>
                       </div>
                       <div v-else-if="status === 'pekerja'">
-                            <div class="user" v-for="(item, index) in listPerekrut" :key="index">
+                            <div class="user mt-3" v-for="(item, index) in listPerekrut" :key="index">
                               <div class="row no-gutters" @click="selectUser(item.namaperekrut, item.imageperekrut)">
                                 <div class="col-2">
                                   <img class="img-user-chat" width="40px" height="40px" :src="`http://54.164.193.160:3000/${item.imageperekrut}`">
                                 </div>
                                 <div class="col-10 pl-3">
                                   <p class="name-user">{{item.namaperekrut}}</p>
-                                  <p class="chat-tmnl">Permisi kak, mau tanya...</p>
+                                  <p class="chat-tmnl">...</p>
                                 </div>
                               </div>
                             </div>
@@ -106,7 +106,7 @@
          <Navbar/>
           <div class="cont-inbox-hp">
             <p style="font-weight: 600;font-size: 16px;line-height: 22px;color: #9EA0A5;" >Utama</p>
-            <div class="user-box-hp">
+            <div class="user-box-hp mt-2">
               <div v-if="status === 'perekrut'">
                   <div v-b-modal.modal-receiver class="user-receiver"  v-for="(item, index) in listPekerja" :key="index"> <!-- <==looping disini -->
                     <div class="row no-gutters" @click="selectUser(item.namapekerja, item.imagepekerja)">
@@ -165,9 +165,6 @@
                   <div class="chat-key">
                       <form class="input-container" @submit.prevent="sendMessage">
                           <input type="text" placeholder="type message..." v-model="message" class="input-field">
-                          <div class="icon">
-                            <img width="16px" height="16px" src="../assets/img/send (5) 1.png">
-                          </div>
                       </form>
                   </div>
               </b-modal>
@@ -383,17 +380,6 @@ export default {
 }
 .input-field:focus {
   border: 1px solid #E2E5ED;
-}
-.icon {
-  width: 40px;
-  height: 40px;
-  background: #5E50A1;
-  margin-left: 8px;
-  border-radius: 50%;
-  padding-top: 6px;
-  padding-left: auto;
-  padding-right: auto;
-  text-align: center;
 }
 .cont-inbox-hp {
   width: 100vw;

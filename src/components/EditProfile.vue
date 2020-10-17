@@ -708,6 +708,7 @@ export default {
       this.onUpdatePekerja(data)
         .then((response) => {
           this.alertSuccessInsert()
+          window.location = '/edit-profile-pekerja'
           this.getPengalaman(this.idpekerja)
         })
         .catch((err) => {
@@ -722,6 +723,7 @@ export default {
       this.onAddPengalaman(this.newPeng)
         .then((response) => {
           this.alertSuccessInsert()
+          window.location = '/edit-profile-pekerja'
           this.newPeng.posisi = ''
           this.newPeng.namaperusahaan = ''
           this.newPeng.mulaikerja = ''
@@ -739,6 +741,7 @@ export default {
       this.onUpdatePengalaman(item)
         .then((response) => {
           this.alertSuccessInsert()
+          window.location = '/edit-profile-pekerja'
           this.getPengalaman(this.idpekerja)
         })
         .catch((err) => {
@@ -750,6 +753,7 @@ export default {
         this.onDeletePengalaman(idpengalaman)
           .then((response) => {
             this.alertSuccessDelete()
+            window.location = '/edit-profile-pekerja'
             this.getPengalaman(this.idpekerja)
           })
           .catch((err) => {
@@ -773,7 +777,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/'
+          window.location = '/edit-profile-pekerja'
         }
       })
     },
@@ -829,7 +833,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/'
+          window.location = '/edit-profile-pekerja'
         }
       })
     },
@@ -845,7 +849,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/'
+          window.location = '/edit-profile-pekerja'
         }
       })
     },
@@ -861,7 +865,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/'
+          window.location = '/edit-profile-pekerja'
         }
       })
     },
@@ -904,7 +908,7 @@ export default {
           this.alertValidation()
         } else {
           this.alertSuccess()
-          window.location = '/'
+          window.location = '/edit-profile-perekrut'
         }
       })
     },
@@ -913,6 +917,7 @@ export default {
       this.onUpdatePerusahaan(this.dataperekrut)
         .then((response) => {
           this.alertSuccessInsert()
+          window.location = '/edit-profile-perekrut'
         })
         .catch((err) => {
           alert(err)
@@ -1078,7 +1083,7 @@ export default {
 /* Card-User */
 .card-user {
   width: 320px;
-  height: 100%;
+  height: 80vh;
   background: #FFFFFF;
   border-radius: 5px;
   display: flex;

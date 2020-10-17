@@ -52,14 +52,10 @@ export default {
     .user-card{
         height: 600px;
     }
-    /* .profile{
-        padding: 0px 5px;
-        margin-top: 5px;
-    } */
-    @media only screen and (max-width: 600px) {
-    .edit-profile {
-      margin-top: 25px;
+    .edit-profile{
+      margin-top: 120px;
     }
+    @media only screen and (max-width: 600px) {
     .profile {
       padding-right: 0px;
       padding-left: 0px;
@@ -73,6 +69,7 @@ export default {
       padding-left: 0px;
     }
     .edit-profile {
+      margin-top: 200px;
       padding-right: 0px;
       padding-left: 0px;
     }

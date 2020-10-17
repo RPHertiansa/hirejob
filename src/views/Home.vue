@@ -450,7 +450,7 @@ export default {
 }
 .card {
     width: 160px;
-    height: 280px;
+    height: 400px;
     background: #FFFFFF;
     box-shadow: 0px 8px 16px rgba(214, 214, 214, 0.25);
     border-radius: 4px;

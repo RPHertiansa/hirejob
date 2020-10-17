@@ -104,6 +104,7 @@
                     </template>
                       <img class="ml-5" style="border-radius:100%;" :src="`http://54.164.193.160:3000/${detailPekerja.imagepekerja}` === undefined ? `../assets/img/mail (3) 1.png` : `http://54.164.193.160:3000/${detailPekerja.imagepekerja}`" width="24px" height="24px">
                       <b-dropdown-item><li class="" @click="detailProfile(detailPekerja.idpekerja)" >Profile</li></b-dropdown-item>
+                      <b-dropdown-item><router-link style="color: #5E50A1;" to="/edit-profile-pekerja">Edit Profile</router-link></b-dropdown-item>
                       <b-dropdown-divider></b-dropdown-divider>
                       <b-dropdown-item><li class="text-danger" @click="logout()">Logout</li></b-dropdown-item>
                   </b-dropdown>
